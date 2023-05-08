@@ -33,7 +33,7 @@ class Note():
                       unique=True,
                       nullable=False)
     body_content = db.Column(db.Text)
-    entry_date = db.Column(db.datetime)
+    entry_date = db.Column(db.DateTime)
 
     def __repr__(self):
         return f'<Note note_id={self.note_id}, title={self.title}>'
