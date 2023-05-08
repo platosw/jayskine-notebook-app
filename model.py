@@ -37,6 +37,21 @@ class Note():
 
     def __repr__(self):
         return f'<Note note_id={self.note_id}, title={self.title}>'
+    
+
+class Category():
+
+    __tablename__ = "categories"
+
+    category_id = db.Column(db.Integer,
+                            autoincrement=True,
+                            primary_key=True)
+    name = db.Column(db.String(30),
+                     unique=True,
+                     nullable=False)
+    
+    def __repr__(self):
+        return f'<Category category_id={self.category_id}, name={self.name}>'
 
 
 def connect_to_db(flask_app, db_uri="postgresql:///jayskine", echo=True):
