@@ -2,6 +2,7 @@ from flask_sqlalchemy import SQLAlchemy
 
 db = SQLAlchemy()
 
+
 class User():
 
     __tablename__ = "users"
@@ -19,6 +20,24 @@ class User():
 
     def __repr__(self):
         return f'<User user_id={self.user_id}, email={self.email}>'
+
+
+class Note():
+
+    __tablename__ = "notes"
+
+    note_id = db.Column(db.Integer,
+                        autoincrement=True,
+                        primary_key=True)
+    title = db.Column(db.String(35),
+                      unique=True,
+                      nullable=False)
+    body_content = db.Column(db.Text)
+    entry_date = db.Column(db.datetime)
+
+    def __repr__(self):
+        return f'<Note note_id={self.note_id}, title={self.title}>'
+
 
 def connect_to_db(flask_app, db_uri="postgresql:///jayskine", echo=True):
     flask_app.config["SQLALCHEMY_DATABASE_URI"] = db_uri
