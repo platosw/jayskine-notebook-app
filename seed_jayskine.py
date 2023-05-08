@@ -1,7 +1,6 @@
 import os
 import json
 from random import choice
-from datetime import datetime
 
 import server
 import model
@@ -36,7 +35,6 @@ notes = []
 for title in range(1, 21):
     new_note = crud.create_note(f"Title {title}",
                             "This is just testing.",
-                            datetime.now(),
                             choice(users),
                             choice(categories))
     notes.append(new_note)

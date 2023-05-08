@@ -33,6 +33,19 @@ def add_category():
     db.session.commit()
     return redirect("/")
 
+@app.route("/add_note", methods=["POST"])
+def add_note():
+    title = request.form.get("note_title")
+    body_content = request.form.get("note_context")
+    user_email = request.form.get("note_user_email")
+    category_id = request.form.get("note_category_id")
+    user = crud.get_user_by_email(user_email)
+    category = crud.get_category(category_id)
+    new_note = crud.create_note(title, body_content, user, category)
+    db.session.add(new_note)
+    db.session.commit()
+    return redirect("/")
+
 
 if __name__ == "__main__":
     connect_to_db(app)

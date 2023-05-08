@@ -28,6 +28,16 @@ class Note(db.Model):
 
     __tablename__ = "notes"
 
+    def __init__(self, title, body_content, entry_date, user,
+                 category):
+        self.title = title
+        self.body_content = body_content
+        self.entry_date = entry_date
+        self.user_id = user.user_id
+        self.category_id = category.category_id
+        self.user = user        
+        self.category = category
+    
     note_id = db.Column(db.Integer,
                         autoincrement=True,
                         primary_key=True)

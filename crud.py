@@ -1,4 +1,5 @@
 from model import User, Note, Category, connect_to_db, db
+from datetime import datetime
 
 # About users table
 def create_user(email, password, username):
@@ -7,6 +8,9 @@ def create_user(email, password, username):
 
 def get_user(id):
     return User.query.get(id)
+
+def get_user_by_email(email):
+    return User.query.filter_by(email=email).first()
 
 def update_user(id, password, username):
     user = User.query.get(id)
@@ -20,9 +24,9 @@ def delete_user(id):
     return 'User account has been deleted.'
 
 # About notes table
-def create_note(title, body_content, entry_date, user, category):
+def create_note(title, body_content, user, category):
     note = Note(title=title, body_content=body_content,
-                entry_date=entry_date, user=user, category=category)
+                entry_date=datetime.now(), user=user, category=category)
     return note
 
 def get_all_notes():

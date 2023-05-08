@@ -10,7 +10,8 @@
         </li>
         {% endfor %}
     </ul>
-    <form action="/add_category" method="POST">
+    <h4>Add Category</h4>
+    <form action="/add_category" method="POST" id="category_form">
         <label>Category Name: </label>
         <input type="text" name="category_name" />
         <input type="submit" />
@@ -23,5 +24,18 @@
         <li><a href="/notes/{{note.note_id}}">{{note.title}}</a></li>
         {% endfor %}
     </ul>
+    <h4>Add Note</h4>
+    <form action="/add_note" method="POST" id="note_form">
+        <label>Title: </label><input type="text" name="note_title" />
+        <label>Context: </label><input type="text" name="note_context" />
+        <label>User email: </label><input type="text" name="note_user_email" />
+        <label>Select Category: </label>
+        <select name="note_category_id">
+            {% for category in categories %}
+            <option value="{{category.category_id}}">{{category.name}}</option>
+            {% endfor %}
+        </select>
+        <input type="submit" />
+    </form>
 </div>
 {% endblock %}
