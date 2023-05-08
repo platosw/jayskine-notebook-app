@@ -1,0 +1,18 @@
+{% extends 'base.html' %} {% block title %} Index {% endblock %} {% block body
+%}
+<h2>Index Page</h2>
+<h3>Categories</h3>
+<ul>
+    {% for category in categories %}
+    <li>
+        <a href="/categories/{{category.category_id}}">{{category.name}}</a>
+    </li>
+    {% endfor %}
+</ul>
+<h3>All Notes</h3>
+<ul>
+    {% for note in notes %}
+    <li><a href="/notes/{{note.note_id}}">{{note.title}}</a></li>
+    {% endfor %}
+</ul>
+{% endblock %}

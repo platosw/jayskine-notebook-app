@@ -25,6 +25,10 @@ def create_note(title, body_content, entry_date, user, category):
                 entry_date=entry_date, user=user, category=category)
     return note
 
+def get_all_notes():
+    notes = Note.query.all()
+    return notes
+
 def get_note(id):
     note = Note.query.get(id)
     return note
@@ -46,6 +50,10 @@ def delete_note(id):
 def create_category(name):
     category = Category(name=name)
     return category
+
+def get_all_categories():
+    categories = Category.query.all()
+    return categories
 
 def get_category(id):
     return Category.query.get(id)
