@@ -1,0 +1,9 @@
+{% extends 'base.html' %} {% block title %} {{category.name}} {% endblock %} {%
+block body %}
+<h2>{{category.name}} Notes</h3>
+    <ul>
+{% for note in category.notes %}
+<li><a href="/notes/{{note.note_id}}">{{note.title}}</a></li>
+{% endfor %}
+</ul>
+{% endblock %}

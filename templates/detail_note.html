@@ -1,0 +1,9 @@
+{% extends 'base.html' %} {% block title %} {{note.title}} {% endblock %} {%
+block body %}
+<h2>{{note.title}}</h2>
+<p>{{note.body_content}}</p>
+<p>
+    posted by: {{note.entry_date}}, Category -
+    <a href="/categories/{{note.category_id}}">{{note.category.name}}</a>
+</p>
+{% endblock %}
