@@ -47,6 +47,17 @@ def add_note():
     return redirect("/")
 
 
+# About update routes
+@app.route("/edit_category", methods=["POST"])
+def update_category():
+    id = request.form.get("category_id")
+    name = request.form.get("edit_category_name")
+    updated_category = crud.update_category(id, name)
+    db.session.add(updated_category)
+    db.session.commit()
+    return redirect(f"/categories/{id}")
+
+
 if __name__ == "__main__":
     connect_to_db(app)
     app.run(host="0.0.0.0", debug=True)

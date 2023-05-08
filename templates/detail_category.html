@@ -6,4 +6,13 @@ block body %}
 <li><a href="/notes/{{note.note_id}}">{{note.title}}</a></li>
 {% endfor %}
 </ul>
+<h3>Edit Category Name</h3>
+<form action="/edit_category" method="POST">
+    <input type="hidden" value="{{category.category_id}}" name="category_id">
+    <label>Category Name: </label><input type="text" name="edit_category_name" value="{{category.name}}">
+    <input type="submit">
+</form>
 {% endblock %}
+
+
+<!-- category 기존 정보 변경 기능 추가하기 -->
