@@ -3,7 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 db = SQLAlchemy()
 
 
-class User():
+class User(db.Model):
 
     __tablename__ = "users"
 
@@ -24,7 +24,7 @@ class User():
         return f'<User user_id={self.user_id}, email={self.email}>'
 
 
-class Note():
+class Note(db.Model):
 
     __tablename__ = "notes"
 
@@ -48,7 +48,7 @@ class Note():
         return f'<Note note_id={self.note_id}, title={self.title}>'
     
 
-class Category():
+class Category(db.Model):
 
     __tablename__ = "categories"
 
@@ -75,6 +75,6 @@ def connect_to_db(flask_app, db_uri="postgresql:///jayskine", echo=True):
 
     print("Connected to the db!")
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     from server import app
     connect_to_db(app)
