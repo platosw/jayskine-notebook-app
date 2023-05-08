@@ -13,7 +13,6 @@ def index():
     categories = crud.get_all_categories()
     return render_template("index.html", notes=notes, categories=categories)
 
-
 @app.route("/categories/<category_id>")
 def show_detail_category(category_id):
     category = crud.get_category(category_id)
@@ -23,6 +22,16 @@ def show_detail_category(category_id):
 def show_detail_note(note_id):
     note = crud.get_note(note_id)
     return render_template("detail_note.html", note=note)
+
+
+# About create routes
+@app.route("/add_category", methods=["POST"])
+def add_category():
+    name = request.form.get("category_name")
+    new_category = crud.create_category(name)
+    db.session.add(new_category)
+    db.session.commit()
+    return redirect("/")
 
 
 if __name__ == "__main__":
