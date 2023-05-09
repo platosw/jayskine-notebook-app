@@ -19,9 +19,10 @@ block body %}
     /><br />
     <label>Category: </label>
     <select name="note_category">
-        {% for category in categories %}
+        {% for category in categories %} {% if category.user.email ==
+        session.user.email %}
         <option value="{{category.category_id}}">{{category.name}}</option>
-        {% endfor %}
+        {% endif %} {% endfor %}
     </select>
     <input type="submit" />
 </form>
