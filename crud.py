@@ -21,6 +21,7 @@ def update_user(id, password, username):
 def delete_user(id):
     user = User.query.get(id)
     db.session.delete(user)
+    db.session.commit()
     return 'User account has been deleted.'
 
 # About notes table
@@ -48,6 +49,7 @@ def update_note(id, title, body_content, category):
 def delete_note(id):
     note = Note.query.get(id)
     db.session.delete(note)
+    db.session.commit()
     return "This note has been deleted."
 
 # About categories table
@@ -70,6 +72,7 @@ def update_category(id, name):
 def delete_category(id):
     category = Category.query.get(id)
     db.session.delete(category)
+    db.session.commit()
     return "This category has been deleted"
 
 

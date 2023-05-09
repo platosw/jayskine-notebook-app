@@ -116,6 +116,27 @@ def update_user():
      return redirect(f"/users/{email}")
 
 
+# About Delete routes
+@app.route("/delete_user/<user_id>")
+def delete_user(user_id):
+     msg = crud.delete_user(user_id)
+     session.clear()
+     flash(msg)
+     return redirect("/")
+
+@app.route("/delete_category/<category_id>")
+def delete_category(category_id):
+     msg = crud.delete_category(category_id)
+     flash(msg)
+     return redirect("/")
+
+@app.route("/delete_note/<note_id>")
+def delete_note(note_id):
+     msg = crud.delete_note(note_id)
+     flash(msg)
+     return redirect("/")
+
+
 # About athentication routes
 @app.route("/login", methods=["POST"])
 def login():

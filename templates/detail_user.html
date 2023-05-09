@@ -12,4 +12,12 @@ body %}
         <input type="submit" />
     </form>
 </div>
+<div id="delete_user">
+    <h3>Delete Account</h3>
+    <button>
+        <a href="/delete_user/{{user.user_id}}"
+            >Delete '{{user.email}}' Account</a
+        >
+    </button>
+</div>
 {% endblock %}
