@@ -25,9 +25,9 @@
 <div id="notes">
     <h3>All Notes</h3>
     <ul>
-        {% for note in notes %}
+        {% for note in notes %} {% if note.user.email == session.user.email %}
         <li><a href="/notes/{{note.note_id}}">{{note.title}}</a></li>
-        {% endfor %}
+        {% endif %} {% endfor %}
     </ul>
     <h4>Add Note</h4>
     <form action="/add_note" method="POST" id="note_form">

@@ -3,7 +3,9 @@ block body %}
 <h2>{{category.name}} Notes</h3>
     <ul>
 {% for note in category.notes %}
+{% if note.user.email == session.user.email %}
 <li><a href="/notes/{{note.note_id}}">{{note.title}}</a></li>
+{% endif %}
 {% endfor %}
 </ul>
 <h3>Edit Category Name</h3>

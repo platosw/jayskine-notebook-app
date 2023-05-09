@@ -87,7 +87,7 @@ def login():
     password = request.form.get("user_password")
     user = crud.get_user_by_email(email)
     if user.password == password:
-        session["user"] = {"user_id": user.user_id, "email": user.email, "username": user.username}
+        session["user"] = {"email": user.email, "username": user.username}
         flash("You're logged in!")
     else:
         flash("Your email or password does not match. Please try again.")
