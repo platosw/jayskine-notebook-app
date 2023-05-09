@@ -3,7 +3,7 @@
 <h2>Index Page</h2>
 {% if "user" in session %}
 <div id="categories">
-    <h3>Categories</h3>
+    <h3>All Categories</h3>
     <ul>
         {% for category in categories %} {% if session.user.email ==
         category.user.email %}

@@ -12,6 +12,9 @@
         <h1 id="title"><a href="/">Jayskine</a></h1>
         {% if "user" in session %}
         <h2 id="user_welcome">Welcome!! {{session.user.username}}</h2>
+        <button>
+            <a href="/users/{{session.user.email}}">User Settings</a>
+        </button>
         <div id="logout">
             <button><a href="/logout">Log Out</a></button>
         </div>

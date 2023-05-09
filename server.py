@@ -32,6 +32,11 @@ def show_detail_note(note_id):
         return render_template("detail_note.html", note=note, categories=categories)
     else:
         return redirect("/")
+    
+@app.route("/users/<email>")
+def show_user(email):
+    user = crud.get_user_by_email(email)
+    return render_template("detail_user.html", user=user)
 
 
 # About create routes
@@ -97,6 +102,18 @@ def update_note():
         db.session.add(update_note)
         db.session.commit()
         return redirect(f"/notes/{id}")
+
+@app.route("/edit_user", methods=["POST"])
+def update_user():
+     email = session["user"]["email"]
+     user = crud.get_user_by_email(email)
+     new_username = request.form.get("username")
+     new_password = request.form.get("password")
+     update_user = crud.update_user(user.user_id, new_password, new_username)
+     db.session.add(update_user)
+     db.session.commit()
+     session["user"] = {"email": user.email, "username": user.username}
+     return redirect(f"/users/{email}")
 
 
 # About athentication routes
