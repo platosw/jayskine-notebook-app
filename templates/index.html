@@ -1,7 +1,8 @@
 {% extends 'base.html' %} {% block title %} Index {% endblock %} {% block body
 %}
 <h2>Index Page</h2>
-{% if "user_email" in session %}
+{% if "user" in session %}
+<h2 id="user_welcome">Welcome!! {{session.user.username}}</h2>
 <div id="logout">
     <button><a href="/logout">Log Out</a></button>
 </div>
