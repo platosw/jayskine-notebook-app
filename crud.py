@@ -37,11 +37,11 @@ def get_note(id):
     note = Note.query.get(id)
     return note
 
-def update_note(id, title, body_content, entry_date, category):
+def update_note(id, title, body_content, category):
     note = Note.query.get(id)
     note.title = title
     note.body_content = body_content
-    note.entry_date = entry_date
+    note.entry_date = datetime.now()
     note.category = category
     return note
 

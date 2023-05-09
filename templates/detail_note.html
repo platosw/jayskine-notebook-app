@@ -6,4 +6,23 @@ block body %}
     posted by: {{note.entry_date}}, Category -
     <a href="/categories/{{note.category_id}}">{{note.category.name}}</a>
 </p>
+<h3>Edit {{note.title}}</h3>
+<form action="/edit_note" method="POST">
+    <input type="hidden" value="{{note.note_id}}" name="note_id" />
+    <label>Title: </label
+    ><input type="text" name="note_title" value="{{note.title}}" /><br />
+    <label>Text: </label
+    ><input
+        type="text"
+        name="body_content"
+        value="{{note.body_content}}"
+    /><br />
+    <label>Category: </label>
+    <select name="note_category">
+        {% for category in categories %}
+        <option value="{{category.category_id}}">{{category.name}}</option>
+        {% endfor %}
+    </select>
+    <input type="submit" />
+</form>
 {% endblock %}

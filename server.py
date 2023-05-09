@@ -21,7 +21,8 @@ def show_detail_category(category_id):
 @app.route("/notes/<note_id>")
 def show_detail_note(note_id):
     note = crud.get_note(note_id)
-    return render_template("detail_note.html", note=note)
+    categories = crud.get_all_categories()
+    return render_template("detail_note.html", note=note, categories=categories)
 
 
 # About create routes
@@ -56,6 +57,18 @@ def update_category():
     db.session.add(updated_category)
     db.session.commit()
     return redirect(f"/categories/{id}")
+
+@app.route("/edit_note", methods=["POST"])
+def update_note():
+    id = request.form.get("note_id")
+    new_title = request.form.get("note_title")
+    new_body_content = request.form.get("body_content")
+    new_category_id = request.form.get("note_category")
+    new_category = crud.get_category(new_category_id)
+    update_note = crud.update_note(id, new_title, new_body_content, new_category)
+    db.session.add(update_note)
+    db.session.commit()
+    return redirect(f"/notes/{id}")
 
 
 if __name__ == "__main__":
