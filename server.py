@@ -1,6 +1,9 @@
+import os
 from flask import Flask, render_template, request, flash, session, redirect
 
+
 app = Flask(__name__)
+app.secret_key = "dev"
 
 from model import db, connect_to_db
 import crud
@@ -69,6 +72,27 @@ def update_note():
     db.session.add(update_note)
     db.session.commit()
     return redirect(f"/notes/{id}")
+
+
+# About athentication routes
+@app.route("/login", methods=["POST"])
+def login():
+    email = request.form.get("user_email")
+    password = request.form.get("user_password")
+    user = crud.get_user_by_email(email)
+    if user.password == password:
+        session["user_email"] = user.email
+        flash(f"Welcome {user.username}!")
+    else:
+        flash("Your email or password does not match. Please try again.")
+
+    return redirect("/")
+
+@app.route("/logout")
+def logout():
+    session.clear()
+    flash("You are logged out.")
+    return redirect("/")
 
 
 if __name__ == "__main__":
