@@ -58,6 +58,23 @@ def add_note():
         db.session.commit()
         return redirect("/")
 
+@app.route("/add_user", methods=["POST"])
+def add_user():
+    email = request.form.get("email")
+    password = request.form.get("password")
+    username = request.form.get("username")
+
+    user = crud.get_user_by_email(email)
+    if user:
+         flash("Cannot create an account with this email. Try again.")
+    else:
+         user = crud.create_user(email, password, username)
+         db.session.add(user)
+         db.session.commit()
+         flash(f"{user.username}, your account created! Please log in.")
+
+    return redirect("/")
+
 
 # About update routes
 @app.route("/edit_category", methods=["POST"])
@@ -88,7 +105,7 @@ def login():
     email = request.form.get("user_email")
     password = request.form.get("user_password")
     user = crud.get_user_by_email(email)
-    if user.password == password:
+    if user and user.password == password:
         session["user"] = {"email": user.email, "username": user.username}
         flash("You're logged in!")
     else:
