@@ -51,8 +51,8 @@ def delete_note(id):
     return "This note has been deleted."
 
 # About categories table
-def create_category(name):
-    category = Category(name=name)
+def create_category(name, user):
+    category = Category(name=name, user=user)
     return category
 
 def get_all_categories():

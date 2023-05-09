@@ -38,7 +38,9 @@ def show_detail_note(note_id):
 @app.route("/add_category", methods=["POST"])
 def add_category():
         name = request.form.get("category_name")
-        new_category = crud.create_category(name)
+        user_email = session["user"]["email"]
+        user = crud.get_user_by_email(user_email)
+        new_category = crud.create_category(name, user)
         db.session.add(new_category)
         db.session.commit()
         return redirect("/")
@@ -47,7 +49,7 @@ def add_category():
 def add_note():
         title = request.form.get("note_title")
         body_content = request.form.get("note_context")
-        user_email = request.form.get("note_user_email")
+        user_email = session["user"]["email"]
         category_id = request.form.get("note_category_id")
         user = crud.get_user_by_email(user_email)
         category = crud.get_category(category_id)

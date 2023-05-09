@@ -21,23 +21,21 @@ for num in range(1, 11):
 model.db.session.add_all(users)
 model.db.session.commit()
 
-# add categories
+# add categories and notes
 categories = []
+notes = []
 for num in range(1, 6):
-    new_category = crud.create_category(f"Category {num}")
+    user = choice(users)
+    new_category = crud.create_category(f"Category {num}", user)
     categories.append(new_category)
 
-model.db.session.add_all(categories)
-model.db.session.commit()
-
-# add notes
-notes = []
-for title in range(1, 21):
-    new_note = crud.create_note(f"Title {title}",
+    for title in range(1, 4):
+        new_note = crud.create_note(f"Title {title}",
                             "This is just testing.",
-                            choice(users),
-                            choice(categories))
-    notes.append(new_note)
+                            user,
+                            new_category)
+        notes.append(new_note)
 
+model.db.session.add_all(categories)
 model.db.session.add_all(notes)
 model.db.session.commit()

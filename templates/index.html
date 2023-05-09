@@ -5,11 +5,12 @@
 <div id="categories">
     <h3>Categories</h3>
     <ul>
-        {% for category in categories %}
+        {% for category in categories %} {% if session.user.email ==
+        category.user.email %}
         <li>
             <a href="/categories/{{category.category_id}}">{{category.name}}</a>
         </li>
-        {% endfor %}
+        {% endif %} {% endfor %}
     </ul>
     <h4>Add Category</h4>
     <form action="/add_category" method="POST" id="category_form">
@@ -29,12 +30,12 @@
     <form action="/add_note" method="POST" id="note_form">
         <label>Title: </label><input type="text" name="note_title" />
         <label>Context: </label><input type="text" name="note_context" />
-        <label>User email: </label><input type="text" name="note_user_email" />
         <label>Select Category: </label>
         <select name="note_category_id">
-            {% for category in categories %}
+            {% for category in categories %} {% if session.user.email ==
+            category.user.email %}
             <option value="{{category.category_id}}">{{category.name}}</option>
-            {% endfor %}
+            {% endif %} {% endfor %}
         </select>
         <input type="submit" />
     </form>

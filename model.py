@@ -19,6 +19,7 @@ class User(db.Model):
                          nullable=False)
     
     notes = db.relationship("Note", back_populates="user")
+    categories = db.relationship("Category", back_populates="user")
 
     def __repr__(self):
         return f'<User user_id={self.user_id}, email={self.email}>'
@@ -42,7 +43,6 @@ class Note(db.Model):
                         autoincrement=True,
                         primary_key=True)
     title = db.Column(db.String(35),
-                      unique=True,
                       nullable=False)
     body_content = db.Column(db.Text)
     entry_date = db.Column(db.DateTime)
@@ -62,13 +62,22 @@ class Category(db.Model):
 
     __tablename__ = "categories"
 
+    def __init__(self, name, user):
+        self.name = name
+        self.user_id = user.user_id
+        self.user = user
+        
+
     category_id = db.Column(db.Integer,
                             autoincrement=True,
                             primary_key=True)
     name = db.Column(db.String(30),
                      unique=True,
                      nullable=False)
+    user_id = db.Column(db.Integer,
+                        db.ForeignKey("users.user_id"))
     
+    user = db.relationship("User", back_populates="categories")
     notes = db.relationship("Note", back_populates="category")
     
     def __repr__(self):
