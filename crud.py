@@ -25,10 +25,10 @@ def delete_user(id):
     return 'User account has been deleted.'
 
 # About notes table
-def create_note(title, body_content, user, category):
+def create_note(title, body_content, user, category, tags=""):
     note = Note(title=title, body_content=body_content,
                 entry_date=datetime.now().strftime('%c'),
-                user=user, category=category)
+                user=user, category=category, tags=tags)
     return note
 
 def get_all_notes():
@@ -39,12 +39,13 @@ def get_note(id):
     note = Note.query.get(id)
     return note
 
-def update_note(id, title, body_content, category):
+def update_note(id, title, body_content, category, tags):
     note = Note.query.get(id)
     note.title = title
     note.body_content = body_content
     note.entry_date = datetime.now().strftime('%c')
     note.category = category
+    note.tags = tags
     return note
 
 def delete_note(id):

@@ -7,6 +7,10 @@ block body %}
         posted by: {{note.entry_date}}, Category -
         <a href="/categories/{{note.category_id}}">{{note.category.name}}</a>
     </p>
+    <p>
+        {% for tag in note.tags.split() %}<a class="label">#{{tag}}</a> &nbsp;{%
+        endfor %}
+    </p>
 </div>
 <div id="edit_note">
     <h3>Edit {{note.title}}</h3>
@@ -20,6 +24,9 @@ block body %}
             name="body_content"
             value="{{note.body_content}}"
         /><br />
+        <label>Tags: </label>
+        <input type="text" name="tags" value="{{note.tags}}" />
+        <br />
         <label>Category: </label>
         <select name="note_category">
             {% for category in categories %} {% if category.user.email ==

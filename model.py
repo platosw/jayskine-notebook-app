@@ -36,7 +36,7 @@ class Note(db.Model):
     __tablename__ = "notes"
 
     def __init__(self, title, body_content, entry_date, user,
-                 category):
+                 category, tags):
         self.title = title
         self.body_content = body_content
         self.entry_date = entry_date
@@ -44,6 +44,7 @@ class Note(db.Model):
         self.category_id = category.category_id
         self.user = user        
         self.category = category
+        self.tags = tags
     
     note_id = db.Column(db.Integer,
                         autoincrement=True,
@@ -59,6 +60,7 @@ class Note(db.Model):
     
     user = db.relationship("User", back_populates="notes")
     category = db.relationship("Category", back_populates="notes")
+    tags = db.Column(db.String)
 
     def __repr__(self):
         return f'<Note note_id={self.note_id}, title={self.title}>'

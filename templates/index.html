@@ -23,7 +23,11 @@
     <h3>All Notes</h3>
     <ul>
         {% for note in notes %} {% if note.user.email == session.user.email %}
-        <li><a href="/notes/{{note.note_id}}">{{note.title}}</a></li>
+        <li>
+            <a href="/notes/{{note.note_id}}">{{note.title}}</a>
+            {% for tag in note.tags.split() %}
+            <a class="label">#{{tag}}</a> &nbsp; {% endfor %}
+        </li>
         {% endif %} {% endfor %}
     </ul>
     <h4>Add Note</h4>
