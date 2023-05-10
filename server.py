@@ -71,14 +71,16 @@ def add_user():
 
     user = crud.get_user_by_email(email)
     if user:
-         flash("Cannot create an account with this email. Try again.")
+        flash("Cannot create an account with this email. Try again.")
+        return redirect("/")
     else:
-         user = crud.create_user(email, password, username)
-         db.session.add(user)
-         db.session.commit()
-         flash(f"{user.username}, your account created! Please log in.")
+        user = crud.create_user(email, password, username)
+        db.session.add(user)
+        db.session.commit()
+        flash(f"{user.username}, your account created!")
+        session["user"] = {"email": user.email, "username": user.username}
+        return redirect("/")
 
-    return redirect("/")
 
 
 # About update routes
