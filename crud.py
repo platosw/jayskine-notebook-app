@@ -58,7 +58,7 @@ def create_category(name, user):
     return category
 
 def get_all_categories():
-    categories = Category.query.order_by(Category.name).all()
+    categories = Category.query.order_by(db.func.lower(Category.name)).all()
     return categories
 
 def get_category(id):

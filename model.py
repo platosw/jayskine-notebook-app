@@ -1,5 +1,11 @@
 from flask_sqlalchemy import SQLAlchemy
 
+from sqlalchemy import desc, event, func, orm
+from sqlalchemy.ext.associationproxy import association_proxy
+from sqlalchemy.ext.declarative import declared_attr
+from sqlalchemy_utils import ArrowType, auto_delete_orphans
+import slugify
+
 db = SQLAlchemy()
 
 
@@ -72,7 +78,6 @@ class Category(db.Model):
                             autoincrement=True,
                             primary_key=True)
     name = db.Column(db.String(30),
-                     unique=True,
                      nullable=False)
     user_id = db.Column(db.Integer,
                         db.ForeignKey("users.user_id"))
