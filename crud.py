@@ -27,7 +27,8 @@ def delete_user(id):
 # About notes table
 def create_note(title, body_content, user, category):
     note = Note(title=title, body_content=body_content,
-                entry_date=datetime.now(), user=user, category=category)
+                entry_date=datetime.now().strftime('%c'),
+                user=user, category=category)
     return note
 
 def get_all_notes():
@@ -42,7 +43,7 @@ def update_note(id, title, body_content, category):
     note = Note.query.get(id)
     note.title = title
     note.body_content = body_content
-    note.entry_date = datetime.now()
+    note.entry_date = datetime.now().strftime('%c')
     note.category = category
     return note
 
