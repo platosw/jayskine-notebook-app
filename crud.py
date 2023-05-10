@@ -31,7 +31,7 @@ def create_note(title, body_content, user, category):
     return note
 
 def get_all_notes():
-    notes = Note.query.all()
+    notes = Note.query.order_by(Note.entry_date.desc()).all()
     return notes
 
 def get_note(id):
@@ -58,7 +58,7 @@ def create_category(name, user):
     return category
 
 def get_all_categories():
-    categories = Category.query.all()
+    categories = Category.query.order_by(Category.name).all()
     return categories
 
 def get_category(id):
