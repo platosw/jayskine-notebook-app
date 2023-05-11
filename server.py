@@ -9,6 +9,7 @@ app.jinja_env.undefined = StrictUndefined
 
 from model import db, connect_to_db
 import crud
+# import json_data
 
 
 # About show routes
@@ -46,9 +47,9 @@ def index_data():
     categories = crud.get_all_categories()
     categories_json = []
     for category in categories:
-         notes_list = []
+         category_notes_list = []
          for note in notes:
-              notes_list.append(
+              category_notes_list.append(
                    {
                         "note_id": note.note_id,
                         "title": note.title,
@@ -80,7 +81,7 @@ def index_data():
                             "email": category.user.email,
                             "username": category.user.username
                             },
-                   "notes": notes_list
+                   "notes": category_notes_list
               }
          )
 

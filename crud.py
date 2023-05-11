@@ -1,6 +1,7 @@
 from model import User, Note, Category, connect_to_db, db
 from datetime import datetime
 
+
 # About users table
 def create_user(email, password, username):
     user = User(email=email, password=password, username=username)
@@ -76,6 +77,7 @@ def delete_category(id):
     db.session.delete(category)
     db.session.commit()
     return "This category has been deleted"
+
 
 
 if __name__ == "__main__":
