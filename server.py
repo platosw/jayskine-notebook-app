@@ -1,9 +1,11 @@
 import os
-from flask import Flask, render_template, request, flash, session, redirect
+from flask import Flask, render_template, request, flash, session, redirect, jsonify
 
+from jinja2 import StrictUndefined
 
 app = Flask(__name__)
 app.secret_key = "dev"
+app.jinja_env.undefined = StrictUndefined
 
 from model import db, connect_to_db
 import crud
@@ -12,9 +14,78 @@ import crud
 # About show routes
 @app.route("/")
 def index():
+     notes = []
+     categories = []
+     return render_template("index.html", notes=notes, categories=categories)
+
+@app.route("/index_data")
+def index_data():
     notes = crud.get_all_notes()
+    notes_json = []
+    for note in notes:
+        notes_json.append({
+                   "note_id": note.note_id,
+                   "title": note.title,
+                   "body_content": note.body_content,
+                   "entry_date": note.entry_date,
+                   "user_id": note.user_id,
+                   "category_id": note.category_id,
+                   "user": {
+                            "user_id": note.user.user_id,
+                            "email": note.user.email,
+                            "username": note.user.username
+                            },
+                   "category": {
+                                "category_id": note.category.category_id,
+                                "name": note.category.name,
+                                "user_id": note.category.user_id
+                                },
+                   "tags": note.tags
+        })
+
     categories = crud.get_all_categories()
-    return render_template("index.html", notes=notes, categories=categories)
+    categories_json = []
+    for category in categories:
+         notes_list = []
+         for note in notes:
+              notes_list.append(
+                   {
+                        "note_id": note.note_id,
+                        "title": note.title,
+                        "body_content": note.body_content,
+                        "entry_date": note.entry_date,
+                        "user_id": note.user_id,
+                        "category_id": note.category_id,
+                        "user": {
+                                "user_id": note.user.user_id,
+                                "email": note.user.email,
+                                "username": note.user.username
+                                },
+                        "category": {
+                                    "category_id": note.category.category_id,
+                                    "name": note.category.name,
+                                    "user_id": note.category.user_id
+                                    },
+                        "tags": note.tags
+                   }
+              )
+
+         categories_json.append(
+              {
+                   "category_id": category.category_id,
+                   "name": category.name,
+                   "user_id": category.user_id,
+                   "user": {
+                            "user_id": category.user.user_id,
+                            "email": category.user.email,
+                            "username": category.user.username
+                            },
+                   "notes": notes_list
+              }
+         )
+
+    json_data = {"notes": notes_json, "categories": categories_json}
+    return jsonify(json_data)
 
 @app.route("/categories/<category_id>")
 def show_detail_category(category_id):
@@ -140,7 +211,7 @@ def delete_note(note_id):
      return redirect("/")
 
 
-# About athentication routes
+# About authentication routes
 @app.route("/login", methods=["POST"])
 def login():
     email = request.form.get("user_email")

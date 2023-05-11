@@ -1,5 +1,6 @@
 from flask_sqlalchemy import SQLAlchemy
 
+from dataclasses import dataclass
 from sqlalchemy import desc, event, func, orm
 from sqlalchemy.ext.associationproxy import association_proxy
 from sqlalchemy.ext.declarative import declared_attr
@@ -9,6 +10,7 @@ import slugify
 db = SQLAlchemy()
 
 
+@dataclass
 class User(db.Model):
 
     __tablename__ = "users"
@@ -31,6 +33,7 @@ class User(db.Model):
         return f'<User user_id={self.user_id}, email={self.email}>'
 
 
+@dataclass
 class Note(db.Model):
 
     __tablename__ = "notes"
@@ -66,6 +69,7 @@ class Note(db.Model):
         return f'<Note note_id={self.note_id}, title={self.title}>'
     
 
+@dataclass
 class Category(db.Model):
 
     __tablename__ = "categories"
@@ -93,7 +97,7 @@ class Category(db.Model):
 
 def connect_to_db(flask_app, db_uri="postgresql:///jayskine", echo=True):
     flask_app.config["SQLALCHEMY_DATABASE_URI"] = db_uri
-    flask_app.config["SQLALCHEMY_ECHO"] = echo
+    # flask_app.config["SQLALCHEMY_ECHO"] = echo
     flask_app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
     db.app = flask_app
