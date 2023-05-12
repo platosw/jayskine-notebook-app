@@ -1,7 +1,7 @@
 import crud
 
 
-def get_notes(user_id):
+def get_all_notes(user_id):
     notes = crud.get_all_notes(user_id)
 
     notes_json = []
@@ -26,11 +26,16 @@ def get_notes(user_id):
                     "tags": note.tags
             })
 
+    return notes_json
+
+
+
+def get_all_categories(user_id):
     categories = crud.get_all_categories(user_id)
     categories_json = []
     for category in categories:
         category_notes_list = []
-        for note in notes:
+        for note in category.notes:
             category_notes_list.append(
                 {
                     "note_id": note.note_id,
@@ -66,5 +71,31 @@ def get_notes(user_id):
             "notes": category_notes_list
             }
         )
+    
+    return categories_json
 
-    return [notes_json, categories_json]
+
+
+def get_note(note_id):
+    note = crud.get_note(note_id)
+    note_json = {
+                    "note_id": note.note_id,
+                    "title": note.title,
+                    "body_content": note.body_content,
+                    "entry_date": note.entry_date,
+                    "user_id": note.user_id,
+                    "category_id": note.category_id,
+                    "user": {
+                            "user_id": note.user.user_id,
+                            "email": note.user.email,
+                            "username": note.user.username
+                            },
+                    "category": {
+                                "category_id": note.category.category_id,
+                                "name": note.category.name,
+                                "user_id": note.category.user_id
+                                },
+                    "tags": note.tags
+                }
+    
+    return note_json

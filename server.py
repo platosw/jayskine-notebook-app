@@ -1,6 +1,6 @@
 import os
 from flask import Flask, render_template, request, flash, session, redirect, jsonify
-from json_data import get_notes
+from json_data import get_all_notes, get_all_categories, get_note
 
 from jinja2 import StrictUndefined
 
@@ -11,19 +11,18 @@ app.jinja_env.undefined = StrictUndefined
 from model import db, connect_to_db
 import crud
 
-# import json_data
 
 
 # About show routes
 @app.route("/")
 def index():
-     return render_template("index.html")
+    return render_template("index.html")
 
 @app.route("/jayskine.api")
 def index_data():
     if "user" in session:
-        current_user = crud.get_user_by_email(session["user"]["email"])
-        return jsonify(get_notes(current_user.user_id))
+        current_user_id = crud.get_user_by_email(session["user"]["email"]).user_id
+        return jsonify([get_all_notes(current_user_id), get_all_categories(current_user_id)])
     else:
         return redirect('/')
 
@@ -38,9 +37,10 @@ def show_detail_category(category_id):
 @app.route("/notes/<note_id>")
 def show_detail_note(note_id):
     if "user" in session:
-        note = crud.get_note(note_id)
-        categories = crud.get_all_categories()
-        return render_template("detail_note.html", note=note, categories=categories)
+        note = get_note(note_id)
+        current_user = crud.get_user_by_email(session["user"]["email"])
+        categories = get_all_categories(current_user.user_id)
+        return jsonify([note, categories])
     else:
         return redirect("/")
     

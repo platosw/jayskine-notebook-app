@@ -49,7 +49,7 @@ function Index() {
                         {notes &&
                             notes.map((note) => (
                                 <li key={note.note_id}>
-                                    <a href={`/categories/${note.note_id}`}>
+                                    <a href={`/notes/${note.note_id}`}>
                                         {note.title}
                                     </a>
                                 </li>
@@ -61,4 +61,4 @@ function Index() {
     }
 }
 
-ReactDOM.render(<Index />, document.querySelector("#root"));
+ReactDOM.render(<Index />, document.querySelector("#main"));
