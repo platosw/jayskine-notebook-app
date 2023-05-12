@@ -2,48 +2,7 @@
 %}
 <h2>Index Page</h2>
 {% if "user" in session %}
-<div id="categories">
-    <h3>All Categories</h3>
-    <ul>
-        {% for category in categories %} {% if session.user.email ==
-        category.user.email %}
-        <li>
-            <a href="/categories/{{category.category_id}}">{{category.name}}</a>
-        </li>
-        {% endif %} {% endfor %}
-    </ul>
-    <h4>Add Category</h4>
-    <form action="/add_category" method="POST" id="category_form">
-        <label>Category Name: </label>
-        <input type="text" name="category_name" />
-        <input type="submit" />
-    </form>
-</div>
-<div id="notes">
-    <h3>All Notes</h3>
-    <ul>
-        {% for note in notes %} {% if note.user.email == session.user.email %}
-        <li>
-            <a href="/notes/{{note.note_id}}">{{note.title}}</a>
-            {% for tag in note.tags.split() %}
-            <a class="label">#{{tag}}</a> &nbsp; {% endfor %}
-        </li>
-        {% endif %} {% endfor %}
-    </ul>
-    <h4>Add Note</h4>
-    <form action="/add_note" method="POST" id="note_form">
-        <label>Title: </label><input type="text" name="note_title" />
-        <label>Context: </label><input type="text" name="note_context" />
-        <label>Select Category: </label>
-        <select name="note_category_id">
-            {% for category in categories %} {% if session.user.email ==
-            category.user.email %}
-            <option value="{{category.category_id}}">{{category.name}}</option>
-            {% endif %} {% endfor %}
-        </select>
-        <input type="submit" />
-    </form>
-</div>
+<div id="root"></div>
 {% else %}
 <div id="login">
     <h3>Log In</h3>
@@ -65,4 +24,6 @@
         </p>
     </form>
 </div>
-{% endif %} {% endblock %}
+{% endif %}
+<script type="text/jsx" src="/static/index.jsx"></script>
+{% endblock %}

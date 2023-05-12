@@ -1,5 +1,6 @@
 import os
 from flask import Flask, render_template, request, flash, session, redirect, jsonify
+from json_data import get_notes
 
 from jinja2 import StrictUndefined
 
@@ -9,84 +10,22 @@ app.jinja_env.undefined = StrictUndefined
 
 from model import db, connect_to_db
 import crud
+
 # import json_data
 
 
 # About show routes
 @app.route("/")
 def index():
-     notes = []
-     categories = []
-     return render_template("index.html", notes=notes, categories=categories)
+     return render_template("index.html")
 
-@app.route("/index_data")
+@app.route("/jayskine.api")
 def index_data():
-    notes = crud.get_all_notes()
-    notes_json = []
-    for note in notes:
-        notes_json.append({
-                   "note_id": note.note_id,
-                   "title": note.title,
-                   "body_content": note.body_content,
-                   "entry_date": note.entry_date,
-                   "user_id": note.user_id,
-                   "category_id": note.category_id,
-                   "user": {
-                            "user_id": note.user.user_id,
-                            "email": note.user.email,
-                            "username": note.user.username
-                            },
-                   "category": {
-                                "category_id": note.category.category_id,
-                                "name": note.category.name,
-                                "user_id": note.category.user_id
-                                },
-                   "tags": note.tags
-        })
-
-    categories = crud.get_all_categories()
-    categories_json = []
-    for category in categories:
-         category_notes_list = []
-         for note in notes:
-              category_notes_list.append(
-                   {
-                        "note_id": note.note_id,
-                        "title": note.title,
-                        "body_content": note.body_content,
-                        "entry_date": note.entry_date,
-                        "user_id": note.user_id,
-                        "category_id": note.category_id,
-                        "user": {
-                                "user_id": note.user.user_id,
-                                "email": note.user.email,
-                                "username": note.user.username
-                                },
-                        "category": {
-                                    "category_id": note.category.category_id,
-                                    "name": note.category.name,
-                                    "user_id": note.category.user_id
-                                    },
-                        "tags": note.tags
-                   }
-              )
-
-         categories_json.append(
-              {
-                   "category_id": category.category_id,
-                   "name": category.name,
-                   "user_id": category.user_id,
-                   "user": {
-                            "user_id": category.user.user_id,
-                            "email": category.user.email,
-                            "username": category.user.username
-                            },
-                   "notes": category_notes_list
-              }
-         )
-
-    json_data = {"notes": notes_json, "categories": categories_json}
-    return jsonify(json_data)
+    if "user" in session:
+        current_user = crud.get_user_by_email(session["user"]["email"])
+        return jsonify(get_notes(current_user.user_id))
+    else:
+        return redirect('/')
 
 @app.route("/categories/<category_id>")
 def show_detail_category(category_id):
