@@ -1,6 +1,6 @@
 import os
 from flask import Flask, render_template, request, flash, session, redirect, jsonify
-from json_data import get_all_notes, get_all_categories, get_note
+from json_data import get_all_notes, get_all_categories, get_category
 
 from jinja2 import StrictUndefined
 
@@ -30,17 +30,31 @@ def index_data():
 def show_detail_category(category_id):
     if "user" in session:
         category = crud.get_category(category_id)
-        return render_template("detail_category.html", category=category)
+        if session["user"]["email"] == category.user.email:
+            return render_template("detail_category.html", category=category)
+        else:
+             return redirect("/")
+    else:
+        return redirect("/")
+    
+@app.route("/categories.api/<category_id>")
+def detail_category_data(category_id):
+    if "user" in session:
+        category = get_category(category_id)
+        if session["user"]["email"] == category["user"]["email"]:
+            return jsonify(category)
+        else:
+             return redirect("/")
     else:
         return redirect("/")
 
 @app.route("/notes/<note_id>")
 def show_detail_note(note_id):
     if "user" in session:
-        note = get_note(note_id)
+        note = crud.get_note(note_id)
         current_user = crud.get_user_by_email(session["user"]["email"])
-        categories = get_all_categories(current_user.user_id)
-        return jsonify([note, categories])
+        categories = crud.get_all_categories(current_user.user_id)
+        return render_template("detail_note.html", note=note, categories=categories)
     else:
         return redirect("/")
     
@@ -53,7 +67,7 @@ def show_user(email):
 # About create routes
 @app.route("/add_category", methods=["POST"])
 def add_category():
-        name = request.form.get("category_name")
+        name = request.json.get("name")
         user_email = session["user"]["email"]
         user = crud.get_user_by_email(user_email)
         new_category = crud.create_category(name, user)

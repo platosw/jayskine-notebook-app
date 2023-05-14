@@ -76,26 +76,43 @@ def get_all_categories(user_id):
 
 
 
-def get_note(note_id):
-    note = crud.get_note(note_id)
-    note_json = {
-                    "note_id": note.note_id,
-                    "title": note.title,
-                    "body_content": note.body_content,
-                    "entry_date": note.entry_date,
-                    "user_id": note.user_id,
-                    "category_id": note.category_id,
-                    "user": {
+def get_category(category_id):
+    category = crud.get_category(category_id)
+
+    category_notes_list = []
+    for note in category.notes:
+        category_notes_list.append(
+            {
+                "note_id": note.note_id,
+                "title": note.title,
+                "body_content": note.body_content,
+                "entry_date": note.entry_date,
+                "user_id": note.user_id,
+                "category_id": note.category_id,
+                "user": {
                             "user_id": note.user.user_id,
                             "email": note.user.email,
                             "username": note.user.username
-                            },
-                    "category": {
+                        },
+                "category": {
                                 "category_id": note.category.category_id,
                                 "name": note.category.name,
                                 "user_id": note.category.user_id
-                                },
-                    "tags": note.tags
+                            },
+                "tags": note.tags
+            }
+        )
+
+    category_json = {
+            "category_id": category.category_id,
+            "name": category.name,
+            "user_id": category.user_id,
+            "user": {
+                        "user_id": category.user.user_id,
+                        "email": category.user.email,
+                        "username": category.user.username
+                    },
+            "notes": category_notes_list
                 }
     
-    return note_json
+    return category_json

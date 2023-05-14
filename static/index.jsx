@@ -28,6 +28,55 @@ function Index() {
         const notes = data[0];
         const categories = data[1];
 
+        class CategoryNameForm extends React.Component {
+            constructor(props) {
+                super(props);
+                this.state = { name: "" };
+
+                this.handleChange = this.handleChange.bind(this);
+                this.handleSubmit = this.handleSubmit.bind(this);
+            }
+
+            handleChange(event) {
+                this.setState({ name: event.target.value });
+            }
+
+            handleSubmit(event) {
+                fetch("/add_category", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({ name: this.state.name }),
+                })
+                    .then((res) => res.json())
+                    .then((responseJson) => {
+                        alert(
+                            "A category was submitted: " +
+                                this.state.name +
+                                responseJson.status
+                        );
+                        event.preventDefault();
+                    });
+            }
+
+            render() {
+                return (
+                    <form onSubmit={this.handleSubmit}>
+                        <label>
+                            Name:
+                            <input
+                                type="text"
+                                value={this.state.name}
+                                onChange={this.handleChange}
+                            />
+                        </label>
+                        <input type="submit" value="Submit" />
+                    </form>
+                );
+            }
+        }
+
         return (
             <div>
                 <div id="categories">
@@ -42,6 +91,7 @@ function Index() {
                                 </li>
                             ))}
                     </ul>
+                    <CategoryNameForm />
                 </div>
                 <div id="notes">
                     <h3>All Notes</h3>
