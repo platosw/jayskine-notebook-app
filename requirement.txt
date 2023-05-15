@@ -8,6 +8,7 @@ greenlet==2.0.2
 importlib-metadata==6.6.0
 itsdangerous==2.0.1
 Jinja2==3.0.1
+Markdown==3.4.3
 MarkupSafe==2.0.1
 psycopg2==2.9.6
 psycopg2-binary==2.9.3

@@ -3,6 +3,7 @@ from flask import Flask, render_template, request, flash, session, redirect, jso
 from flask_mde import Mde, MdeField
 from flask_wtf import FlaskForm
 from wtforms import SubmitField
+import markdown
 from json_data import get_all_notes, get_all_categories, get_category
 
 from jinja2 import StrictUndefined
@@ -56,7 +57,7 @@ def detail_category_data(category_id):
         return redirect("/")
     
 @app.route("/create_note")
-def create_note():
+def show_create_note():
      form = MdeForm()
      current_user_id = crud.get_user_by_email(session["user"]["email"]).user_id
      categories = get_all_categories(current_user_id)
@@ -67,8 +68,9 @@ def show_detail_note(note_id):
     if "user" in session:
         note = crud.get_note(note_id)
         current_user = crud.get_user_by_email(session["user"]["email"])
+        content = markdown.markdown(note.body_content)
         categories = crud.get_all_categories(current_user.user_id)
-        return render_template("detail_note.html", note=note, categories=categories)
+        return render_template("detail_note.html", note=note, categories=categories, content=content)
     else:
         return redirect("/")
     

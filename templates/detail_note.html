@@ -11,8 +11,7 @@ block head %} {{mde.css}} {% endblock %} {% block body %}
         endfor %}
     </p>
 </div>
-{{note.body_content|safe}}
-<code class="prettyprint">{{note.body_content|safe}}</code>
+<div class="make-pretty">{{content|safe}}</div>
 {{mde.js}}
 <div id="edit_note">
     <h3>Edit {{note.title}}</h3>
@@ -46,5 +45,4 @@ block head %} {{mde.css}} {% endblock %} {% block body %}
     </button>
 </div>
 
-<script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
 {% endblock %}
