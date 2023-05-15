@@ -51,13 +51,13 @@ function Index() {
                 })
                     .then((res) => res.json())
                     .then((responseJson) => {
-                        alert(
+                        console.log(
                             "A category was submitted: " +
                                 this.state.name +
                                 responseJson.status
                         );
-                        event.preventDefault();
                     });
+                // event.preventDefault();
             }
 
             render() {
@@ -81,6 +81,7 @@ function Index() {
             <div>
                 <div id="categories">
                     <h3>All Categories</h3>
+                    <CategoryNameForm />
                     <ul>
                         {categories &&
                             categories.map((cat) => (
@@ -91,7 +92,6 @@ function Index() {
                                 </li>
                             ))}
                     </ul>
-                    <CategoryNameForm />
                 </div>
                 <div id="notes">
                     <h3>All Notes</h3>
@@ -105,6 +105,9 @@ function Index() {
                                 </li>
                             ))}
                     </ul>
+                    <button>
+                        <a href="/create_note">Add a new Note</a>
+                    </button>
                 </div>
             </div>
         );

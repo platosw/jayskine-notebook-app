@@ -1,8 +1,7 @@
 {% extends 'base.html' %} {% block title %} {{note.title}} {% endblock %} {%
-block body %}
+block head %} {{mde.css}} {% endblock %} {% block body %}
 <div id="note">
     <h2>{{note.title}}</h2>
-    <p>{{note.body_content}}</p>
     <p>
         posted by: {{note.entry_date}}, Category -
         <a href="/categories/{{note.category_id}}">{{note.category.name}}</a>
@@ -12,6 +11,9 @@ block body %}
         endfor %}
     </p>
 </div>
+{{note.body_content|safe}}
+<code class="prettyprint">{{note.body_content|safe}}</code>
+{{mde.js}}
 <div id="edit_note">
     <h3>Edit {{note.title}}</h3>
     <form action="/edit_note" method="POST">
@@ -43,4 +45,6 @@ block body %}
         <a href="/delete_note/{{note.note_id}}">Delete {{note.title}}</a>
     </button>
 </div>
+
+<script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
 {% endblock %}

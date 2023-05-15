@@ -1,16 +1,23 @@
 import os
 from flask import Flask, render_template, request, flash, session, redirect, jsonify
+from flask_mde import Mde, MdeField
+from flask_wtf import FlaskForm
+from wtforms import SubmitField
 from json_data import get_all_notes, get_all_categories, get_category
 
 from jinja2 import StrictUndefined
 
 app = Flask(__name__)
 app.secret_key = "dev"
+mde = Mde(app)
 app.jinja_env.undefined = StrictUndefined
 
 from model import db, connect_to_db
 import crud
 
+class MdeForm(FlaskForm):
+     editor = MdeField()
+     submit = SubmitField()
 
 
 # About show routes
@@ -47,6 +54,13 @@ def detail_category_data(category_id):
              return redirect("/")
     else:
         return redirect("/")
+    
+@app.route("/create_note")
+def create_note():
+     form = MdeForm()
+     current_user_id = crud.get_user_by_email(session["user"]["email"]).user_id
+     categories = get_all_categories(current_user_id)
+     return render_template("create_note.html", form=form, categories=categories)
 
 @app.route("/notes/<note_id>")
 def show_detail_note(note_id):
@@ -78,12 +92,13 @@ def add_category():
 @app.route("/add_note", methods=["POST"])
 def add_note():
         title = request.form.get("note_title")
-        body_content = request.form.get("note_context")
+        body_content = request.form.get("editor")
         user_email = session["user"]["email"]
         category_id = request.form.get("note_category_id")
+        tags = request.form.get("tags")
         user = crud.get_user_by_email(user_email)
         category = crud.get_category(category_id)
-        new_note = crud.create_note(title, body_content, user, category)
+        new_note = crud.create_note(title, body_content, user, category, tags)
         db.session.add(new_note)
         db.session.commit()
         return redirect("/")

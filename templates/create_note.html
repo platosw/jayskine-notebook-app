@@ -1,0 +1,15 @@
+{% extends 'base.html' %} {% block title %} Create a note {% endblock %} {%
+block head %} {{mde.css}} {% endblock %} {% block body %}
+<form action="/add_note" method="POST">
+    <label>Title: </label><input type="text" name="note_title" />
+    <label>Choose category</label>
+    <select name="note_category_id">
+        {% for category in categories %}
+        <option value="{{category.category_id}}">{{category.name}}</option>
+        {% endfor %}
+    </select>
+    {{form.csrf_token }} {{form.editor}}
+    <label>Tags: </label><input type="text" name="tags" /><br />
+    {{form.submit}}
+</form>
+{{mde.preview}} {{mde.js}} {% endblock %}
