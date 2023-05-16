@@ -1,13 +1,8 @@
 "use strict";
-// This is for my personal Documentation!!!!
-// do not use "React.useState" or "React.useEffect" directly
-// import those hooks as below from react module
 
-// use functional component with hooks for better performance
-// place subcomponent(CategoryNameForm) outside and before main component(Index)
 function CategoryNameForm() {
     const [name, setName] = React.useState("");
-    // try to give contextual name as much as you can for debug or issue handling later
+
     function handleSubmitNewCategory(event) {
         // event.preventDefault();
         fetch("/add_category", {
@@ -18,9 +13,6 @@ function CategoryNameForm() {
             body: JSON.stringify({ name }),
         })
             .then((data) => {
-                // need return data validation
-                // I'm not sure which status will be returned here in case of success
-                // let's assume it is '200' here
                 console.log(data.status);
                 if (data.status == "200") {
                     console.log(
@@ -29,14 +21,12 @@ function CategoryNameForm() {
                             data.status
                     );
                 } else {
-                    // throw an error in case of failure
-                    // so that we can check where the error coming from
                     throw new Error(
                         "Something went wrong while adding a new category"
                     );
                 }
             })
-            // don't forget to add "catch" after "then"
+
             .catch((error) => console.log(error.message));
     }
     return (
@@ -59,7 +49,6 @@ function Index() {
     const [categories, setCategories] = React.useState([]);
     const [notes, setNotes] = React.useState([]);
     React.useEffect(() => {
-        // 'isLoading' is more common usecase than 'isLoaded'
         setIsLoading(true);
         fetch("/jayskine.api")
             .then((res) => res.json())
@@ -75,12 +64,12 @@ function Index() {
             .catch((error) => {
                 setError(error.message);
             })
-            // you can add 'finally' for final actions regardless of success or failure
+
             .finally(() => {
                 setIsLoading(false);
             });
     }, []);
-    // no need 'else' block since we will return a component
+
     if (isLoding) {
         return <div>Loading...</div>;
     }
