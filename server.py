@@ -66,11 +66,12 @@ def show_create_note():
 @app.route("/notes/<note_id>")
 def show_detail_note(note_id):
     if "user" in session:
+        form = MdeForm()
         note = crud.get_note(note_id)
         current_user = crud.get_user_by_email(session["user"]["email"])
         content = markdown.markdown(note.body_content)
         categories = crud.get_all_categories(current_user.user_id)
-        return render_template("detail_note.html", note=note, categories=categories, content=content)
+        return render_template("detail_note.html", note=note, categories=categories, content=content, form=form)
     else:
         return redirect("/")
     

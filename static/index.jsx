@@ -48,7 +48,7 @@ function CategoryNameForm() {
                     onChange={(e) => setName(e.target.value)}
                 />
             </label>
-            <input type="submit" value="Submit" />
+            <input type="submit" />
         </form>
     );
 }
@@ -122,4 +122,5 @@ function Index() {
         </div>
     );
 }
+
 ReactDOM.render(<Index />, document.querySelector("#main"));

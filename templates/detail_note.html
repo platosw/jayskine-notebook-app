@@ -12,20 +12,15 @@ block head %} {{mde.css}} {% endblock %} {% block body %}
     </p>
 </div>
 <div class="make-pretty">{{content|safe}}</div>
-{{mde.js}}
 <div id="edit_note">
     <h3>Edit {{note.title}}</h3>
     <form action="/edit_note" method="POST">
         <input type="hidden" value="{{note.note_id}}" name="note_id" />
         <label>Title: </label
         ><input type="text" name="note_title" value="{{note.title}}" /><br />
-        <label>Text: </label
-        ><textarea
-            type="text"
-            name="body_content"
-            value="{{content|safe}}"
-        ></textarea
-        ><br />
+        <label>Text: </label>{{form.csrf_token }}
+        {{mde.editor(name="body_content", default=note.body_content)}}
+        <br />
         <label>Tags: </label>
         <input type="text" name="tags" value="{{note.tags}}" />
         <br />
@@ -46,4 +41,4 @@ block head %} {{mde.css}} {% endblock %} {% block body %}
     </button>
 </div>
 
-{% endblock %}
+{{mde.js}} {% endblock %}
