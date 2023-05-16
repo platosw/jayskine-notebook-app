@@ -20,11 +20,12 @@ block head %} {{mde.css}} {% endblock %} {% block body %}
         <label>Title: </label
         ><input type="text" name="note_title" value="{{note.title}}" /><br />
         <label>Text: </label
-        ><input
+        ><textarea
             type="text"
             name="body_content"
-            value="{{note.body_content}}"
-        /><br />
+            value="{{content|safe}}"
+        ></textarea
+        ><br />
         <label>Tags: </label>
         <input type="text" name="tags" value="{{note.tags}}" />
         <br />

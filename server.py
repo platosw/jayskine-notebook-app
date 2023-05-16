@@ -4,7 +4,7 @@ from flask_mde import Mde, MdeField
 from flask_wtf import FlaskForm
 from wtforms import SubmitField
 import markdown
-from json_data import get_all_notes, get_all_categories, get_category
+from transform_object_to_dictionary import get_all_notes, get_all_categories, get_category
 
 from jinja2 import StrictUndefined
 
