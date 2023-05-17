@@ -122,7 +122,7 @@ def add_category():
         new_category = crud.create_category(name, user)
         db.session.add(new_category)
         db.session.commit()
-        return redirect("/")
+        return ""
 
 @app.route("/add_note", methods=["POST"])
 def add_note():

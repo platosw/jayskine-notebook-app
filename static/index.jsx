@@ -1,55 +1,19 @@
 "use strict";
 
-function CategoryNameForm() {
-    const [name, setName] = React.useState("");
-
-    function handleSubmitNewCategory(event) {
-        event.preventDefault();
-        fetch("/add_category", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ name }),
-        })
-            // .then((res) => res.json())
-            .then((data) => {
-                console.log(data.status);
-                if (data.status == "200") {
-                    console.log(
-                        "A new category submitted successfully: " +
-                            name +
-                            data.status
-                    );
-                } else {
-                    throw new Error(
-                        "Something went wrong while adding a new category"
-                    );
-                }
-            })
-
-            .catch((error) => console.log(error.message));
-    }
-    return (
-        <form onSubmit={handleSubmitNewCategory}>
-            <label>
-                Name:
-                <input
-                    type="text"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                />
-            </label>
-            <input type="submit" />
-        </form>
-    );
-}
-
 function Index() {
     const [error, setError] = React.useState(null);
     const [isLoding, setIsLoading] = React.useState(false);
     const [categories, setCategories] = React.useState([]);
     const [notes, setNotes] = React.useState([]);
+    const [formInput, setFormInput] = React.useState("");
+
+    function formSubmitHandler(formInput){
+        setFormInput(formInput);
+    }
+
+
+    let input_field = "";
+
     React.useEffect(() => {
         setIsLoading(true);
         fetch("/jayskine.api")
@@ -94,12 +58,14 @@ function Index() {
     if (error) {
         return <div>Error: {error}</div>;
     }
+
     return (
         <div id="index-container">
             <div id="categories">
                 <h3>All Categories</h3>
-                <CategoryNameForm />
+                    <CategoryInput submitHandler={submitHandler}/>
                 <ul>
+                    <NewCategories input={input} />
                     {categories &&
                         categories.map((category) => (
                             <li key={`category_${category.category_id}`}>
@@ -108,6 +74,7 @@ function Index() {
                                 </a>
                             </li>
                         ))}
+                   
                 </ul>
             </div>
             <div id="notes">
@@ -139,5 +106,100 @@ function Index() {
         </div>
     );
 }
+
+function NewCategories(props) {
+    const [categories, setCategories] = React.useState([]);
+
+    // function handleSubmitNewCategory(event) {
+        fetch("/add_category", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ name: props.input }),
+        })
+            .then((response) => {
+                if (response.status == "200") {
+                    console.log(
+                        "A new category submitted successfully: " +
+                            response.status
+                    );
+
+                    setCategories(...categories.push(props.input));
+                } else {
+                    console.log(response.status);
+                }
+            })
+            .catch((error) => console.log(error.message));
+    // }
+
+    return (
+        <div>
+            {categories &&
+                categories.map((category) => (
+                    <li key={`category_${category.category_id}`}>
+                        <a href={`/categories/${category.category_id}`}>
+                            {category.name}
+                        </a>
+                    </li>
+                ))}
+        </div>
+    );
+}
+
+
+
+function CategoryInput() {
+    const [input, setInput] = React.useState("");
+    
+    
+    return (
+        <form onSubmit={props.submitHandler(input)}>
+            <label>
+            Name:
+
+        
+        </label>
+
+        <input
+            type="text"
+            value={input}
+            onChange={(e) => {
+            setInput(e.target.value);
+        }}
+        />
+    
+     <input type="submit" />
+    </form> 
+
+    )
+
+// { <input
+// type="text"
+// value={input_field}
+// onChange={(e) => {
+
+//     Name:
+//     <input
+//       type="text"
+//       value={input_field}
+//       onChange={(e) => {
+
+//       input_field = event.target.value;
+
+//       setName(e.target.value);
+//       }
+//   />
+
+//     input_field = event.target.value;
+
+//     setName(e.target.value);
+// }}
+// />
+
+//     return (
+
+//     );
+// }
 
 ReactDOM.render(<Index />, document.querySelector("#main"));
