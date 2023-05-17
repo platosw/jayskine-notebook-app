@@ -92,7 +92,7 @@ function Index() {
         return <div>Error: {error}</div>;
     }
     return (
-        <div>
+        <div id="index-container">
             <div id="categories">
                 <h3>All Categories</h3>
                 <CategoryNameForm />

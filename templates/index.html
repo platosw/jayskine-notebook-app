@@ -1,6 +1,4 @@
-{% extends 'base.html' %} {% block title %} Index {% endblock %} {% block body
-%}
-<h2>Index Page</h2>
+{% extends 'base.html' %} {% block title %} Index {% endblock %}{% block body %}
 {% if "user" not in session %}
 
 <div id="login">
@@ -25,6 +23,7 @@
 </div>
 
 {% else %}
+<h2 id="categories-title">Index Page</h2>
 <div id="main"></div>
 <script type="text/jsx" src="/static/index.jsx"></script>
 {% endif %} {% endblock %}

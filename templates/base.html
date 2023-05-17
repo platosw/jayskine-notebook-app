@@ -4,6 +4,7 @@
         <meta charset="UTF-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="/static/css/style.css" />
         <title>Jayskine | {% block title %}{% endblock %}</title>
         <script
             crossorigin
@@ -20,15 +21,17 @@
         {% block head %}{% endblock %}
     </head>
     <body>
-        {% for msg in get_flashed_messages() %} {{msg}} {% endfor %}
-        <h1 id="title"><a href="/">Jayskine</a></h1>
-        {% if "user" in session %}
-        <h2 id="user_welcome">Welcome!! {{session.user.username}}</h2>
-        <button>
-            <a href="/users/{{session.user.email}}">User Settings</a>
-        </button>
-        <div id="logout">
-            <button><a href="/logout">Log Out</a></button>
+        <div id="navbar">
+            {% for msg in get_flashed_messages() %} {{msg}} {% endfor %}
+            <h1 id="title"><a href="/">Jayskine</a></h1>
+            {% if "user" in session %}
+            <h2 id="user_welcome">Welcome!! {{session.user.username}}</h2>
+            <button>
+                <a href="/users/{{session.user.email}}">User Settings</a>
+            </button>
+            <div id="logout">
+                <button><a href="/logout">Log Out</a></button>
+            </div>
         </div>
         {% endif %} {% block body %}{% endblock %} {% block after_body %}{%
         endblock %}
