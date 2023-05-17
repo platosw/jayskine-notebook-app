@@ -4,7 +4,7 @@ function CategoryNameForm() {
     const [name, setName] = React.useState("");
 
     function handleSubmitNewCategory(event) {
-        // event.preventDefault();
+        event.preventDefault();
         fetch("/add_category", {
             method: "POST",
             headers: {
@@ -43,6 +43,7 @@ function CategoryNameForm() {
         </form>
     );
 }
+
 function Index() {
     const [error, setError] = React.useState(null);
     const [isLoding, setIsLoading] = React.useState(false);
@@ -55,10 +56,23 @@ function Index() {
             .then((data) => {
                 const [notes, categories] = data;
                 if (notes.length > 0) {
-                    setNotes(notes);
+                    setNotes(
+                        notes
+                            .sort((a, b) => a.entry_date - b.entry_date)
+                            .reverse()
+                    );
                 }
                 if (categories.length > 0) {
-                    setCategories(categories);
+                    setCategories(
+                        categories.sort((a, b) => {
+                            let keyA = a.name.toLowerCase();
+                            let keyB = b.name.toLowerCase();
+
+                            if (keyA < keyB) return -1;
+                            if (keyA > keyB) return 1;
+                            return 0;
+                        })
+                    );
                 }
             })
             .catch((error) => {
@@ -100,7 +114,7 @@ function Index() {
                         notes.map((note) => (
                             <li key={`note_${note.note_id}`}>
                                 <a href={`/notes/${note.note_id}`}>
-                                    {note.title}
+                                    {note.title}&nbsp;
                                 </a>
                             </li>
                         ))}

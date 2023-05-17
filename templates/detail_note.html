@@ -7,8 +7,8 @@ block head %} {{mde.css}} {% endblock %} {% block body %}
         <a href="/categories/{{note.category_id}}">{{note.category.name}}</a>
     </p>
     <p>
-        {% for tag in note.tags.split() %}<a class="label">#{{tag}}</a> &nbsp;{%
-        endfor %}
+        {% for tag in note.tags.split() %}<a href="#" class="label">#{{tag}}</a>
+        &nbsp;{% endfor %}
     </p>
 </div>
 <div class="make-pretty">{{content|safe}}</div>

@@ -26,9 +26,36 @@ class MdeForm(FlaskForm):
 def index():
     return render_template("index.html")
 
+# About authentication routes
+@app.route("/login", methods=["POST"])
+def login():
+    email = request.form.get("user_email")
+    password = request.form.get("user_password")
+    user = crud.get_user_by_email(email)
+
+    if user and user.password == password:
+        session["user"] = {"email": user.email, "username": user.username}
+        flash("You're logged in!")
+    else:
+        flash("Your email or password does not match. Please try again.")
+
+    return redirect("/")
+
+@app.route("/logout")
+def logout():
+    if "user" in session:
+        session.clear()
+        flash("You are logged out.")
+        return redirect("/")
+    else:
+        return redirect("/")
+
+
+
 @app.route("/jayskine.api")
 def index_data():
     if "user" in session:
+        # print(session['user'])
         current_user_id = crud.get_user_by_email(session["user"]["email"]).user_id
         return jsonify([get_all_notes(current_user_id), get_all_categories(current_user_id)])
     else:
@@ -79,6 +106,11 @@ def show_detail_note(note_id):
 def show_user(email):
     user = crud.get_user_by_email(email)
     return render_template("detail_user.html", user=user)
+
+@app.route("/tags")
+def show_tags():
+     
+    return render_template("tags.html")
 
 
 # About create routes
@@ -182,29 +214,6 @@ def delete_note(note_id):
      flash(msg)
      return redirect("/")
 
-
-# About authentication routes
-@app.route("/login", methods=["POST"])
-def login():
-    email = request.form.get("user_email")
-    password = request.form.get("user_password")
-    user = crud.get_user_by_email(email)
-    if user and user.password == password:
-        session["user"] = {"email": user.email, "username": user.username}
-        flash("You're logged in!")
-    else:
-        flash("Your email or password does not match. Please try again.")
-
-    return redirect("/")
-
-@app.route("/logout")
-def logout():
-    if "user" in session:
-        session.clear()
-        flash("You are logged out.")
-        return redirect("/")
-    else:
-        return redirect("/")
 
 
 if __name__ == "__main__":

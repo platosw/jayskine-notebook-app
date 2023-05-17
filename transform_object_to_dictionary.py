@@ -113,6 +113,6 @@ def get_category(category_id):
                         "username": category.user.username
                     },
             "notes": category_notes_list
-                }
+            }
     
     return category_json
