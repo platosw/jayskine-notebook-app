@@ -2,11 +2,26 @@ body {
     font-family: Helvetica, sans-serif, Arial;
 }
 
+ul {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+    color: rgb(40, 153, 234);
+}
+
+#index-navbar {
+    display: flex;
+    text-align: center;
+    align-items: center;
+}
+
 #index-container {
     display: flex;
 }
 
-#categories-title {
+#index-title {
     text-align: center;
 }
 
@@ -15,7 +30,16 @@ body {
     margin-left: 5%;
 }
 
+#categories li {
+    margin-left: -2.5em;
+}
+
 #notes {
+    text-align: center;
     width: 50%;
     margin-right: 20%;
+}
+
+#notes li {
+    margin-right: 2.5em;
 }

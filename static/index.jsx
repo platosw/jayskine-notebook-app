@@ -12,6 +12,7 @@ function CategoryNameForm() {
             },
             body: JSON.stringify({ name }),
         })
+            // .then((res) => res.json())
             .then((data) => {
                 console.log(data.status);
                 if (data.status == "200") {
@@ -84,6 +85,8 @@ function Index() {
             });
     }, []);
 
+    let tag_id = 1;
+
     if (isLoding) {
         return <div>Loading...</div>;
     }
@@ -116,12 +119,22 @@ function Index() {
                                 <a href={`/notes/${note.note_id}`}>
                                     {note.title}&nbsp;
                                 </a>
+                                <span>
+                                    Tags:
+                                    {note.tags &&
+                                        note.tags.split(" ").map((tag) => {
+                                            const output = (
+                                                <a key={tag_id} href="#">
+                                                    #{tag}&nbsp;
+                                                </a>
+                                            );
+                                            tag_id++;
+                                            return output;
+                                        })}
+                                </span>
                             </li>
                         ))}
                 </ul>
-                <button>
-                    <a href="/create_note">Add a new Note</a>
-                </button>
             </div>
         </div>
     );

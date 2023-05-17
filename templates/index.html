@@ -23,7 +23,12 @@
 </div>
 
 {% else %}
-<h2 id="categories-title">Index Page</h2>
+<div id="index-navbar">
+    <h2 id="index-title">Index Page</h2>
+    <button>
+        <a href="/create_note">Add a new Note</a>
+    </button>
+</div>
 <div id="main"></div>
 <script type="text/jsx" src="/static/index.jsx"></script>
 {% endif %} {% endblock %}
