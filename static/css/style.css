@@ -6,9 +6,19 @@ ul {
     list-style: none;
 }
 
+button {
+    all: unset;
+    cursor: pointer;
+    color: rgb(59, 139, 237);
+}
+
+button:hover {
+    outline: rgb(59, 139, 237) 5px auto;
+}
+
 a {
     text-decoration: none;
-    color: rgb(40, 153, 234);
+    color: rgb(59, 139, 237);
 }
 
 #index-navbar {
@@ -17,29 +27,6 @@ a {
     align-items: center;
 }
 
-#index-container {
-    display: flex;
-}
-
-#index-title {
-    text-align: center;
-}
-
-#categories {
-    width: 30%;
-    margin-left: 5%;
-}
-
-#categories li {
-    margin-left: -2.5em;
-}
-
-#notes {
-    text-align: center;
-    width: 50%;
-    margin-right: 20%;
-}
-
-#notes li {
-    margin-right: 2.5em;
+#categories-ul {
+    margin-left: -2.3em;
 }
