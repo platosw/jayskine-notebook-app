@@ -16,12 +16,13 @@ function CategoryContent(props) {
                                 </li>
                             ))}
                 </ul>
-                <a
+                <button
                     id="delete-category-btn"
-                    href={`/delete_category/${props.selectedCategory.category_id}`}
+                    value={props.selectedCategory.category_id}
+                    onClick={(e) => props.handleDelete(e, "value")}
                 >
                     Delete {props.selectedCategory.name}
-                </a>
+                </button>
             </div>
         );
     }

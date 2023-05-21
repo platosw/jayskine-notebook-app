@@ -16,7 +16,7 @@ function Categories() {
         try {
             const response = await fetch("/jayskine.api");
             const json = await response.json();
-            console.log(json[1]);
+            // console.log(json[1]);
 
             if (json[1] && json[1].length > 0) {
                 setCategoriesData(
@@ -106,6 +106,24 @@ function Categories() {
             .catch((error) => console.log(error.message));
     };
 
+    const handleDelete = (e) => {
+        fetch(`/delete_category/${e.target.value}`)
+            .then((response) => {
+                if (response.status === 200) {
+                    // console.log(response.status);
+                    console.log("This category removed successfully.");
+                    fetchData();
+                } else {
+                    throw new Error(
+                        "Something went wrong while removing this category."
+                    );
+                }
+            })
+            .catch((error) => console.log(error.message));
+
+        setSelectedCategory(null);
+    };
+
     if (isLoading) {
         return <div id="loading">Loading...</div>;
     }
@@ -153,6 +171,7 @@ function Categories() {
             <CategoryContent
                 selectedCategory={selectedCategory}
                 notes={notesData}
+                handleDelete={handleDelete}
             />
         </div>
     );
