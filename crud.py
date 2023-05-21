@@ -26,7 +26,7 @@ def delete_user(id):
     return 'User account has been deleted.'
 
 # About notes table
-def create_note(title, body_content, user, category, tags=""):
+def create_note(title, body_content, user, category="", tags=""):
     note = Note(title=title, body_content=body_content,
                 entry_date=datetime.now().strftime('%c'),
                 user=user, category=category, tags=tags)

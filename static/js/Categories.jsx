@@ -1,9 +1,11 @@
 function Categories() {
     const [categoriesData, setCategoriesData] = React.useState(null);
+    const [notesData, setNotesData] = React.useState(null);
     const [err, setErr] = React.useState(null);
     const [isLoading, setIsLoading] = React.useState(false);
     const [input, setInput] = React.useState("");
     const [newCategory, setNewCategory] = React.useState("");
+    const [selectedCategory, setSelectedCategory] = React.useState(null);
 
     const handleInputChange = (evt) => {
         setInput(evt.target.value);
@@ -50,6 +52,14 @@ function Categories() {
                             (a, b) =>
                                 a.name.toLowerCase() - b.name.toLowerCase()
                         )
+                    );
+                }
+
+                if (response[0].length > 0) {
+                    setNotesData(
+                        response[0]
+                            .sort((a, b) => a.entry_date - b.entry_date)
+                            .reverse()
                     );
                 }
             })
@@ -105,37 +115,45 @@ function Categories() {
     }
 
     return (
-        <div id="categories-section">
-            <h3>Categories</h3>
-            <div id="categories-container">
-                <ul id="categories-ul">
-                    <li key="all-notes_1">
-                        <button>
-                            <a>All Notes</a>
-                        </button>
-                    </li>
-                    {categoriesData &&
-                        categoriesData.map((cat) => (
-                            <li key={`category_${cat.category_id}`}>
-                                <button>
-                                    <a href={`/categories/${cat.category_id}`}>
+        <div id="lists-container">
+            <div id="categories-section">
+                <h3>Categories</h3>
+                <div id="categories-container">
+                    <ul id="categories-ul">
+                        <li key="all-notes_1">
+                            <button>
+                                <a onClick={() => setSelectedCategory(null)}>
+                                    All Notes
+                                </a>
+                            </button>
+                        </li>
+                        {categoriesData &&
+                            categoriesData.map((cat) => (
+                                <li key={`category_${cat.category_id}`}>
+                                    <button
+                                        onClick={() => setSelectedCategory(cat)}
+                                    >
                                         {cat.name}
-                                    </a>
-                                </button>
-                            </li>
-                        ))}
-                </ul>
+                                    </button>
+                                </li>
+                            ))}
+                    </ul>
+                </div>
+                <div id="add-category-container">
+                    <input
+                        type="text"
+                        onChange={handleInputChange}
+                        placeholder="Type New Category"
+                        value={input}
+                        required
+                    />
+                    <input type="submit" onClick={handleSubmit} />
+                </div>
             </div>
-            <div id="add-category-container">
-                <input
-                    type="text"
-                    onChange={handleInputChange}
-                    placeholder="Type New Category"
-                    value={input}
-                    required
-                />
-                <input type="submit" onClick={handleSubmit} />
-            </div>
+            <CategoryContent
+                selectedCategory={selectedCategory}
+                notes={notesData}
+            />
         </div>
     );
 }

@@ -21,6 +21,20 @@ a {
     color: rgb(59, 139, 237);
 }
 
+#delete-category-btn {
+    background-color: red;
+    color: white;
+}
+
+#lists-container {
+    display: flex;
+}
+
+#navbar button {
+    margin-left: 1em;
+    margin-right: 1em;
+}
+
 #index-navbar {
     display: flex;
     text-align: center;
