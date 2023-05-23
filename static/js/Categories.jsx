@@ -6,9 +6,22 @@ function Categories() {
     const [input, setInput] = React.useState("");
     const [newCategory, setNewCategory] = React.useState("");
     const [selectedCategory, setSelectedCategory] = React.useState(null);
+    const [editButton, setEditButton] = React.useState(false);
+    const [editInput, setEditInput] = React.useState("");
+    // const [editId, setEditId] = React.useState();
+    const [editCategory, setEditCategory] = React.useState("");
 
     const handleInputChange = (evt) => {
         setInput(evt.target.value);
+    };
+
+    const handleEditInputChange = (evt) => {
+        setEditInput(evt.target.value);
+        // console.log(editId);
+    };
+
+    const handleEditCategory = (category) => {
+        setSelectedCategory(category);
     };
 
     const fetchData = async () => {
@@ -40,6 +53,12 @@ function Categories() {
             fetchData();
         }
     }, [newCategory]);
+
+    React.useEffect(() => {
+        if (editCategory !== "") {
+            fetchData();
+        }
+    }, [editCategory]);
 
     React.useEffect(() => {
         setIsLoading(true);
@@ -100,6 +119,41 @@ function Categories() {
                 } else {
                     throw new Error(
                         "Something went wrong while adding a new category."
+                    );
+                }
+            })
+            .catch((error) => console.log(error.message));
+    };
+
+    const handleEditSubmit = (id) => {
+        if (editInput.trim() === "") {
+            console.log("New category is empty.");
+            return;
+        }
+
+        fetch("/edit_category", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ name: editInput, id: id }),
+        })
+            .then((response) => {
+                console.log(response.status);
+                if (response.status === 200) {
+                    console.log(
+                        "This category submitted successfully: " +
+                            editInput +
+                            ", " +
+                            response.status
+                    );
+                    // setSelectedCategory(editInput);
+                    setEditInput("");
+                    setEditCategory(editInput);
+                    fetchData();
+                } else {
+                    throw new Error(
+                        `Something went wrong while updating ${editInput} category.`
                     );
                 }
             })
@@ -172,6 +226,12 @@ function Categories() {
                 selectedCategory={selectedCategory}
                 notes={notesData}
                 handleDelete={handleDelete}
+                editButton={editButton}
+                setEditButton={setEditButton}
+                editInput={editInput}
+                handleEditInputChange={handleEditInputChange}
+                handleEditSubmit={handleEditSubmit}
+                handleEditCategory={handleEditCategory}
             />
         </div>
     );

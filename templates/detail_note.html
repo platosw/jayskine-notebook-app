@@ -2,8 +2,9 @@
 block head %} {{mde.css}} {% endblock %} {% block body %}
 <div id="note">
     <h2>{{note.title}}</h2>
+    <p>posted by: {{note.entry_date}}</p>
     <p>
-        posted by: {{note.entry_date}}, Category -
+        Category:
         <a href="/categories/{{note.category_id}}">{{note.category.name}}</a>
     </p>
     <p>
@@ -40,5 +41,4 @@ block head %} {{mde.css}} {% endblock %} {% block body %}
         <a href="/delete_note/{{note.note_id}}">Delete {{note.title}}</a>
     </button>
 </div>
-
 {{mde.js}} {% endblock %}

@@ -161,12 +161,12 @@ def add_user():
 # About update routes
 @app.route("/edit_category", methods=["POST"])
 def update_category():
-        id = request.form.get("category_id")
-        name = request.form.get("edit_category_name")
+        id = request.json.get("id")
+        name = request.json.get("name")
         updated_category = crud.update_category(id, name)
         db.session.add(updated_category)
         db.session.commit()
-        return redirect(f"/categories/{id}")
+        return ""
 
 @app.route("/edit_note", methods=["POST"])
 def update_note():
