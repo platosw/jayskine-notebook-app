@@ -54,11 +54,11 @@ function Categories() {
         }
     }, [newCategory]);
 
-    React.useEffect(() => {
-        if (editCategory !== "") {
-            fetchData();
-        }
-    }, [editCategory]);
+    // React.useEffect(() => {
+    //     if (editCategory !== "") {
+    //         fetchData();
+    //     }
+    // }, [editCategory]);
 
     React.useEffect(() => {
         setIsLoading(true);
@@ -147,15 +147,27 @@ function Categories() {
                             ", " +
                             response.status
                     );
-                    // setSelectedCategory(editInput);
-                    setEditInput("");
-                    setEditCategory(editInput);
-                    fetchData();
+                    return response.json();
                 } else {
                     throw new Error(
                         `Something went wrong while updating ${editInput} category.`
                     );
                 }
+            })
+            // .then((res) => {
+            //     console.log(res);
+            //     return res.json();
+            // })
+            .then((data) => {
+                console.log(data);
+                // setSelectedCategory(editInput);
+                setInput("");
+                setNewCategory(input);
+                setCategoriesData((prev) => {
+                    prev[selectedCategory] = data;
+                    return [...prev];
+                });
+                fetchData();
             })
             .catch((error) => console.log(error.message));
     };
@@ -200,10 +212,10 @@ function Categories() {
                             </button>
                         </li>
                         {categoriesData &&
-                            categoriesData.map((cat) => (
+                            categoriesData.map((cat, idx) => (
                                 <li key={`category_${cat.category_id}`}>
                                     <button
-                                        onClick={() => setSelectedCategory(cat)}
+                                        onClick={() => setSelectedCategory(idx)}
                                     >
                                         {cat.name}
                                     </button>
@@ -222,17 +234,23 @@ function Categories() {
                     <input type="submit" onClick={handleSubmit} />
                 </div>
             </div>
-            <CategoryContent
-                selectedCategory={selectedCategory}
-                notes={notesData}
-                handleDelete={handleDelete}
-                editButton={editButton}
-                setEditButton={setEditButton}
-                editInput={editInput}
-                handleEditInputChange={handleEditInputChange}
-                handleEditSubmit={handleEditSubmit}
-                handleEditCategory={handleEditCategory}
-            />
+            {selectedCategory !== null ? (
+                <CategoryContent
+                    selectedCategory={categoriesData[selectedCategory]}
+                    // notes={notesData}
+                    handleDelete={handleDelete}
+                    editButton={editButton}
+                    setEditButton={setEditButton}
+                    editInput={editInput}
+                    handleEditInputChange={handleEditInputChange}
+                    handleEditSubmit={handleEditSubmit}
+                    handleEditCategory={handleEditCategory}
+                    fetchData={fetchData}
+                    editCategory={editCategory}
+                />
+            ) : (
+                <AllNotes notes={notesData} />
+            )}
         </div>
     );
 }

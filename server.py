@@ -166,7 +166,9 @@ def update_category():
         updated_category = crud.update_category(id, name)
         db.session.add(updated_category)
         db.session.commit()
-        return ""
+        cat = get_category(id)
+        print(cat)
+        return jsonify(cat)
 
 @app.route("/edit_note", methods=["POST"])
 def update_note():
