@@ -59,7 +59,7 @@ function Tags() {
 
     return (
         <div id="tags-list">
-            <h4>Tags List</h4>
+            {tags && tags.length > 0 && <h4>Tags List</h4>}
             {tags &&
                 tags.map((tag) => {
                     tagId++;

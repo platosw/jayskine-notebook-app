@@ -47,16 +47,6 @@ function CategoryContent(props) {
                                 <a href={`/notes/${note.note_id}`}>
                                     {note.title}
                                 </a>
-                                {note.tags && "Tags "}
-                                {note.tags &&
-                                    note.tags.split(" ").map((tag) => {
-                                        tagId++;
-                                        return (
-                                            <a key={tagId} href="#">
-                                                #{tag}{" "}
-                                            </a>
-                                        );
-                                    })}
                             </li>
                         ))}
             </ul>

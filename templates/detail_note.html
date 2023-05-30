@@ -10,7 +10,8 @@ block head %} {{mde.css}} {% endblock %} {% block body %}
     </p>
 </div>
 <div class="make-pretty">{{content|safe}}</div>
-<div id="edit_note">
+<button id="edit-btn">Edit</button>
+<div id="edit_note" hidden>
     <h3>Edit {{note.title}}</h3>
     <form action="/edit_note" method="POST">
         <input type="hidden" value="{{note.note_id}}" name="note_id" />
@@ -31,6 +32,7 @@ block head %} {{mde.css}} {% endblock %} {% block body %}
         </select>
         <input type="submit" />
     </form>
+    {{mde.preview}}
 </div>
 <div id="delete_note">
     <h3>Delete Note</h3>
@@ -38,4 +40,5 @@ block head %} {{mde.css}} {% endblock %} {% block body %}
         <a href="/delete_note/{{note.note_id}}">Delete {{note.title}}</a>
     </button>
 </div>
+<script src="/static/js/editNote.js"></script>
 {{mde.js}} {% endblock %}
