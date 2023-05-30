@@ -15,7 +15,7 @@ function AllNotes(props) {
                                     tagId++;
                                     return (
                                         <a key={`tag_${tagId}`} href="#">
-                                            #{tag}
+                                            #{tag}{" "}
                                         </a>
                                     );
                                 })}
