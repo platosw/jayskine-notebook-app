@@ -9,7 +9,7 @@ function Categories() {
     const [editButton, setEditButton] = React.useState(false);
     const [editInput, setEditInput] = React.useState("");
     // const [editId, setEditId] = React.useState();
-    const [editCategory, setEditCategory] = React.useState("");
+    // const [editCategory, setEditCategory] = React.useState("");
 
     const handleInputChange = (evt) => {
         setInput(evt.target.value);
@@ -246,7 +246,7 @@ function Categories() {
                     handleEditSubmit={handleEditSubmit}
                     handleEditCategory={handleEditCategory}
                     fetchData={fetchData}
-                    editCategory={editCategory}
+                    // editCategory={editCategory}
                 />
             ) : (
                 <AllNotes notes={notesData} />

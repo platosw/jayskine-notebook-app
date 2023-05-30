@@ -1,7 +1,10 @@
 function Tags() {
     const [isLoading, setIsLoading] = React.useState(false);
     const [err, setErr] = React.useState(null);
+    const [notes, setNotes] = React.useState(null);
     const [tags, setTags] = React.useState(null);
+    const [btn, setBtn] = React.useState(false);
+    const [stateTag, setStateTag] = React.useState(null);
 
     React.useEffect(() => {
         fetch("/jayskine.api")
@@ -21,6 +24,7 @@ function Tags() {
                         }
                     });
                     allTags = allTags.sort();
+                    setNotes(notes);
                     setTags(allTags);
                 }
             })
@@ -43,6 +47,16 @@ function Tags() {
 
     let tagId = 0;
 
+    const handleClick = (tag) => {
+        if (btn && tag === stateTag) {
+            setBtn(false);
+            setStateTag(null);
+        } else {
+            setBtn(true);
+            setStateTag(tag);
+        }
+    };
+
     return (
         <div id="tags-list">
             <h4>Tags List</h4>
@@ -50,11 +64,17 @@ function Tags() {
                 tags.map((tag) => {
                     tagId++;
                     return (
-                        <a key={`tag-component_${tagId}`} href="#">
-                            #{tag}{" "}
-                        </a>
+                        <button
+                            className="tag-btn"
+                            key={`tag-component_${tagId}`}
+                            onClick={() => handleClick(tag)}
+                        >
+                            #{tag}
+                        </button>
                     );
                 })}
+
+            {btn && <TagPage tag={stateTag} notes={notes} />}
         </div>
     );
 }
