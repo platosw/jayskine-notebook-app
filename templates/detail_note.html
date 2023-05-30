@@ -3,10 +3,7 @@ block head %} {{mde.css}} {% endblock %} {% block body %}
 <div id="note">
     <h2>{{note.title}}</h2>
     <p>posted by: {{note.entry_date}}</p>
-    <p>
-        Category:
-        <a href="/categories/{{note.category_id}}">{{note.category.name}}</a>
-    </p>
+    <p>Category: {{note.category.name}}</p>
     <p>
         {% for tag in note.tags.split() %}<a href="#" class="label">#{{tag}}</a>
         &nbsp;{% endfor %}
