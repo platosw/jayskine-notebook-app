@@ -4,6 +4,7 @@ block head %} {{mde.css}} {% endblock %} {% block body %}
     <label>Title: </label><input type="text" name="note_title" />
     <label>Choose category</label>
     <select name="note_category_id">
+        <option value="" disabled selected>Select this note's category</option>
         {% for category in categories %}
         <option value="{{category.category_id}}">{{category.name}}</option>
         {% endfor %}

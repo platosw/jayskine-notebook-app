@@ -15,6 +15,8 @@ function CategoryContent(props) {
     //     }
     // }, [props.editCategory]); // Continue this part.
 
+    let tagId = 0;
+
     if (!props.selectedCategory) {
         return <div id="notes-section">Please select categories</div>;
     }
@@ -45,6 +47,18 @@ function CategoryContent(props) {
                                 <a href={`/notes/${note.note_id}`}>
                                     {note.title}
                                 </a>
+                                <p>
+                                    {note.tags && "Tags "}
+                                    {note.tags &&
+                                        note.tags.split(" ").map((tag) => {
+                                            tagId++;
+                                            return (
+                                                <a key={tagId} href="#">
+                                                    #{tag}{" "}
+                                                </a>
+                                            );
+                                        })}
+                                </p>
                             </li>
                         ))}
             </ul>
