@@ -59,7 +59,7 @@ function Tags() {
 
     return (
         <div id="tags-list">
-            {tags && tags.length > 0 && <h4>Tags List</h4>}
+            {tags && tags.length > 0 && <h4>All Tags</h4>}
             {tags &&
                 tags.map((tag) => {
                     tagId++;
@@ -78,3 +78,5 @@ function Tags() {
         </div>
     );
 }
+
+ReactDOM.render(<Tags />, document.querySelector("#tags_React"));

@@ -2,12 +2,9 @@
 block head %} {{mde.css}} {% endblock %} {% block body %}
 <div id="note">
     <h2>{{note.title}}</h2>
-    <p>posted by: {{note.entry_date}}</p>
+    <p>Tags: {% for tag in note.tags.split(" ") %} #{{tag }} {% endfor %}</p>
+    <p>posted/updated by: {{note.entry_date}}</p>
     <p>Category: {{note.category.name}}</p>
-    <p>
-        {% for tag in note.tags.split() %}<a href="#" class="label">#{{tag}}</a>
-        &nbsp;{% endfor %}
-    </p>
 </div>
 <div class="make-pretty">{{content|safe}}</div>
 <button id="edit-btn">Edit</button>
@@ -40,5 +37,11 @@ block head %} {{mde.css}} {% endblock %} {% block body %}
         <a href="/delete_note/{{note.note_id}}">Delete {{note.title}}</a>
     </button>
 </div>
-<script src="/static/js/editNote.js"></script>
+<script>
+    document.querySelector("#edit-btn").addEventListener("click", () => {
+        document.querySelector("#edit_note").toggleAttribute("hidden");
+    });
+</script>
+<script src="/static/js/TagPage.jsx" type="text/jsx"></script>
+<script src="/static/js/Tags.jsx" type="text/jsx"></script>
 {{mde.js}} {% endblock %}

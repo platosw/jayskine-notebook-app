@@ -3,7 +3,6 @@
 function Index() {
     return (
         <div id="index-container">
-            <Tags />
             <Categories />
         </div>
     );
