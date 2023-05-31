@@ -11,7 +11,7 @@ from transform_object_to_dictionary import get_all_notes, get_all_categories, ge
 from jinja2 import StrictUndefined
 
 app = Flask(__name__)
-app.secret_key = "dev"
+app.secret_key = os.environ["SECRET_KEYS"]
 mde = Mde(app)
 app.jinja_env.undefined = StrictUndefined
 
