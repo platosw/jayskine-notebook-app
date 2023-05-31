@@ -15,7 +15,8 @@ model.db.create_all()
 # add users
 users = []
 for num in range(1, 11):
-    new_user = crud.create_user(f"user{num}@users.com", "user1234", f"User {num}")
+    new_user = crud.create_user(f"user{num}@users.com", f"User {num}")
+    new_user.set_password("user1234")
     users.append(new_user)
 
 model.db.session.add_all(users)
@@ -31,9 +32,9 @@ for num in range(1, 6):
 
     for title in range(1, 4):
         new_note = crud.create_note(f"Title {title}",
-                            "This is just testing.",
-                            user,
-                            new_category)
+                                    "This is just testing.",
+                                    user,
+                                    new_category)
         notes.append(new_note)
 
 model.db.session.add_all(categories)

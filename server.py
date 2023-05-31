@@ -17,6 +17,7 @@ app.jinja_env.undefined = StrictUndefined
 
 
 class MdeForm(FlaskForm):
+    # Markdown Editor and Viewer
     editor = MdeField()
     submit = SubmitField()
 
@@ -35,7 +36,7 @@ def login():
     password = request.form.get("user_password")
     user = crud.get_user_by_email(email)
 
-    if user and user.password == password:
+    if user and user.check_password:
         session["user"] = {"email": user.email, "username": user.username}
         flash("You're logged in!")
     else:
@@ -151,7 +152,8 @@ def add_user():
         flash("Cannot create an account with this email. Try again.")
         return redirect("/")
     else:
-        user = crud.create_user(email, password, username)
+        user = crud.create_user(email, username)
+        user.set_password(password)
         db.session.add(user)
         db.session.commit()
         flash(f"{user.username}, your account created!")
@@ -193,7 +195,9 @@ def update_user():
     user = crud.get_user_by_email(email)
     new_username = request.form.get("username")
     new_password = request.form.get("password")
-    update_user = crud.update_user(user.user_id, new_password, new_username)
+
+    update_user = crud.update_user(user.user_id, new_username)
+    update_user.set_password(new_password)
     db.session.add(update_user)
     db.session.commit()
     session["user"] = {"email": user.email, "username": user.username}

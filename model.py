@@ -1,11 +1,12 @@
 from flask_sqlalchemy import SQLAlchemy
+import bcrypt
 
 from dataclasses import dataclass
-from sqlalchemy import desc, event, func, orm
-from sqlalchemy.ext.associationproxy import association_proxy
-from sqlalchemy.ext.declarative import declared_attr
-from sqlalchemy_utils import ArrowType, auto_delete_orphans
-import slugify
+# from sqlalchemy import desc, event, func, orm
+# from sqlalchemy.ext.associationproxy import association_proxy
+# from sqlalchemy.ext.declarative import declared_attr
+# from sqlalchemy_utils import ArrowType, auto_delete_orphans
+# import slugify
 
 db = SQLAlchemy()
 
@@ -21,13 +22,19 @@ class User(db.Model):
     email = db.Column(db.String(30),
                       unique=True,
                       nullable=False)
-    password = db.Column(db.String,
-                         nullable=False)
+    password = db.Column(db.String)
     username = db.Column(db.String(20),
                          nullable=False)
-    
+
     notes = db.relationship("Note", back_populates="user")
     categories = db.relationship("Category", back_populates="user")
+
+    def set_password(self, password):
+        hashed_password = bcrypt.hashpw(password.encode(), bcrypt.gensalt())
+        self.password = hashed_password.decode()
+
+    def check_password(self, password):
+        return bcrypt.checkpw(password.encode(), self.password.encode())
 
     def __repr__(self):
         return f'<User user_id={self.user_id}, email={self.email}>'
@@ -45,10 +52,10 @@ class Note(db.Model):
         self.entry_date = entry_date
         self.user_id = user.user_id
         self.category_id = category.category_id
-        self.user = user        
+        self.user = user
         self.category = category
         self.tags = tags
-    
+
     note_id = db.Column(db.Integer,
                         autoincrement=True,
                         primary_key=True)
@@ -60,14 +67,14 @@ class Note(db.Model):
                         db.ForeignKey("users.user_id"))
     category_id = db.Column(db.Integer,
                             db.ForeignKey("categories.category_id"))
-    
+
     user = db.relationship("User", back_populates="notes")
     category = db.relationship("Category", back_populates="notes")
     tags = db.Column(db.String)
 
     def __repr__(self):
         return f'<Note note_id={self.note_id}, title={self.title}>'
-    
+
 
 @dataclass
 class Category(db.Model):
@@ -78,7 +85,6 @@ class Category(db.Model):
         self.name = name
         self.user_id = user.user_id
         self.user = user
-        
 
     category_id = db.Column(db.Integer,
                             autoincrement=True,
@@ -87,10 +93,10 @@ class Category(db.Model):
                      nullable=False)
     user_id = db.Column(db.Integer,
                         db.ForeignKey("users.user_id"))
-    
+
     user = db.relationship("User", back_populates="categories")
     notes = db.relationship("Note", back_populates="category")
-    
+
     def __repr__(self):
         return f'<Category category_id={self.category_id}, name={self.name}>'
 
@@ -104,6 +110,7 @@ def connect_to_db(flask_app, db_uri="postgresql:///jayskine", echo=True):
     db.init_app(flask_app)
 
     print("Connected to the db!")
+
 
 if __name__ == "__main__":
     from server import app

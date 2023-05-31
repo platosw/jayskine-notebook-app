@@ -15,8 +15,6 @@ function CategoryContent(props) {
     //     }
     // }, [props.editCategory]); // Continue this part.
 
-    let tagId = 0;
-
     if (!props.selectedCategory) {
         return <div id="notes-section">Please select categories</div>;
     }
