@@ -1,6 +1,4 @@
 function AllNotes(props) {
-    let tagId = 0;
-
     return (
         <div id="notes-section">
             <h3>All Notes</h3>

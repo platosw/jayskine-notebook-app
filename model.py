@@ -2,17 +2,14 @@ from flask_sqlalchemy import SQLAlchemy
 import bcrypt
 
 from dataclasses import dataclass
-# from sqlalchemy import desc, event, func, orm
-# from sqlalchemy.ext.associationproxy import association_proxy
-# from sqlalchemy.ext.declarative import declared_attr
-# from sqlalchemy_utils import ArrowType, auto_delete_orphans
-# import slugify
 
 db = SQLAlchemy()
 
 
+# User model class
 @dataclass
 class User(db.Model):
+    """User model class"""
 
     __tablename__ = "users"
 
@@ -30,18 +27,22 @@ class User(db.Model):
     categories = db.relationship("Category", back_populates="user")
 
     def set_password(self, password):
+        """Set encrypted password"""
         hashed_password = bcrypt.hashpw(password.encode(), bcrypt.gensalt())
         self.password = hashed_password.decode()
 
     def check_password(self, password):
+        """check input password and encrypted password"""
         return bcrypt.checkpw(password.encode(), self.password.encode())
 
     def __repr__(self):
         return f'<User user_id={self.user_id}, email={self.email}>'
 
 
+# Note model class
 @dataclass
 class Note(db.Model):
+    """Note model class"""
 
     __tablename__ = "notes"
 
@@ -76,8 +77,10 @@ class Note(db.Model):
         return f'<Note note_id={self.note_id}, title={self.title}>'
 
 
+# Category model class
 @dataclass
 class Category(db.Model):
+    """Category model class"""
 
     __tablename__ = "categories"
 
@@ -102,6 +105,8 @@ class Category(db.Model):
 
 
 def connect_to_db(flask_app, db_uri="postgresql:///jayskine", echo=True):
+    """Connection between Flask and Database"""
+
     flask_app.config["SQLALCHEMY_DATABASE_URI"] = db_uri
     # flask_app.config["SQLALCHEMY_ECHO"] = echo
     flask_app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False

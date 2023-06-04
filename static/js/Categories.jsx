@@ -1,35 +1,25 @@
 function Categories() {
+    // These states are categories and notes datas, error status and loading status
     const [categoriesData, setCategoriesData] = React.useState(null);
     const [notesData, setNotesData] = React.useState(null);
     const [err, setErr] = React.useState(null);
     const [isLoading, setIsLoading] = React.useState(false);
+
+    // These states are adding(creating) new category.
     const [input, setInput] = React.useState("");
     const [newCategory, setNewCategory] = React.useState("");
+
+    // These states are selecting and editing category.
     const [selectedCategory, setSelectedCategory] = React.useState(null);
     const [editButton, setEditButton] = React.useState(false);
     const [editInput, setEditInput] = React.useState("");
-    // const [editId, setEditId] = React.useState();
-    // const [editCategory, setEditCategory] = React.useState("");
 
-    const handleInputChange = (evt) => {
-        setInput(evt.target.value);
-    };
-
-    const handleEditInputChange = (evt) => {
-        setEditInput(evt.target.value);
-        // console.log(editId);
-    };
-
-    const handleEditCategory = (category) => {
-        setSelectedCategory(category);
-    };
-
+    // Fetching categories data function
     const fetchData = async () => {
         setIsLoading(true);
         try {
             const response = await fetch("/jayskine.api");
             const json = await response.json();
-            // console.log(json[1]);
 
             if (json[1] && json[1].length > 0) {
                 setCategoriesData(
@@ -48,18 +38,14 @@ function Categories() {
         }
     };
 
+    // This is callback fetchData function when a category is added or updated.
     React.useEffect(() => {
         if (newCategory !== "") {
             fetchData();
         }
     }, [newCategory]);
 
-    // React.useEffect(() => {
-    //     if (editCategory !== "") {
-    //         fetchData();
-    //     }
-    // }, [editCategory]);
-
+    // This is fetching categories and notes datas
     React.useEffect(() => {
         setIsLoading(true);
         fetch("/jayskine.api")
@@ -91,6 +77,12 @@ function Categories() {
             });
     }, []);
 
+    // New category name handler
+    const handleInputChange = (evt) => {
+        setInput(evt.target.value);
+    };
+
+    // Posting new category form
     const handleSubmit = () => {
         if (input.trim() === "") {
             console.log("New category is empty.");
@@ -125,6 +117,17 @@ function Categories() {
             .catch((error) => console.log(error.message));
     };
 
+    // Updating category name handler
+    const handleEditInputChange = (evt) => {
+        setEditInput(evt.target.value);
+    };
+
+    // Edit button click handler
+    const handleEditCategory = (category) => {
+        setSelectedCategory(category);
+    };
+
+    // Post edit category form
     const handleEditSubmit = (id) => {
         if (editInput.trim() === "") {
             console.log("New category is empty.");
@@ -154,13 +157,8 @@ function Categories() {
                     );
                 }
             })
-            // .then((res) => {
-            //     console.log(res);
-            //     return res.json();
-            // })
             .then((data) => {
                 console.log(data);
-                // setSelectedCategory(editInput);
                 setInput("");
                 setNewCategory(input);
                 setCategoriesData((prev) => {
@@ -172,11 +170,11 @@ function Categories() {
             .catch((error) => console.log(error.message));
     };
 
+    // Deleting a category handler
     const handleDelete = (e) => {
         fetch(`/delete_category/${e.target.value}`)
             .then((response) => {
                 if (response.status === 200) {
-                    // console.log(response.status);
                     console.log("This category removed successfully.");
                     fetchData();
                 } else {
@@ -190,10 +188,12 @@ function Categories() {
         setSelectedCategory(null);
     };
 
+    // During loading
     if (isLoading) {
         return <div id="loading">Loading...</div>;
     }
 
+    // Occuring error
     if (err) {
         return <div id="error">Error: {err}</div>;
     }
@@ -202,42 +202,18 @@ function Categories() {
         <div id="lists-container">
             <div id="categories-section">
                 <h3>Categories</h3>
-                <div id="categories-container">
-                    <ul id="categories-ul">
-                        <li key="all-notes_1">
-                            <button>
-                                <a onClick={() => setSelectedCategory(null)}>
-                                    All Notes
-                                </a>
-                            </button>
-                        </li>
-                        {categoriesData &&
-                            categoriesData.map((cat, idx) => (
-                                <li key={`category_${cat.category_id}`}>
-                                    <button
-                                        onClick={() => setSelectedCategory(idx)}
-                                    >
-                                        {cat.name}
-                                    </button>
-                                </li>
-                            ))}
-                    </ul>
-                </div>
-                <div id="add-category-container">
-                    <input
-                        type="text"
-                        onChange={handleInputChange}
-                        placeholder="Type New Category"
-                        value={input}
-                        required
-                    />
-                    <input type="submit" onClick={handleSubmit} />
-                </div>
+                <CategoryList
+                    setSelectedCategory={setSelectedCategory}
+                    categoriesData={categoriesData}
+                />
+                <NewCategoryForm
+                    handleInputChange={handleInputChange}
+                    handleSubmit={handleSubmit}
+                />
             </div>
             {selectedCategory !== null ? (
                 <CategoryContent
                     selectedCategory={categoriesData[selectedCategory]}
-                    // notes={notesData}
                     handleDelete={handleDelete}
                     editButton={editButton}
                     setEditButton={setEditButton}
@@ -246,7 +222,6 @@ function Categories() {
                     handleEditSubmit={handleEditSubmit}
                     handleEditCategory={handleEditCategory}
                     fetchData={fetchData}
-                    // editCategory={editCategory}
                 />
             ) : (
                 <AllNotes notes={notesData} />

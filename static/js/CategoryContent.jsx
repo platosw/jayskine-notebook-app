@@ -1,22 +1,10 @@
 function CategoryContent(props) {
-    // const [editId, setEditId] = React.useState();
-    // const [selectedCategory, setSelectedCategory] = React.useState(null);
-
-    // if (props.selectedCategory) {
-    // const setEditId = (id) => {
-    //     props.setEditId(id);
-    // };
-
-    // setEditId(props.selectedCategory.category_id);
-
-    // React.useEffect(() => {
-    //     if (props.editCategory !== "") {
-    //         props.fetchData();
-    //     }
-    // }, [props.editCategory]); // Continue this part.
-
     if (!props.selectedCategory) {
-        return <div id="notes-section">Please select categories</div>;
+        return (
+            <div id="notes-section">
+                <p>Please select categories</p>
+            </div>
+        );
     }
 
     return (
@@ -57,29 +45,12 @@ function CategoryContent(props) {
             </button>
         </div>
     );
-    // }
-
-    // return (
-    //     <div id="notes-section">
-    //         <h3>All Notes</h3>
-    //         <ul>
-    //             {props.notes &&
-    //                 props.notes.map((note) => (
-    //                     <li key={`note_id_${note.note_id}`}>
-    //                         <a href={`/notes/${note.note_id}`}>{note.title}</a>
-    //                     </li>
-    //                 ))}
-    //         </ul>
-    //     </div>
-    // );
 }
 
 function EditCategory(props) {
     const handleEditCategory = () => {
         props.handleEditCategory(props.cat);
         props.handleEditSubmit(props.id);
-        // props.handleSelectedCategory(props.cat);
-        // do something to trigger re-render of parent (categorycontent)
     };
 
     if (props.editButton === false) {
@@ -91,7 +62,7 @@ function EditCategory(props) {
                 <input
                     type="text"
                     onChange={props.handleEditInputChange}
-                    value={props.editInput} // Question -> how to bring value in here.
+                    // value={props.cat.name} // Question -> how to bring value in here.
                 />
                 <input type="submit" onClick={handleEditCategory} />
             </div>

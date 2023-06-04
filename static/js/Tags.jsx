@@ -6,6 +6,7 @@ function Tags() {
     const [btn, setBtn] = React.useState(false);
     const [stateTag, setStateTag] = React.useState(null);
 
+    // Fetch notes and tags data from the API
     React.useEffect(() => {
         fetch("/jayskine.api")
             .then((res) => res.json())
@@ -37,16 +38,19 @@ function Tags() {
             });
     }, []);
 
+    // Render loading state
     if (isLoading) {
         return <div id="loading">Loading...</div>;
     }
 
+    // Render error state
     if (err) {
         return <div id="error">Error: {err}</div>;
     }
 
     let tagId = 0;
 
+    // Handle click event on a tag button
     const handleClick = (tag) => {
         if (btn && tag === stateTag) {
             setBtn(false);

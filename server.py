@@ -17,26 +17,25 @@ app.jinja_env.undefined = StrictUndefined
 
 
 class MdeForm(FlaskForm):
-    # Markdown Editor and Viewer
+    # Form for the Markdown Editor and Viewer
     editor = MdeField()
     submit = SubmitField()
 
 
-# This is a root route
 @app.route("/")
 def index():
+    """Render the index page."""
     return render_template("index.html")
-
-# About authentication routes
 
 
 @app.route("/login", methods=["POST"])
 def login():
+    """Authenticate user login."""
     email = request.form.get("user_email")
     password = request.form.get("user_password")
     user = crud.get_user_by_email(email)
 
-    if user and user.check_password:
+    if user and user.check_password(password):
         session["user"] = {"email": user.email, "username": user.username}
         flash("You're logged in!")
     else:
@@ -47,6 +46,7 @@ def login():
 
 @app.route("/logout")
 def logout():
+    """Perform user logout."""
     if "user" in session:
         session.clear()
         flash("You are logged out.")
@@ -55,11 +55,10 @@ def logout():
         return redirect("/")
 
 
-# This is only current login user's data api
 @app.route("/jayskine.api")
 def index_data():
+    """API endpoint to retrieve data of the current logged-in user."""
     if "user" in session:
-        # print(session['user'])
         current_user_id = crud.get_user_by_email(
             session["user"]["email"]).user_id
         return jsonify([get_all_notes(current_user_id), get_all_categories(current_user_id)])
@@ -69,6 +68,7 @@ def index_data():
 
 @app.route("/categories.api/<category_id>")
 def detail_category_data(category_id):
+    """API endpoint to retrieve data of a specific category."""
     if "user" in session:
         category = get_category(category_id)
         if session["user"]["email"] == category["user"]["email"]:
@@ -78,11 +78,10 @@ def detail_category_data(category_id):
     else:
         return redirect("/")
 
-# About show routes
-
 
 @app.route("/create_note")
 def show_create_note():
+    """Render the create note page."""
     form = MdeForm()
     current_user_id = crud.get_user_by_email(session["user"]["email"]).user_id
     categories = get_all_categories(current_user_id)
@@ -91,6 +90,7 @@ def show_create_note():
 
 @app.route("/notes/<note_id>")
 def show_detail_note(note_id):
+    """Render the detail view of a specific note."""
     if "user" in session:
         form = MdeForm()
         note = crud.get_note(note_id)
@@ -102,21 +102,16 @@ def show_detail_note(note_id):
         return redirect("/")
 
 
-@app.route("/users/<email>")
-def show_user(email):
-    user = crud.get_user_by_email(email)
+@app.route("/users/")
+def show_user():
+    """Render the user detail page."""
+    user = crud.get_user_by_email(session["user"]["email"])
     return render_template("detail_user.html", user=user)
 
 
-@app.route("/tags")
-def show_tags():
-
-    return render_template("tags.html")
-
-
-# About create routes
 @app.route("/add_category", methods=["POST"])
 def add_category():
+    """Add a new category."""
     name = request.json.get("name")
     user_email = session["user"]["email"]
     user = crud.get_user_by_email(user_email)
@@ -128,6 +123,7 @@ def add_category():
 
 @app.route("/add_note", methods=["POST"])
 def add_note():
+    """Add a new note."""
     title = request.form.get("note_title")
     body_content = request.form.get("editor")
     user_email = session["user"]["email"]
@@ -143,6 +139,7 @@ def add_note():
 
 @app.route("/add_user", methods=["POST"])
 def add_user():
+    """Add a new user."""
     email = request.form.get("email")
     password = request.form.get("password")
     username = request.form.get("username")
@@ -161,21 +158,21 @@ def add_user():
         return redirect("/")
 
 
-# About update routes
 @app.route("/edit_category", methods=["POST"])
 def update_category():
+    """Update an existing category."""
     id = request.json.get("id")
     name = request.json.get("name")
     updated_category = crud.update_category(id, name)
     db.session.add(updated_category)
     db.session.commit()
     cat = get_category(id)
-    print(cat)
     return jsonify(cat)
 
 
 @app.route("/edit_note", methods=["POST"])
 def update_note():
+    """Update an existing note."""
     id = request.form.get("note_id")
     new_title = request.form.get("note_title")
     new_body_content = request.form.get("body_content")
@@ -191,6 +188,7 @@ def update_note():
 
 @app.route("/edit_user", methods=["POST"])
 def update_user():
+    """Update the current user's information."""
     email = session["user"]["email"]
     user = crud.get_user_by_email(email)
     new_username = request.form.get("username")
@@ -201,12 +199,12 @@ def update_user():
     db.session.add(update_user)
     db.session.commit()
     session["user"] = {"email": user.email, "username": user.username}
-    return redirect(f"/users/{email}")
+    return redirect("/users")
 
 
-# About Delete routes
 @app.route("/delete_user/<user_id>")
 def delete_user(user_id):
+    """Delete a user."""
     msg = crud.delete_user(user_id)
     session.clear()
     flash(msg)
@@ -215,6 +213,7 @@ def delete_user(user_id):
 
 @app.route("/delete_category/<category_id>")
 def delete_category(category_id):
+    """Delete a category."""
     msg = crud.delete_category(category_id)
     flash(msg)
     return redirect("/")
@@ -222,6 +221,7 @@ def delete_category(category_id):
 
 @app.route("/delete_note/<note_id>")
 def delete_note(note_id):
+    """Delete a note."""
     msg = crud.delete_note(note_id)
     flash(msg)
     return redirect("/")
