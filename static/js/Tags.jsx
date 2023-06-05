@@ -8,34 +8,41 @@ function Tags() {
 
     // Fetch notes and tags data from the API
     React.useEffect(() => {
-        fetch("/jayskine.api")
-            .then((res) => res.json())
-            .then((data) => {
-                if (data[0].length > 0) {
-                    const notes = data[0];
-                    let allTags = [];
-                    notes.map((note) => {
-                        if (note.tags !== "") {
-                            const tags = note.tags.split(" ");
-                            tags.map((tag) => {
-                                if (allTags.includes(tag) === false) {
-                                    allTags.push(tag);
-                                }
-                            });
-                        }
-                    });
-                    allTags = allTags.sort();
-                    setNotes(notes);
-                    setTags(allTags);
-                }
-            })
-            .catch((err) => {
-                console.log(err);
-                setErr(err.message);
-            })
-            .finally(() => {
-                setIsLoading(false);
-            });
+        // Check if the user is logged in
+        const isLoggedIn = "{% 'user' in session %}";
+
+        if (isLoggedIn) {
+            setIsLoading(true);
+
+            fetch("/jayskine.api")
+                .then((res) => res.json())
+                .then((data) => {
+                    if (data[0].length > 0) {
+                        const notes = data[0];
+                        let allTags = [];
+                        notes.map((note) => {
+                            if (note.tags !== "") {
+                                const tags = note.tags.split(" ");
+                                tags.map((tag) => {
+                                    if (allTags.includes(tag) === false) {
+                                        allTags.push(tag);
+                                    }
+                                });
+                            }
+                        });
+                        allTags = allTags.sort();
+                        setNotes(notes);
+                        setTags(allTags);
+                    }
+                })
+                .catch((err) => {
+                    console.log(err);
+                    setErr(err.message);
+                })
+                .finally(() => {
+                    setIsLoading(false);
+                });
+        }
     }, []);
 
     // Render loading state
@@ -63,24 +70,32 @@ function Tags() {
 
     return (
         <div id="tags-list">
-            {tags && tags.length > 0 && <h4>All Tags</h4>}
-            {tags &&
-                tags.map((tag) => {
-                    tagId++;
-                    return (
+            {tags && tags.length > 0 && (
+                <div className="d-flex align-items-center">
+                    <h4
+                        style={{ display: "inline-block", marginRight: "1rem" }}
+                    >
+                        All Tags
+                    </h4>
+                    {tags.map((tag) => (
                         <button
-                            className="tag-btn"
-                            key={`tag-component_${tagId}`}
+                            className={`btn btn-link mx-1${
+                                btn && tag === stateTag ? " active" : ""
+                            }`}
+                            key={`tag-component_${tag}`}
                             onClick={() => handleClick(tag)}
                         >
                             #{tag}
                         </button>
-                    );
-                })}
-
+                    ))}
+                </div>
+            )}
             {btn && <TagPage tag={stateTag} notes={notes} />}
         </div>
     );
 }
 
-ReactDOM.render(<Tags />, document.querySelector("#tags_React"));
+const container = document.querySelector("#tags_React");
+if (container) {
+    ReactDOM.render(<Tags />, container);
+}

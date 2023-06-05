@@ -1,26 +1,7 @@
-{% extends 'base.html' %} {% block title %} Index {% endblock %}{% block body %}
+{% extends 'base.html' %} {% block title %} Home {% endblock %}{% block body %}
 {% if "user" not in session %}
 
-<div id="login">
-    <h3>Log In</h3>
-    <form action="/login" method="POST">
-        <label>email: </label><input type="text" name="user_email" required />
-        <label>Password: </label
-        ><input type="password" name="user_password" required />
-        <input type="submit" />
-    </form>
-</div>
-<div id="signup">
-    <h3>Sign Up</h3>
-    <form action="/add_user" method="POST">
-        <p>Email: <input type="text" name="email" required /></p>
-        <p>Password: <input type="password" name="password" required /></p>
-        <p>Username: <input type="text" name="username" required /></p>
-        <p>
-            <input type="submit" />
-        </p>
-    </form>
-</div>
+<div id="welcome">Welcome to Jayskine Notebook!</div>
 
 {% else %}
 <div id="main"></div>
