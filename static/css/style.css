@@ -1,5 +1,5 @@
-html {
-    font-family: Helvetica, sans-serif, Arial;
+body {
+    font-family: "Work Sans", sans-serif;
 }
 
 ul {
@@ -10,9 +10,17 @@ ul {
     padding: 0 2em 0 2em;
 }
 
-.navbar-brand > a {
+a {
     text-decoration: none;
     color: inherit;
+}
+
+a:hover {
+    color: #0095ff;
+}
+
+.nav-link:hover {
+    color: #0095ff;
 }
 
 #container {
@@ -59,7 +67,7 @@ ul {
     border: none;
     border-radius: 4px;
     cursor: pointer;
-    background-color: #007bff;
+    background-color: #0095ff;
     color: #fff;
 }
 
@@ -68,7 +76,7 @@ ul {
 }
 
 .btn-primary {
-    background-color: #007bff;
+    background-color: #0095ff;
 }
 
 .btn-primary:hover {
@@ -87,12 +95,29 @@ ul {
     margin-left: 0;
 }
 
+.btn-link {
+    border: none;
+    background-color: transparent;
+    color: black;
+}
+
+.btn-link:hover {
+    border: none;
+    background-color: transparent;
+    color: #0095ff;
+}
+
 #notes-section {
-    padding-left: 33%;
+    padding-left: 35%;
 }
 
 #add-category-container {
     width: 15.5em;
+    padding-left: 0;
+}
+
+#select-categories-info {
+    margin-top: 33%;
 }
 
 @media (max-width: 991.98px) {

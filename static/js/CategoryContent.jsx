@@ -2,7 +2,7 @@ function CategoryContent(props) {
     if (!props.selectedCategory) {
         return (
             <div id="notes-section">
-                <p>Please select categories</p>
+                <p id="select-categories-info">Please select categories</p>
             </div>
         );
     }
