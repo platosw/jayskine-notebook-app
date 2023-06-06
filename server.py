@@ -47,9 +47,9 @@ def login():
 
     if user and user.check_password(password):
         session["user"] = {"email": user.email, "username": user.username}
-        flash("You're logged in!")
+        flash("You're logged in!", "success")
     else:
-        flash("Your email or password does not match. Please try again.")
+        flash("Your email or password does not match. Please try again.", "error")
 
     return redirect("/")
 
@@ -59,7 +59,7 @@ def logout():
     """Perform user logout."""
     if "user" in session:
         session.clear()
-        flash("You are logged out.")
+        flash("You are logged out.", "success")
         return redirect("/")
     else:
         return redirect("/")
@@ -156,14 +156,14 @@ def add_user():
 
     user = crud.get_user_by_email(email)
     if user:
-        flash("Cannot create an account with this email. Try again.")
+        flash("Cannot create an account with this email. Try again.", "error")
         return redirect("/")
     else:
         user = crud.create_user(email, username)
         user.set_password(password)
         db.session.add(user)
         db.session.commit()
-        flash(f"{user.username}, your account created!")
+        flash(f"{user.username}, your account created!", "success")
         session["user"] = {"email": user.email, "username": user.username}
         return redirect("/")
 
@@ -217,7 +217,7 @@ def delete_user(user_id):
     """Delete a user."""
     msg = crud.delete_user(user_id)
     session.clear()
-    flash(msg)
+    flash(msg, "warning")
     return redirect("/")
 
 
@@ -225,7 +225,7 @@ def delete_user(user_id):
 def delete_category(category_id):
     """Delete a category."""
     msg = crud.delete_category(category_id)
-    flash(msg)
+    flash(msg, "warning")
     return redirect("/")
 
 
@@ -233,7 +233,7 @@ def delete_category(category_id):
 def delete_note(note_id):
     """Delete a note."""
     msg = crud.delete_note(note_id)
-    flash(msg)
+    flash(msg, "warning")
     return redirect("/")
 
 

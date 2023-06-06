@@ -15,8 +15,14 @@ ul {
     color: inherit;
 }
 
+#container {
+    margin-left: 2%;
+    margin-right: 2%;
+}
+
 #lists-container {
     display: flex;
+    margin-top: 2%;
 }
 
 .navbar {
@@ -24,13 +30,24 @@ ul {
     justify-content: space-between;
     align-items: center;
 }
+
 .flash-messages {
-    position: absolute;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 999;
+    text-align: center;
+    color: #000000;
 }
+
+.success {
+    background-color: #4caf4f80;
+}
+
+.error {
+    background-color: #f4433683;
+}
+
+.warning {
+    background-color: #ff99005e;
+}
+
 .btn {
     display: inline-block;
     padding: 8px 12px;
@@ -45,12 +62,15 @@ ul {
     background-color: #007bff;
     color: #fff;
 }
+
 .btn:hover {
     background-color: #0056b3;
 }
+
 .btn-primary {
     background-color: #007bff;
 }
+
 .btn-primary:hover {
     background-color: #0056b3;
 }
@@ -63,9 +83,19 @@ ul {
     margin-right: 5px;
 }
 
-@media (max-width: 991.98px) {
-    /* 작은 화면에서만 적용되는 스타일 */
+#categories-container {
+    margin-left: 0;
+}
 
+#notes-section {
+    padding-left: 33%;
+}
+
+#add-category-container {
+    width: 15.5em;
+}
+
+@media (max-width: 991.98px) {
     .navbar-collapse {
         position: absolute;
         top: 100%;
@@ -78,11 +108,25 @@ ul {
         display: none;
     }
 
-    .navbar-toggler {
-        margin-top: 10px;
-    }
-
     .navbar-collapse.show {
         display: block;
+    }
+
+    #categories-section {
+        margin-top: 3%;
+    }
+
+    #lists-container {
+        display: block;
+        text-align: center;
+    }
+
+    #notes-section {
+        margin-top: 5%;
+        padding-left: 0;
+    }
+
+    #notes-section > ul {
+        padding-left: 0;
     }
 }

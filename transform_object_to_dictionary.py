@@ -15,6 +15,20 @@ def get_all_notes(user_id):
 
     notes_json = []
     for note in notes:
+        none = None
+        if not note.category:
+            none = {
+                "category_id": "",
+                "name": "",
+                "user_id": ""
+            }
+        else:
+            none = {
+                "category_id": note.category.category_id,
+                "name": note.category.name,
+                "user_id": note.category.user_id
+            }
+
         notes_json.append({
             "note_id": note.note_id,
             "title": note.title,
@@ -27,11 +41,7 @@ def get_all_notes(user_id):
                 "email": note.user.email,
                 "username": note.user.username
             },
-            "category": {
-                "category_id": note.category.category_id,
-                "name": note.category.name,
-                "user_id": note.category.user_id
-            },
+            "category": none,
             "tags": note.tags
         })
 

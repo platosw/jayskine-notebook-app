@@ -6,7 +6,7 @@ block head %} {{mde.css}} {% endblock %} {% block body %}
     <p>Tags: {% for tag in note.tags.split(" ") %} #{{tag }} {% endfor %}</p>
     {% endif %}
     <p>posted/updated by: {{note.entry_date}}</p>
-    <p>Category: {{note.category.name}}</p>
+    <p>Category:{% if note.category %} {{note.category.name}} {% endif %}</p>
 </div>
 <div class="make-pretty">{{content|safe}}</div>
 <button id="edit-btn">Edit</button>

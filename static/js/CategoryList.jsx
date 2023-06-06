@@ -1,12 +1,13 @@
 function CategoryList(props) {
     return (
         <div id="categories-container">
-            <ul id="categories-ul" style={{ listStyleType: "none" }}>
+            <ul id="categories-ul" className="list-unstyled">
                 <li key="all-notes_1">
-                    <button className="btn btn-link">
-                        <a onClick={() => props.setSelectedCategory(null)}>
-                            All Notes
-                        </a>
+                    <button
+                        className="btn btn-link"
+                        onClick={() => props.setSelectedCategory(null)}
+                    >
+                        All Notes
                     </button>
                 </li>
                 {props.categoriesData &&

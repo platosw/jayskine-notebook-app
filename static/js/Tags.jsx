@@ -52,6 +52,7 @@ function Tags() {
 
     // Render error state
     if (err) {
+        console.log(err);
         return <div id="error">Error: {err}</div>;
     }
 
