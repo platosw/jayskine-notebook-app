@@ -48,10 +48,10 @@ def login():
     if user and user.check_password(password):
         session["user"] = {"email": user.email, "username": user.username}
         flash("You're logged in!", "success")
+        return redirect("/")
     else:
         flash("Your email or password does not match. Please try again.", "error")
-
-    return redirect("/")
+        return redirect("/login_page")
 
 
 @app.route("/logout")
@@ -92,10 +92,14 @@ def detail_category_data(category_id):
 @app.route("/create_note")
 def show_create_note():
     """Render the create note page."""
-    form = MdeForm()
-    current_user_id = crud.get_user_by_email(session["user"]["email"]).user_id
-    categories = get_all_categories(current_user_id)
-    return render_template("create_note.html", form=form, categories=categories)
+    if "user" in session:
+        form = MdeForm()
+        current_user_id = crud.get_user_by_email(
+            session["user"]["email"]).user_id
+        categories = get_all_categories(current_user_id)
+        return render_template("create_note.html", form=form, categories=categories)
+    else:
+        return redirect("/")
 
 
 @app.route("/notes/<note_id>")
@@ -115,8 +119,11 @@ def show_detail_note(note_id):
 @app.route("/users/")
 def show_user():
     """Render the user detail page."""
-    user = crud.get_user_by_email(session["user"]["email"])
-    return render_template("detail_user.html", user=user)
+    if "user" in session:
+        user = crud.get_user_by_email(session["user"]["email"])
+        return render_template("detail_user.html", user=user)
+    else:
+        return redirect("/")
 
 
 @app.route("/add_category", methods=["POST"])
