@@ -211,21 +211,23 @@ function Categories() {
                     handleSubmit={handleSubmit}
                 />
             </div>
-            {selectedCategory !== null ? (
-                <CategoryContent
-                    selectedCategory={categoriesData[selectedCategory]}
-                    handleDelete={handleDelete}
-                    editButton={editButton}
-                    setEditButton={setEditButton}
-                    editInput={editInput}
-                    handleEditInputChange={handleEditInputChange}
-                    handleEditSubmit={handleEditSubmit}
-                    handleEditCategory={handleEditCategory}
-                    fetchData={fetchData}
-                />
-            ) : (
-                <AllNotes notes={notesData} />
-            )}
+            <div id="all-notes-list-section">
+                {selectedCategory !== null ? (
+                    <CategoryContent
+                        selectedCategory={categoriesData[selectedCategory]}
+                        handleDelete={handleDelete}
+                        editButton={editButton}
+                        setEditButton={setEditButton}
+                        editInput={editInput}
+                        handleEditInputChange={handleEditInputChange}
+                        handleEditSubmit={handleEditSubmit}
+                        handleEditCategory={handleEditCategory}
+                        fetchData={fetchData}
+                    />
+                ) : (
+                    <AllNotes notes={notesData} />
+                )}
+            </div>
         </div>
     );
 }

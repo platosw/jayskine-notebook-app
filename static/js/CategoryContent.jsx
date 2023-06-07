@@ -8,7 +8,7 @@ function CategoryContent(props) {
     }
 
     return (
-        <div id="notes-section">
+        <div id="notes-section" className="notes-grid">
             <div id="category-navbar">
                 <EditCategory
                     editButton={props.editButton}
@@ -28,6 +28,7 @@ function CategoryContent(props) {
                 <ul
                     style={{
                         textAlign: "center",
+                        alignItems: "center",
                         paddingLeft: "0",
                     }}
                 >
@@ -36,10 +37,29 @@ function CategoryContent(props) {
                             .sort((a, b) => a.entry_date - b.entry_date)
                             .reverse()
                             .map((note) => (
-                                <li key={`note_${note.note_id}`}>
+                                <li
+                                    className="note-card"
+                                    key={`note_${note.note_id}`}
+                                >
                                     <a href={`/notes/${note.note_id}`}>
-                                        {note.title}
+                                        <h3
+                                            style={{
+                                                marginTop: "8px",
+                                                paddingTop: "8px",
+                                            }}
+                                        >
+                                            {note.title}
+                                        </h3>
                                     </a>
+                                    <p>Date: {note.entry_date}</p>
+                                    <button className="btn">
+                                        <a
+                                            href={`/notes/${note.note_id}`}
+                                            style={{ color: "inherit" }}
+                                        >
+                                            Go Detail
+                                        </a>
+                                    </button>
                                 </li>
                             ))}
                 </ul>
@@ -60,17 +80,17 @@ function EditCategory(props) {
                 className="btn btn-link"
                 onClick={() => props.setEditButton(true)}
             >
-                <h3>{props.selectedCategory.name}</h3>
+                <h4>{props.selectedCategory.name}</h4>
             </button>
         );
     } else {
         return (
-            <div style={{ justifyContent: "center" }}>
+            <div>
                 <button
                     className="btn btn-link"
                     onClick={() => props.setEditButton(false)}
                 >
-                    <h3>{props.selectedCategory.name}</h3>
+                    <h4>{props.selectedCategory.name}</h4>
                 </button>
                 <div style={{ display: "flex" }}>
                     <input
