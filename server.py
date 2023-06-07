@@ -151,6 +151,7 @@ def add_note():
     new_note = crud.create_note(title, body_content, user, category, tags)
     db.session.add(new_note)
     db.session.commit()
+    flash(f"Created the {title} note.", "success")
     return redirect("/")
 
 
@@ -200,6 +201,7 @@ def update_note():
         id, new_title, new_body_content, new_category, new_tags)
     db.session.add(update_note)
     db.session.commit()
+    flash(f"Updated the {new_title} note.", "success")
     return redirect(f"/notes/{id}")
 
 
@@ -216,6 +218,7 @@ def update_user():
     db.session.add(update_user)
     db.session.commit()
     session["user"] = {"email": user.email, "username": user.username}
+    flash(f"Updated the {new_username}.", "success")
     return redirect("/users")
 
 
