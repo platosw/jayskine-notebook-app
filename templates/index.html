@@ -1,7 +1,16 @@
-{% extends 'base.html' %} {% block title %} Home {% endblock %}{% block body %}
-{% if "user" not in session %}
-
-<div id="welcome">Welcome to Jayskine Notebook!</div>
+{% extends 'base.html' %} {% block title %} Home {% endblock %}{% block head %}
+<style>
+    #container {
+        margin: 0;
+    }
+</style>
+{% endblock %}{% block body %} {% if "user" not in session %}
+<div id="intro-page">
+    <!-- <h1 id="welcome" style="opacity: 1; color: #97d39b">
+        Welcome to Jayskine Notebook!
+    </h1>
+    <h3 style="opacity: 1; color: #97d39b">Jayskine</h3> -->
+</div>
 
 {% else %}
 <div id="main"></div>

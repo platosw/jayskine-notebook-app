@@ -1,6 +1,6 @@
 {% extends 'base.html' %} {% block title %} {{note.title}} {% endblock %} {%
 block head %} {{mde.css}} {% endblock %} {% block body %}
-<div id="note" style="text-align: center">
+<div id="note" style="text-align: center; margin-top: 5%">
     <h2>
         {{note.title}}
         <button
@@ -32,7 +32,7 @@ block head %} {{mde.css}} {% endblock %} {% block body %}
                 />
             </div>
             <div class="edit-note-form">
-                <label>Tags: </label>
+                <label style="margin-left: 2%">Tags: </label>
                 <input
                     type="text"
                     class="form-control"
@@ -41,7 +41,7 @@ block head %} {{mde.css}} {% endblock %} {% block body %}
                 />
             </div>
             <div class="edit-note-form">
-                <label>Category: </label>
+                <label style="margin-left: 2%">Category: </label>
                 <select name="note_category" class="form-select">
                     {% for category in categories %} {% if category.user.email
                     == session.user.email %}
