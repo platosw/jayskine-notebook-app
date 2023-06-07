@@ -1,16 +1,45 @@
-{% extends 'base.html' %} {% block title %} Create a note {% endblock %} {%
-block head %} {{mde.css}} {% endblock %} {% block body %}
+{% extends 'base.html' %} {% block title %} Create a Note {% endblock %} {%
+block head %} {{ mde.css }} {% endblock %} {% block body %}
 <form action="/add_note" method="POST">
-    <label>Title: </label><input type="text" name="note_title" />
-    <label>Choose category</label>
-    <select name="note_category_id" required>
-        <option value="" disabled selected>Select this note's category</option>
-        {% for category in categories %}
-        <option value="{{category.category_id}}">{{category.name}}</option>
-        {% endfor %}
-    </select>
-    {{form.csrf_token }} {{form.editor}}
-    <label>Tags: </label><input type="text" name="tags" /><br />
-    {{form.submit}}
+    <div id="create-note-container" class="container">
+        <h2>Create a new note</h2>
+        <br />
+        <div id="add-note-container">
+            <div class="form-group">
+                <label for="note_title">Title:</label>
+                <input
+                    type="text"
+                    name="note_title"
+                    class="form-control"
+                    style="margin-right: 10px"
+                    required
+                />
+            </div>
+            <div class="form-group">
+                <label for="note_category_id">Category:</label>
+                <select
+                    name="note_category_id"
+                    class="form-select"
+                    style="margin-right: 10px"
+                    required
+                >
+                    <option value="" disabled selected>
+                        Select this note's category
+                    </option>
+                    {% for category in categories %}
+                    <option value="{{ category.category_id }}">
+                        {{ category.name }}
+                    </option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="tags">Tags:</label>
+                <input type="text" name="tags" class="form-control" />
+            </div>
+        </div>
+        {{ form.csrf_token }} {{ form.editor(class="form-control") }} {{
+        form.submit(class="btn") }} {{ mde.preview }}
+    </div>
 </form>
-{{mde.preview}} {{mde.js}} {% endblock %}
+{{ mde.js }} {% endblock %}
