@@ -1,14 +1,42 @@
 {% extends "base.html" %} {% block title %} Sign Up {% endblock %} {% block body
 %}
-<div id="signup">
-    <h3>Sign Up</h3>
-    <form action="/add_user" method="POST">
-        <p>Email: <input type="text" name="email" required /></p>
-        <p>Password: <input type="password" name="password" required /></p>
-        <p>Username: <input type="text" name="username" required /></p>
-        <p>
-            <input type="submit" />
-        </p>
-    </form>
+<div id="login-container">
+    <div id="login">
+        <h3>Sign Up</h3>
+        <form action="/add_user" method="POST">
+            <div id="signup-form-group">
+                <p>
+                    <label>email:</label>
+                    <input
+                        type="email"
+                        class="form-control"
+                        name="email"
+                        required
+                    />
+                </p>
+                <p>
+                    <label>Password:</label>
+                    <input
+                        type="password"
+                        class="form-control"
+                        name="password"
+                        required
+                    />
+                </p>
+                <p>
+                    <label>Username:</label>
+                    <input
+                        type="text"
+                        class="form-control"
+                        name="username"
+                        required
+                    />
+                </p>
+            </div>
+            <p>
+                <input type="submit" value="Sign Up" />
+            </p>
+        </form>
+    </div>
 </div>
 {% endblock %}

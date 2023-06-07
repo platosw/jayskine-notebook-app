@@ -35,9 +35,16 @@
             class="navbar navbar-expand-lg navbar-light bg-light"
             id="base-head"
         >
-            <h1 class="navbar-brand" style="font-size: 2rem">
-                <a href="/">Jayskine</a>
-            </h1>
+            <div class="navbar-brand">
+                <h1 style="font-size: 2rem; margin-right: 5%">
+                    <a href="/">Jayskine</a>
+                </h1>
+                {% if "user" in session %}
+                <p id="nav-username">
+                    Logging in as <strong>{{ session.user.username }}</strong>
+                </p>
+                {% endif %}
+            </div>
             <button
                 class="navbar-toggler"
                 type="button"

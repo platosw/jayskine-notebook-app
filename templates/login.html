@@ -1,12 +1,29 @@
 {% extends "base.html" %} {% block title %} Log In {% endblock %} {% block body
 %}
-<div id="login">
-    <h3>Log In</h3>
-    <form action="/login" method="POST">
-        <label>email: </label><input type="text" name="user_email" required />
-        <label>Password: </label
-        ><input type="password" name="user_password" required />
-        <input type="submit" />
-    </form>
+<div id="login-container">
+    <div id="login">
+        <h3>Log In</h3>
+        <form action="/login" method="POST">
+            <div class="login-form-group">
+                <label>email: </label
+                ><input
+                    type="email"
+                    class="form-control"
+                    name="user_email"
+                    required
+                />
+            </div>
+            <div class="login-form-group">
+                <label>Password: </label
+                ><input
+                    type="password"
+                    class="form-control"
+                    name="user_password"
+                    required
+                />
+            </div>
+            <input type="submit" value="Log In" />
+        </form>
+    </div>
 </div>
 {% endblock %}
