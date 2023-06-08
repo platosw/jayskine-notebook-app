@@ -47,6 +47,16 @@ a:hover {
     color: #159dff;
 }
 
+#tags-list {
+    margin-top: 1.2%;
+    /* max-width: 350px; */
+    text-align: center;
+}
+
+#tag-note-list {
+    margin-top: 1.2%;
+}
+
 #container {
     margin-left: 2%;
     margin-right: 2%;

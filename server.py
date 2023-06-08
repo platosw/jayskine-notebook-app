@@ -14,6 +14,7 @@ app = Flask(__name__)
 app.secret_key = os.environ["SECRET_KEYS"]
 mde = Mde(app)
 app.jinja_env.undefined = StrictUndefined
+app.static_folder = 'static'
 
 
 class MdeForm(FlaskForm):
