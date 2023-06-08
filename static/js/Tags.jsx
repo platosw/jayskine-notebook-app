@@ -73,11 +73,11 @@ function Tags() {
         <div id="tags-list">
             {tags && tags.length > 0 && (
                 <div className="d-flex align-items-center">
-                    <h4
-                        style={{ display: "inline-block", marginRight: "1rem" }}
-                    >
-                        All Tags
-                    </h4>
+                    <link
+                        rel="icon"
+                        type="image/svg+xml"
+                        href="/static/images/book-open-solid.svg"
+                    />
                     {tags.map((tag) => (
                         <button
                             className={`btn btn-link mx-1${

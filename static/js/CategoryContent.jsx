@@ -34,8 +34,7 @@ function CategoryContent(props) {
                 >
                     {props.selectedCategory.notes &&
                         props.selectedCategory.notes
-                            .sort((a, b) => a.entry_date - b.entry_date)
-                            .reverse()
+                            .sort((a, b) => b.entry_date - a.entry_date)
                             .map((note) => (
                                 <li
                                     className="note-card"

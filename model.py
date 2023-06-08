@@ -63,7 +63,7 @@ class Note(db.Model):
     title = db.Column(db.String(35),
                       nullable=False)
     body_content = db.Column(db.Text)
-    entry_date = db.Column(db.String)
+    entry_date = db.Column(db.DateTime)
     user_id = db.Column(db.Integer,
                         db.ForeignKey("users.user_id"))
     category_id = db.Column(db.Integer,

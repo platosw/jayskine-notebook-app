@@ -29,11 +29,14 @@ def get_all_notes(user_id):
                 "user_id": note.category.user_id
             }
 
+        str_date = note.entry_date
+        str_date.strftime('%b, %d %Y')
+
         notes_json.append({
             "note_id": note.note_id,
             "title": note.title,
             "body_content": note.body_content,
-            "entry_date": note.entry_date,
+            "entry_date": str_date.strftime('%b, %d %Y'),
             "user_id": note.user_id,
             "category_id": note.category_id,
             "user": {
@@ -68,7 +71,7 @@ def get_all_categories(user_id):
                     "note_id": note.note_id,
                     "title": note.title,
                     "body_content": note.body_content,
-                    "entry_date": note.entry_date,
+                    "entry_date": note.entry_date.strftime('%b, %d %Y'),
                     "user_id": note.user_id,
                     "category_id": note.category_id,
                     "user": {
@@ -95,7 +98,7 @@ def get_all_categories(user_id):
                     "email": category.user.email,
                     "username": category.user.username
                 },
-                "notes": category_notes_list
+                "notes": sorted(category_notes_list, key=lambda x: x["entry_date"], reverse=True)
             }
         )
 
@@ -147,7 +150,7 @@ def get_category(category_id):
             "email": category.user.email,
             "username": category.user.username
         },
-        "notes": category_notes_list
+        "notes": sorted(category_notes_list, key=lambda x: x["entry_date"], reverse=True)
     }
 
     return category_json

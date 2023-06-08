@@ -76,19 +76,6 @@ def index_data():
         return redirect('/')
 
 
-@app.route("/categories.api/<category_id>")
-def detail_category_data(category_id):
-    """API endpoint to retrieve data of a specific category."""
-    if "user" in session:
-        category = get_category(category_id)
-        if session["user"]["email"] == category["user"]["email"]:
-            return jsonify(category)
-        else:
-            return redirect("/")
-    else:
-        return redirect("/")
-
-
 @app.route("/create_note")
 def show_create_note():
     """Render the create note page."""

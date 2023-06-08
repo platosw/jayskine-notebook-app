@@ -93,7 +93,7 @@ def create_note(title, body_content, user, category="", tags=""):
         Note: created note object
     """
     note = Note(title=title, body_content=body_content,
-                entry_date=datetime.now().strftime('%c'),
+                entry_date=datetime.now(),
                 user=user, category=category, tags=tags)
     return note
 
@@ -108,7 +108,8 @@ def get_all_notes(id):
     Returns:
         list[Note]: user's all notes
     """
-    notes = Note.query.filter_by(user_id=id).all()
+    notes = Note.query.filter_by(user_id=id).order_by(
+        Note.entry_date.desc()).all()
     return notes
 
 
@@ -143,7 +144,7 @@ def update_note(id, title, body_content, category, tags):
     note = Note.query.get(id)
     note.title = title
     note.body_content = body_content
-    note.entry_date = datetime.now().strftime('%c')
+    note.entry_date = datetime.now()
     note.category = category
     note.tags = tags
     return note
@@ -192,7 +193,8 @@ def get_all_categories(user_id):
     Returns:
         list[Category]: user(owner)'s all categories
     """
-    categories = Category.query.filter_by(user_id=user_id).all()
+    categories = Category.query.filter_by(
+        user_id=user_id).order_by(Category.name).all()
     return categories
 
 

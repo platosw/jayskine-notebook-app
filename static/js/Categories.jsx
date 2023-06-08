@@ -22,11 +22,7 @@ function Categories() {
             const json = await response.json();
 
             if (json[1] && json[1].length > 0) {
-                setCategoriesData(
-                    json[1].sort((a, b) =>
-                        a.name.toLowerCase().localeCompare(b.name.toLowerCase())
-                    )
-                );
+                setCategoriesData(json[1]);
             } else {
                 setCategoriesData([]);
             }
@@ -52,20 +48,11 @@ function Categories() {
             .then((res) => res.json())
             .then((response) => {
                 if (response[1].length > 0) {
-                    setCategoriesData(
-                        response[1].sort(
-                            (a, b) =>
-                                a.name.toLowerCase() - b.name.toLowerCase()
-                        )
-                    );
+                    setCategoriesData(response[1]);
                 }
 
                 if (response[0].length > 0) {
-                    setNotesData(
-                        response[0]
-                            .sort((a, b) => a.entry_date - b.entry_date)
-                            .reverse()
-                    );
+                    setNotesData(response[0]);
                 }
             })
             .catch((err) => {

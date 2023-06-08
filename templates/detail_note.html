@@ -14,7 +14,7 @@ block head %} {{mde.css}} {% endblock %} {% block body %}
     {% if note.tags != "" %}
     <p>Tags: {% for tag in note.tags.split(" ") %} #{{tag }} {% endfor %}</p>
     {% endif %}
-    <p>posted/updated by: {{note.entry_date}}</p>
+    <p>posted/updated by: {{note.entry_date.strftime('%b, %d %Y')}}</p>
     <p>Category: {% if note.category %} {{note.category.name}} {% endif %}</p>
 </div>
 <div class="make-pretty" style="margin: 0 auto">{{mde.preview}}</div>
