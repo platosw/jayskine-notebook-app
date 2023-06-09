@@ -5,11 +5,14 @@
     }
 </style>
 {% endblock %}{% block body %} {% if "user" not in session %}
-<div id="intro-page">
-    <!-- <h1 id="welcome" style="opacity: 1; color: #97d39b">
-        Welcome to Jayskine Notebook!
-    </h1>
-    <h3 style="opacity: 1; color: #97d39b">Jayskine</h3> -->
+<div id="intro-page"></div>
+<div id="welcome">
+    <h1>Jayskine</h1>
+    <h3>
+        Unlock the Power of Note-Taking: Organize, Simplify, and Access Your
+        Notes Anytime, Anywhere!
+    </h3>
+    <h3><a href="/signup_page" class="btn">Try it NOW!!</a></h3>
 </div>
 {% else %}
 <div id="main"></div>
