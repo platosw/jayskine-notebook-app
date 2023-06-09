@@ -17,7 +17,7 @@ body {
     background-image: url(https://images.unsplash.com/photo-1468487422149-5edc5034604f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1587&q=80);
     background-position: center;
     background-size: 100%;
-    filter: brightness(50%) opacity(0.45);
+    filter: brightness(150%) opacity(0.2);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -27,14 +27,19 @@ body {
 
 #welcome {
     position: absolute;
-    color: rgb(83, 68, 0);
-    text-shadow: -0.5px 0 grey, 0 0.5px grey, 0.5px 0 grey, 0 -0.5px grey;
+    color: #f37021;
+    text-shadow: -0.5px 0 #f37021, 0 0.5px #f37021, 0.5px 0 #f37021,
+        0 -0.5px #f37021;
     text-align: center;
     padding: 0 10% 0 10%;
     top: 41%;
     right: 0;
     left: 0;
     bottom: 0;
+}
+
+#welcome > a {
+    text-shadow: none;
 }
 
 ul {
