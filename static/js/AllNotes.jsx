@@ -1,7 +1,7 @@
 function AllNotes(props) {
     return (
         <div id="notes-section" className="notes-grid">
-            <h4 id="category-navbar">All Notes</h4>
+            <h4 id="all-notes-title">All Notes</h4>
             <div id="notes-list-container">
                 <ul
                     style={{

@@ -75,8 +75,8 @@ function Tags() {
                 <div>
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
-                        width="20"
-                        height="20"
+                        width="25"
+                        height="25"
                         fill="currentColor"
                         class="bi bi-tags-fill"
                         viewBox="0 0 16 16"
@@ -92,7 +92,7 @@ function Tags() {
                             key={`tag-component_${tag}`}
                             onClick={() => handleClick(tag)}
                         >
-                            #{tag}
+                            <p className="tags-lists">#{tag}</p>
                         </button>
                     ))}
                 </div>

@@ -57,6 +57,11 @@ a:hover {
     margin-top: 1.2%;
 }
 
+.tags-lists {
+    margin-bottom: 0;
+    font-size: 16px;
+}
+
 #container {
     margin-left: 2%;
     margin-right: 2%;
@@ -306,6 +311,9 @@ a:hover {
 
 #categories-section {
     margin-left: 2%;
+    border-right: 0.7px solid #8f8f8f;
+    padding-right: 30px;
+    min-height: 80vh;
 }
 
 #category-navbar {
@@ -317,7 +325,7 @@ a:hover {
 
 #add-category-container {
     width: 15.5em;
-    padding-left: 0;
+    padding: 0;
 }
 
 #select-categories-info {
@@ -399,6 +407,17 @@ a:hover {
 
     #categories-section {
         margin-left: 0;
+        padding-right: 0;
+        margin-left: 0;
+        border-right: none;
+        padding-right: 0;
+        display: flex;
+        flex-direction: column;
+    }
+
+    #add-category-container {
+        text-align: center;
+        padding-right: 0;
     }
 
     #lists-container {
@@ -417,5 +436,9 @@ a:hover {
 
     .note-card {
         width: 85vw;
+    }
+
+    #tag-note-list > ul {
+        padding-left: 0;
     }
 }
