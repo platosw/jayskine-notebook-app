@@ -1,1 +1,1 @@
-web: jayskine main:app
+web: jayskine server:app
