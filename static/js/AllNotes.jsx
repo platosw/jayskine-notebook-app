@@ -42,6 +42,16 @@ function AllNotes(props) {
                                         {note.title}
                                     </h3>
                                 </a>
+                                {/* <div className="note-text">
+                                    <p
+                                        style={{
+                                            marginTop: "8px",
+                                            marginBottom: "8px",
+                                        }}
+                                    >
+                                        {note.body_content.slice(0, 81)}
+                                    </p>
+                                </div> */}
                                 <button className="btn">
                                     <a
                                         href={`/notes/${note.note_id}`}

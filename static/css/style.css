@@ -318,11 +318,19 @@ a:hover {
 
 .note-card {
     width: 60vw;
-    height: 137px;
+    height: 17vh;
     background-color: #f8f9fa;
     border-radius: 4px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     margin-bottom: 30px;
+}
+
+.note-text {
+    text-align: center;
+    margin-left: 10%;
+    margin-right: 10%;
+    border: 0.3px solid #000000;
+    margin-bottom: 12px;
 }
 
 #categories-section {
@@ -450,6 +458,10 @@ a:hover {
 
     .note-card {
         width: 85vw;
+    }
+
+    .note-text {
+        visibility: hidden;
     }
 
     #tag-note-list > ul {
