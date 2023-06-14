@@ -98,4 +98,4 @@ Jason Park | _[Github], [Linkedin]_
 [Postgresql]: https://www.postgresql.org/
 [Github]: https://www.github.com/platosw
 [Linkedin]: https://www.linkedin.com/in/platosw
-[here]: https://www.youtube.com/embed/lXvYbi16Y2A
+[here]: https://youtu.be/AEjYUKi-yXE
