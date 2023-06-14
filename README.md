@@ -89,7 +89,7 @@ python3 server.py
 
 ## **Demo**
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/8-HLrxm65SI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+Click [here] to view the Jayskine demo video!
 
 ## **Author**
 
@@ -98,4 +98,4 @@ Jason Park | _[Github], [Linkedin]_
 [Postgresql]: https://www.postgresql.org/
 [Github]: https://www.github.com/platosw
 [Linkedin]: https://www.linkedin.com/in/platosw
-[video]: https://www.youtube.com/embed/8-HLrxm65SI
+[here]: https://www.youtube.com/embed/lXvYbi16Y2A
