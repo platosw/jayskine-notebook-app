@@ -4,7 +4,7 @@ This project is a versatile note-taking application that provides users with a c
 
 ## **Description**
 
-![The most important Part.](/static/images/Jayskinedemo.gif?raw=true)
+<img src="./static/images/Jayskinedemo.gif?raw=true" alt="The most important Part." width="100%">
 
 ### Features
 
