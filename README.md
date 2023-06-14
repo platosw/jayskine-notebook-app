@@ -114,5 +114,5 @@ Jason Park | <a href="mailto: jason.park.dev@gmail.com"><img src="https://img.sh
 [Postgresql]: https://www.postgresql.org/
 [Github]: https://www.github.com/platosw
 [Linkedin]: https://www.linkedin.com/in/platosw
-[here]: https://youtu.be/AEjYUKi-
+[here]: https://youtu.be/AEjYUKi-yXE
 [pdoc]: https://pdoc.dev/
