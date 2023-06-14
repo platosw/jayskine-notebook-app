@@ -107,7 +107,7 @@ Click [here] to view the Jayskine demo video!
 
 ## **Author**
 
-Jason Park | _[Github], [Linkedin]_
+Jason Park | <a href="mailto: jason.park.dev@gmail.com"><img src="https://img.shields.io/badge/jason.park.dev@gmail.com-EA4335?style=flat-square&logo=Gmail&logoColor=FFFFFF" /></a> <a href="https://www.linkedin.com/in/platosw" target="_blank"><img src="https://img.shields.io/badge/LinkedIn-0A66C2?style=flat-square&logo=Linkedin&logoColor=FFFFFF" /></a>
 
 [Postgresql]: https://www.postgresql.org/
 [Github]: https://www.github.com/platosw
