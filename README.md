@@ -1,4 +1,4 @@
-# 📑 **Jayskine** 📑 - _Hackbright Capstone Project_
+# 📑 **Jayskine** - _Hackbright Capstone Project_ 📑
 
 <img src="./static/images/Jayskinedemo.gif?raw=true" alt="The most important Part." width="100%"><br />
 This project is a versatile note-taking application that provides users with a convenient and powerful solution for creating, managing, and organizing notes in Markdown format, anytime and anywhere.
