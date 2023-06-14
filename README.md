@@ -4,10 +4,12 @@ This project is a versatile note-taking application that provides users with a c
 
 ## **Description**
 
+![The most important Part.](/static/images/Jayskinedemo.gif?raw=true)
+
 ### Features
 
 -   Provides users with a convenient and powerful solution as a versatile note-taking application.
--   Allows users to create, manage, and organize notes in Markdown format.
+-   Allows users to create, manage, and organize notes in Markdown format, utilizing convenient features such as hashtags and categories for efficient categorization, retrieval, and organization of notes.
 -   Can be utilized for various purposes such as recording class materials, personal journaling, and managing workout logs.
 -   Enables users to easily write notes and find the necessary information.
 -   Has been developed with a focus on user convenience and usability.
