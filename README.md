@@ -7,17 +7,18 @@ This project is a versatile note-taking application that provides users with a c
 
 ### Features
 
--   Provides users with a convenient and powerful solution as a versatile note-taking application.
--   Allows users to create, manage, and organize notes in Markdown format, utilizing convenient features such as hashtags and categories for efficient categorization, retrieval, and organization of notes.
--   Can be utilized for various purposes such as recording class materials, personal journaling, and managing workout logs.
--   Enables users to easily write notes and find the necessary information.
--   Has been developed with a focus on user convenience and usability.
--   Features a concise and intuitive design to facilitate smooth note writing and management.
--   Aims to solve problems users encounter in their daily lives and facilitate efficient note-taking.
+-   Athentication, and Authorization
+-   User's password encryption
+-   CRUD user, note, and category
+-   Hashtags
+-   Markdown Editor, and Viewer
+-   Responsive Design
 
 ### Technologies Used
 
--   Most of the technologies used are essentially the ones required by Hackbright, so I won't describe them separately. However, React was optional, but from my perspective, there are areas that will require ongoing updates and maintenance. In these aspects, React clearly outshines vanilla JavaScript, which is why I chose to use React.
+-   I won't go into detail about the technologies required by Hackbright since they were mandatory. However, React without Create React App (CRA) was an optional choice. I opted for React over vanilla JavaScript because it offers efficient ongoing updates and maintenance in certain aspects.
+-   The main advantages of Markdown are its concise and intuitive syntax, which makes document creation and reading easy and fast. It is platform-independent and can be displayed consistently across various platforms. It can be used for a variety of purposes and is well-suited for version control systems, allowing for efficient collaboration and document revision management. Additionally, it can be easily converted to HTML, enabling the incorporation of more complex styling and layout elements when needed.
+-   I designed the application with a responsive layout to emphasize the accessibility of our notes anytime and anywhere. By implementing design principles that optimize readability and usability, we ensure that users can conveniently utilize the notes on various devices and screen sizes.
 
 ### Challenges
 
