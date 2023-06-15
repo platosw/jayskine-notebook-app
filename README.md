@@ -116,3 +116,9 @@ Jason Park | <a href="mailto: jason.park.dev@gmail.com"><img src="https://img.sh
 [Linkedin]: https://www.linkedin.com/in/platosw
 [here]: https://youtu.be/AEjYUKi-yXE
 [pdoc]: https://pdoc.dev/
+
+## **Acknowledgments**
+
+-   I would like to express my deep gratitude to Ray Traina-Grandon, Sean Moriarty, and Katarzyna Jablonski. Your guidance, feedback, and assistance throughout the development process have played a significant role in our success. Thank you for your invaluable support.
+
+-   I would like to extend my deep gratitude to Walmart for their generous sponsorship, which has contributed to making our project a reality. Thank you for your invaluable support.
