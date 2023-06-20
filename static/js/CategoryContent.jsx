@@ -10,8 +10,21 @@ function CategoryContent(props) {
     if (!props.selectedCategory.notes[0]) {
         return (
             <div id="notes-section">
-                <h4>{props.selectedCategory.name}</h4>
-                <br />
+                <div id="category-navbar">
+                    <EditCategory
+                        editButton={props.editButton}
+                        setEditButton={props.setEditButton}
+                        name={props.selectedCategory.name}
+                        editInput={props.editInput}
+                        handleEditInputChange={props.handleEditInputChange}
+                        handleEditSubmit={props.handleEditSubmit}
+                        handleEditCategory={props.handleEditCategory}
+                        id={props.selectedCategory.category_id}
+                        cat={props.selectedCategory}
+                        handleDelete={props.handleDelete}
+                        selectedCategory={props.selectedCategory}
+                    />
+                </div>
                 <p>This category is empty.</p>
             </div>
         );
@@ -114,7 +127,7 @@ function EditCategory(props) {
                     className="btn btn-link"
                     onClick={() => props.setEditButton(false)}
                 >
-                    <h4>{props.selectedCategory.name}</h4>
+                    <h4 id="all-notes-title">{props.selectedCategory.name}</h4>
                 </button>
                 <div style={{ display: "flex" }}>
                     <input
