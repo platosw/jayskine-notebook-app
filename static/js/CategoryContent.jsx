@@ -7,6 +7,16 @@ function CategoryContent(props) {
         );
     }
 
+    if (!props.selectedCategory.notes[0]) {
+        return (
+            <div id="notes-section">
+                <h4>{props.selectedCategory.name}</h4>
+                <br />
+                <p>This category is empty.</p>
+            </div>
+        );
+    }
+
     return (
         <div id="notes-section" className="notes-grid">
             <div id="category-navbar">
