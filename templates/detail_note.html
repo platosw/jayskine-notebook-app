@@ -10,6 +10,15 @@ block head %} {{mde.css}} {% endblock %} {% block body %}
         >
             Edit
         </button>
+        <button
+            id="delete-user-btn"
+            class="btn btn-link"
+            style="margin: 0 auto; font-size: 65%"
+        >
+            <a id="delete-note-btn" href="/delete_note/{{note.note_id}}"
+                >Delete {{note.title}}</a
+            >
+        </button>
     </h2>
     {% if note.tags != "" %}
     <p>
@@ -31,52 +40,47 @@ block head %} {{mde.css}} {% endblock %} {% block body %}
     <p>posted/updated by: {{note.entry_date.strftime('%b, %d %Y')}}</p>
     <p>Category: {% if note.category %} {{note.category.name}} {% endif %}</p>
 </div>
-<div class="make-pretty" style="margin: 0 auto">{{mde.preview}}</div>
-<div id="edit_note" hidden style="margin: 0 auto">
-    <form action="/edit_note" method="POST">
-        <div id="edit-note-navbar">
-            <input type="hidden" value="{{note.note_id}}" name="note_id" />
-            <div class="edit-note-form">
-                <label>Title: </label
-                ><input
-                    type="text"
-                    class="form-control"
-                    name="note_title"
-                    value="{{note.title}}"
-                />
+<div id="detail-note-form">
+    <div class="make-pretty" style="margin: 0 auto">{{mde.preview}}</div>
+    <div id="edit_note" hidden style="margin: 0 auto">
+        <form action="/edit_note" method="POST">
+            <div id="edit-note-navbar">
+                <input type="hidden" value="{{note.note_id}}" name="note_id" />
+                <div class="edit-note-form">
+                    <label>Title: </label
+                    ><input
+                        type="text"
+                        class="form-control"
+                        name="note_title"
+                        value="{{note.title}}"
+                    />
+                </div>
+                <div class="edit-note-form">
+                    <label style="margin-left: 2%">Tags: </label>
+                    <input
+                        type="text"
+                        class="form-control"
+                        name="tags"
+                        value="{{note.tags}}"
+                    />
+                </div>
+                <div class="edit-note-form">
+                    <label style="margin-left: 2%">Category: </label>
+                    <select name="note_category" class="form-select">
+                        {% for category in categories %} {% if
+                        category.user.email == session.user.email %}
+                        <option value="{{category.category_id}}">
+                            {{category.name}}
+                        </option>
+                        {% endif %} {% endfor %}
+                    </select>
+                </div>
             </div>
-            <div class="edit-note-form">
-                <label style="margin-left: 2%">Tags: </label>
-                <input
-                    type="text"
-                    class="form-control"
-                    name="tags"
-                    value="{{note.tags}}"
-                />
-            </div>
-            <div class="edit-note-form">
-                <label style="margin-left: 2%">Category: </label>
-                <select name="note_category" class="form-select">
-                    {% for category in categories %} {% if category.user.email
-                    == session.user.email %}
-                    <option value="{{category.category_id}}">
-                        {{category.name}}
-                    </option>
-                    {% endif %} {% endfor %}
-                </select>
-            </div>
-        </div>
-        <label>Text: </label>{{form.csrf_token }}
-        {{mde.editor(name="body_content", default=note.body_content)}}
-        <input type="submit" value="Submit" class="btn btn-primary" />
-    </form>
-</div>
-<div id="delete_note" style="text-align: center">
-    <button id="delete-user-btn" class="btn">
-        <a id="delete-note-btn" href="/delete_note/{{note.note_id}}"
-            >Delete {{note.title}}</a
-        >
-    </button>
+            <label>Text: </label>{{form.csrf_token }}
+            {{mde.editor(name="body_content", default=note.body_content)}}
+            <input type="submit" value="Submit" class="btn btn-primary" />
+        </form>
+    </div>
 </div>
 <script>
     document.querySelector("#edit-btn").addEventListener("click", () => {

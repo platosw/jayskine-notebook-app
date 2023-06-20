@@ -4,6 +4,8 @@ block head %} {{ mde.css }} {% endblock %} {% block body %}
     <div id="create-note-container" class="container">
         <h2>Create a new note</h2>
         <br />
+        <div id="create-note-preview">{{ mde.preview }}</div>
+        <br />
         <div id="add-note-container">
             <div class="form-group">
                 <label for="note_title">Title:</label>
@@ -39,7 +41,7 @@ block head %} {{ mde.css }} {% endblock %} {% block body %}
             </div>
         </div>
         {{ form.csrf_token }} {{ form.editor(class="form-control") }} {{
-        form.submit(class="btn") }} {{ mde.preview }}
+        form.submit(class="btn") }}
     </div>
 </form>
 {{ mde.js }} {% endblock %}

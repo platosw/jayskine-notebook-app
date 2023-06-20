@@ -1,4 +1,13 @@
 function AllNotes(props) {
+    if (props.notes === null) {
+        return (
+            <div id="notes-section" className="notes-grid">
+                <h4 id="all-notes-title">All Notes</h4>
+                <p>Please create a new note.</p>
+            </div>
+        );
+    }
+
     return (
         <div id="notes-section" className="notes-grid">
             <h4 id="all-notes-title">All Notes</h4>
