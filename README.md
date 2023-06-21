@@ -1,7 +1,7 @@
 # 📑 **Jayskine** - _Hackbright Capstone Project_ 📑
 
 <img src="./static/images/gif_keynote.gif?raw=true" alt="The most important Part." width="100%"><br />
-This project is a versatile note-taking application that provides users with a convenient and powerful solution for creating, managing, and organizing notes in Markdown format, anytime and anywhere.
+This [project] is a versatile note-taking application that provides users with a convenient and powerful solution for creating, managing, and organizing notes in Markdown format, anytime and anywhere.
 
 ## **Description**
 
@@ -111,6 +111,7 @@ Click [here] to view the Jayskine demo video!
 
 Jason Park | <a href="mailto: jason.park.dev@gmail.com"><img src="https://img.shields.io/badge/jason.park.dev@gmail.com-EA4335?style=flat-square&logo=Gmail&logoColor=FFFFFF" /></a> <a href="https://www.linkedin.com/in/platosw" target="_blank"><img src="https://img.shields.io/badge/LinkedIn-0A66C2?style=flat-square&logo=Linkedin&logoColor=FFFFFF" /></a>
 
+[project]: http://34.204.89.90/
 [Postgresql]: https://www.postgresql.org/
 [Github]: https://www.github.com/platosw
 [Linkedin]: https://www.linkedin.com/in/platosw
