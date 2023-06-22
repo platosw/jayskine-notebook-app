@@ -66,7 +66,10 @@ block head %} {{mde.css}} {% endblock %} {% block body %}
                 </div>
                 <div class="edit-note-form">
                     <label style="margin-left: 2%">Category: </label>
-                    <select name="note_category" class="form-select">
+                    <select name="note_category" class="form-select" required>
+                        <option value="" disabled selected>
+                            Select this note's category
+                        </option>
                         {% for category in categories %} {% if
                         category.user.email == session.user.email %}
                         <option value="{{category.category_id}}">
