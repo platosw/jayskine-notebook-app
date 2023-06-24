@@ -105,6 +105,9 @@
                 {% endif %}
             </div>
         </nav>
+        {% if "user" in session %}
+        <div id="tags_React"></div>
+        {% endif %}
         <div class="flash-messages">
             {% with messages = get_flashed_messages(with_categories=true) %} {%
             if messages %} {% for category, message in messages %}
@@ -116,9 +119,6 @@
             </div>
             {% endfor %} {% endif %} {% endwith %}
         </div>
-        {% if "user" in session %}
-        <div id="tags_React"></div>
-        {% endif %}
 
         <div id="container">
             {% block body %}{% endblock %} {% block after_body %}{% endblock %}
