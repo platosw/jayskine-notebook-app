@@ -28,14 +28,17 @@ body {
 #welcome {
     position: absolute;
     color: #1c43a3;
-    text-shadow: -0.5px 0 #1c43a3, 0 0.5px #1c43a3, 0.5px 0 #1c43a3,
-        0 -0.5px #1c43a3;
     text-align: center;
     padding: 0 10% 0 10%;
     top: 41%;
     right: 0;
     left: 0;
     bottom: 0;
+}
+
+#welcome > h3 {
+    text-shadow: -0.5px 0 #1c43a3, 0 0.5px #1c43a3, 0.5px 0 #1c43a3,
+        0 -0.5px #1c43a3;
 }
 
 #welcome > a {
