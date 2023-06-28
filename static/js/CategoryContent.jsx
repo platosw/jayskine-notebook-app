@@ -60,9 +60,12 @@ function CategoryContent(props) {
                         props.selectedCategory.notes
                             .sort((a, b) => b.entry_date - a.entry_date)
                             .map((note) => (
-                                <li key={`note_${note.note_id}`}>
-                                    <div className="card mb-4">
-                                        <div className="card-header">
+                                <li
+                                    key={`note_${note.note_id}`}
+                                    className="border border-0 shadow p-0 mb-5 rounded"
+                                >
+                                    <div className="card border border-0">
+                                        <div className="card-header border border-bottom-0 shadow p-2 bg-body-tertiary">
                                             <svg
                                                 xmlns="http://www.w3.org/2000/svg"
                                                 width="16"

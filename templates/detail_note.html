@@ -119,7 +119,6 @@ block head %} {{ mde.css }} {% endblock %} {% block body %}
                             />
                         </div>
                     </div>
-                    <label>Text:</label>
                     {{ form.csrf_token }} {{ mde.editor(name="body_content",
                     default=note.body_content) }}
                     <input
