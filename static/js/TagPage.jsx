@@ -14,12 +14,15 @@ function TagPage(props) {
                 </svg>{" "}
                 {props.tag}
             </h3>
-            <ul>
+            <ul style={{ marginBottom: "0", paddingBottom: "5px" }}>
                 {props.notes.map((note) => {
                     if (note.tags.includes(props.tag)) {
                         return (
                             <li key={`tag-note_${note.note_id}`}>
-                                <a href={`/notes/${note.note_id}`}>
+                                <a
+                                    href={`/notes/${note.note_id}`}
+                                    className="btn-link"
+                                >
                                     {note.title}
                                 </a>
                             </li>

@@ -7,8 +7,46 @@ body {
 }
 
 body {
-    font-family: "Work Sans", sans-serif;
-    margin: 0;
+    font-family: "Poppins", sans-serif;
+}
+
+.navbar {
+    padding: 0;
+}
+
+.navbar-brand > h1 {
+    font-size: 1.7rem;
+    margin-left: 15%;
+    font-family: "Ysabeau SC", sans-serif;
+}
+
+.navbar-brand > h1 > a {
+    color: black;
+    text-decoration: none;
+}
+
+.navbar-collapse {
+    margin-right: 1%;
+    font-size: 14px;
+}
+
+.btn-primary {
+    background-color: #1b90fb;
+    border: 0;
+}
+
+.btn-primary > a {
+    color: white;
+    text-decoration: none;
+}
+
+.btn-danger > a {
+    text-decoration: none;
+}
+
+.btn-link {
+    color: #1b90fb;
+    text-decoration: none;
 }
 
 #intro-page {
@@ -27,7 +65,7 @@ body {
 
 #welcome {
     position: absolute;
-    color: #1c43a3;
+    color: black;
     text-align: center;
     padding: 0 10% 0 10%;
     top: 41%;
@@ -36,9 +74,14 @@ body {
     bottom: 0;
 }
 
+#welcome > h1 {
+    font-family: "Ysabeau SC", sans-serif;
+    font-size: 65px;
+    margin-bottom: 3.5%;
+}
+
 #welcome > h3 {
-    text-shadow: -0.5px 0 #1c43a3, 0 0.5px #1c43a3, 0.5px 0 #1c43a3,
-        0 -0.5px #1c43a3;
+    text-shadow: -0.5px 0 black, 0 0.5px black, 0.5px 0 black, 0 -0.5px black;
 }
 
 #welcome > a {
@@ -47,9 +90,24 @@ body {
 
 ul {
     list-style-type: none;
+    padding-left: 0;
 }
 
-#base-head {
+.categories {
+    padding-top: 15px;
+}
+
+.category-name {
+    text-decoration: none;
+    color: #1b90fb;
+}
+
+.card-title > a {
+    text-decoration: none;
+    color: black;
+}
+
+/*#base-head {
     padding: 0 2em 0 2em;
 }
 
@@ -62,14 +120,41 @@ a:hover {
     color: #159dff;
 }
 
+.card {
+    text-align: left;
+    margin-bottom: 30px;
+    width: 50rem;
+}
+
+.card-header {
+    border: none;
+}
+
+.card-title {
+    display: flex;
+}
+
+.card-title > p {
+    margin-top: 8px;
+    margin-left: 20px;
+    margin-bottom: 0;
+}
+
+#card-detail-btn:hover {
+    color: inherit;
+}*/
+
+.navbar {
+    background-color: #f8f9fa;
+}
+
 .nav-link:hover {
-    color: #159dff;
+    color: #1b90fb;
 }
 
 #tags-list {
-    margin-top: 1.2%;
-    /* max-width: 350px; */
     text-align: center;
+    background-color: #f8f9fa;
 }
 
 #tag-note-list {
@@ -81,15 +166,14 @@ a:hover {
     font-size: 16px;
 }
 
-#container {
-    margin-left: 2%;
-    margin-right: 2%;
+/*#container {
+    margin-left: 0%;
+    margin-right: 0%;
     padding-bottom: 2px;
 }
 
 #lists-container {
     display: flex;
-    margin-top: 5%;
 }
 
 .navbar {
@@ -107,7 +191,7 @@ a:hover {
 #nav-username {
     font-size: 15px;
     color: rgb(68, 68, 68);
-}
+}*/
 
 .flash-messages {
     text-align: center;
@@ -126,7 +210,17 @@ a:hover {
     background-color: #ff99005e;
 }
 
-.btn {
+.delete-note-btn {
+    background-color: white;
+    color: black;
+}
+
+.delete-note {
+    color: red;
+    text-decoration: none;
+}
+
+/*.btn {
     display: inline-block;
     padding: 8px 12px;
     font-size: 14px;
@@ -139,6 +233,7 @@ a:hover {
     cursor: pointer;
     background-color: #159dff;
     color: #fff;
+     margin-bottom: 10px; 
 }
 
 .btn:hover {
@@ -240,19 +335,19 @@ a:hover {
 
 #user_setting {
     margin-bottom: 20px;
-}
+}*/
 
-#delete-user-btn {
-    /* background-color: rgb(255, 65, 65); */
+/* .delete-user-btn {
+    background-color: rgb(255, 65, 65);
     color: rgb(255, 65, 65);
 }
 
-#delete-user-btn:hover {
-    /* background-color: rgb(213, 0, 0); */
+.delete-user-btn:hover {
+    background-color: rgb(213, 0, 0);
     color: rgb(213, 0, 0);
-}
+} */
 
-#detail-note-form {
+/*#detail-note-form {
     margin: 5% 10% 5% 10%;
 }
 #user-delete-link {
@@ -300,8 +395,15 @@ a:hover {
     color: #159dff;
 }
 
+#all-notes-title {
+    width: 20vw;
+    min-width: 100px;
+}
+
 #all-notes-list-section {
-    /* flex: 3; */
+    flex: 1;
+    margin-top: 13px;
+    width: 33.33%;
 }
 
 #notes-section {
@@ -311,6 +413,7 @@ a:hover {
     align-items: center;
     text-align: center;
     padding-bottom: 30px;
+    margin-left: 100%;
 }
 
 .notes-grid {
@@ -323,29 +426,13 @@ a:hover {
 }
 
 #notes-list-container {
-    flex-grow: 3;
-}
-
-.note-card {
-    width: 30vw;
-    height: 20vh;
-    background-color: #f8f9fa;
-    border-radius: 4px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    margin-bottom: 30px;
-}
-
-.note-text {
-    text-align: center;
-    margin-left: 10%;
-    margin-right: 10%;
-    border: 0.3px solid #000000;
-    margin-bottom: 12px;
+    flex-grow: 1;
+    min-width: 450px;
 }
 
 #categories-section {
-    margin-left: 2%;
-    border-right: 0.7px solid #8f8f8f;
+    background-color: #f8f9fa;
+    padding-left: 2%;
     padding-right: 30px;
     min-height: 80vh;
 }
@@ -358,13 +445,11 @@ a:hover {
 }
 
 #add-category-container {
-    width: 15.5em;
+    width: 12em;
     padding: 0;
 }
 
-#select-categories-info {
-    margin-top: 98px;
-}
+
 
 #delete-category-btn {
     background-color: rgb(255, 65, 65);
@@ -386,38 +471,90 @@ a:hover {
     color: #0056b3;
 }
 
-#edit-note-navbar,
-.edit-note-form {
+#edit-note-navbar {
     display: flex;
     flex-direction: row;
     align-items: center;
     flex: 1;
-    margin-bottom: 5px;
 }
 
 .edit-note-form > label {
     margin-right: 2%;
-}
+}*/
 
-footer {
+/* footer {
     position: fixed;
     text-align: center;
     bottom: 0;
     width: 100%;
     height: 40px;
     background: #f8f9fa;
-}
+} */
 
 footer > p {
     margin: 10px 0 20px 0;
     font-size: small;
 }
 
+footer > p > a {
+    text-decoration: none;
+    color: #1b90fb;
+}
+
 .footer-author {
-    color: #159dff;
+    color: #1b90fb;
 }
 
 @media (max-width: 991.98px) {
+    #welcome > h1 {
+        font-size: xx-large;
+    }
+
+    #welcome > h3 {
+        font-size: large;
+    }
+
+    #welcome > a {
+        font-size: 14px;
+        width: auto;
+    }
+
+    .navbar-brand > h1 {
+        font-size: 21px;
+    }
+
+    .navbar-collapse {
+        margin-right: 0;
+    }
+
+    .flex-container {
+        flex-direction: column;
+    }
+
+    .categories {
+        width: 100%;
+        height: auto;
+        text-align: center;
+        padding-top: 15px;
+        padding-bottom: 15px;
+    }
+
+    .notes {
+        width: 100%;
+        padding: 0;
+    }
+}
+
+/*#all-notes-title {
+    margin-top: 8px;
+    margin-bottom: 18px;
+}
+
+@media (max-width: 991.98px) {
+    #logo {
+        font-size: 1.2rem;
+    }
+
     .navbar-collapse {
         position: absolute;
         top: 100%;
@@ -444,7 +581,15 @@ footer > p {
 
     #login input {
         margin-bottom: 20px;
-        width: 10em;
+        width: 15em;
+    }
+
+    #welcome > h1 {
+        font-size: 35px;
+    }
+
+    #welcome > h3 {
+        font-size: large;
     }
 
     #container {
@@ -475,21 +620,30 @@ footer > p {
     }
 
     #lists-container {
-        display: block;
+        display: flex;
         text-align: center;
+    }
+
+    .card {
+        width: 20vw;
+    }
+
+    #all-notes-list-section {
+        width: 50vw;
     }
 
     #notes-section {
         margin-top: 10%;
         padding-left: 0;
+        margin-left: 0;
+    }
+
+    #notes-list-container > ul {
+        margin-left: 30%;
     }
 
     #notes-section > ul {
         padding-left: 0;
-    }
-
-    .note-card {
-        width: 85vw;
     }
 
     .note-text {
@@ -500,3 +654,4 @@ footer > p {
         padding-left: 0;
     }
 }
+*/

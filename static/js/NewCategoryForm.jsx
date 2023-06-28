@@ -1,18 +1,19 @@
 function NewCategoryForm(props) {
     return (
-        <div id="add-category-container" className="container">
+        <div>
             <div className="input-group">
                 <input
                     type="text"
                     className="form-control"
                     onChange={props.handleInputChange}
-                    placeholder="Type New Category"
+                    placeholder="New Category"
                     required
                 />
                 <button
                     className="btn btn-primary"
                     type="submit"
                     onClick={props.handleSubmit}
+                    style={{ marginBottom: "0" }}
                 >
                     Add
                 </button>

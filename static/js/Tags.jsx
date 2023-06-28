@@ -72,7 +72,7 @@ function Tags() {
     return (
         <div id="tags-list">
             {tags && tags.length > 0 && (
-                <div>
+                <div className="pb-2">
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
                         width="25"

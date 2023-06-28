@@ -4,7 +4,8 @@ function CategoryList(props) {
             <ul id="categories-ul" className="list-unstyled">
                 <li key="all-notes_1">
                     <button
-                        className="btn btn-link"
+                        className="btn btn-link category-name"
+                        style={{ marginBottom: "0" }}
                         onClick={() => props.setSelectedCategory(null)}
                     >
                         All Notes
@@ -14,7 +15,8 @@ function CategoryList(props) {
                     props.categoriesData.map((cat, idx) => (
                         <li key={`category_${cat.category_id}`}>
                             <button
-                                className="btn btn-link"
+                                className="btn btn-link category-name"
+                                style={{ marginBottom: "0" }}
                                 onClick={() => props.setSelectedCategory(idx)}
                             >
                                 {cat.name}

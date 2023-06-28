@@ -1,3 +1,5 @@
+const { func } = require("prop-types");
+
 function Categories() {
     // These states are categories and notes datas, error status and loading status
     const [categoriesData, setCategoriesData] = React.useState(null);
@@ -186,34 +188,51 @@ function Categories() {
     }
 
     return (
-        <div id="lists-container">
-            <div id="categories-section">
-                <h3>Categories</h3>
-                <CategoryList
-                    setSelectedCategory={setSelectedCategory}
-                    categoriesData={categoriesData}
-                />
-                <NewCategoryForm
-                    handleInputChange={handleInputChange}
-                    handleSubmit={handleSubmit}
-                />
-            </div>
-            <div id="all-notes-list-section">
-                {selectedCategory !== null ? (
-                    <CategoryContent
-                        selectedCategory={categoriesData[selectedCategory]}
-                        handleDelete={handleDelete}
-                        editButton={editButton}
-                        setEditButton={setEditButton}
-                        editInput={editInput}
-                        handleEditInputChange={handleEditInputChange}
-                        handleEditSubmit={handleEditSubmit}
-                        handleEditCategory={handleEditCategory}
-                        fetchData={fetchData}
+        <div className="container-fluid">
+            <div className="row flex-container">
+                <div className="categories col-2 bg-light">
+                    <h4>
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="21"
+                            height="21"
+                            fill="currentColor"
+                            class="bi bi-archive-fill"
+                            viewBox="0 0 16 16"
+                        >
+                            <path d="M12.643 15C13.979 15 15 13.845 15 12.5V5H1v7.5C1 13.845 2.021 15 3.357 15h9.286zM5.5 7h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1 0-1zM.8 1a.8.8 0 0 0-.8.8V3a.8.8 0 0 0 .8.8h14.4A.8.8 0 0 0 16 3V1.8a.8.8 0 0 0-.8-.8H.8z" />
+                        </svg>{" "}
+                        Categories
+                    </h4>
+                    <CategoryList
+                        setSelectedCategory={setSelectedCategory}
+                        categoriesData={categoriesData}
                     />
-                ) : (
-                    <AllNotes notes={notesData} />
-                )}
+                    <NewCategoryForm
+                        handleInputChange={handleInputChange}
+                        handleSubmit={handleSubmit}
+                    />
+                </div>
+                <div
+                    className="notes col-10"
+                    style={{ height: "100vh", overflowY: "auto" }}
+                >
+                    {selectedCategory !== null ? (
+                        <CategoryContent
+                            selectedCategory={categoriesData[selectedCategory]}
+                            handleDelete={handleDelete}
+                            editButton={editButton}
+                            setEditButton={setEditButton}
+                            editInput={editInput}
+                            handleEditInputChange={handleEditInputChange}
+                            handleEditSubmit={handleEditSubmit}
+                            handleEditCategory={handleEditCategory}
+                            fetchData={fetchData}
+                        />
+                    ) : (
+                        <AllNotes notes={notesData} />
+                    )}
+                </div>
             </div>
         </div>
     );
