@@ -491,6 +491,10 @@ a:hover {
     background: #f8f9fa;
 } */
 
+.select-comment {
+    margin-top: 75px;
+}
+
 footer > p {
     margin: 10px 0 20px 0;
     font-size: small;
