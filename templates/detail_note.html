@@ -123,13 +123,9 @@ block head %} {{ mde.css }} {% endblock %} {% block body %}
                         </div>
                     </div>
                     <div class="update-editor-form">
-                        {{ form.csrf_token }} {{ mde.editor(name="body_content",
-                        default=note.body_content) }}
-                        <input
-                            type="submit"
-                            value="Submit"
-                            class="btn btn-primary mt-2"
-                        />
+                        {{ form.csrf_token }} {{ form.editor(class="form-control
+                        messageInput", onkeydown="checkShortcut(event)") }} {{
+                        form.submit(class="btn btn-primary mt-3") }}
                     </div>
                 </form>
             </div>
@@ -147,6 +143,9 @@ block head %} {{ mde.css }} {% endblock %} {% block body %}
             document.querySelector("#edit-btn").innerHTML = "Edit";
         }
     });
+
+    document.querySelector("#wmd-input").name = `body_content`;
+    document.querySelector("#wmd-input").innerHTML = `{{note.body_content}}`;
 </script>
 {{ mde.js }} {% endblock %} {% block after_body %}
 <script src="/static/js/chatGpt.js" type="text/javascript"></script>
