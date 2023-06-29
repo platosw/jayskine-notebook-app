@@ -214,7 +214,7 @@ function Categories() {
                     />
                 </div>
                 <div
-                    className="notes col-10"
+                    className="notes col-sm-10 col-md"
                     style={{ height: "100vh", overflowY: "auto" }}
                 >
                     {selectedCategory !== null ? (

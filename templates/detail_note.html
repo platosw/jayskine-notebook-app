@@ -71,6 +71,13 @@ block head %} {{ mde.css }} {% endblock %} {% block body %}
     <div id="edit_note" class="row m-md-5" hidden>
         <div class="col-md-6">
             <div class="note-container mt-3">
+                <p>Viewer</p>
+                <hr />
+                {{ mde.preview }}
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="note-container mt-3">
                 <form action="/edit_note" method="POST">
                     <input
                         type="hidden"
@@ -115,21 +122,16 @@ block head %} {{ mde.css }} {% endblock %} {% block body %}
                             />
                         </div>
                     </div>
-                    {{ form.csrf_token }} {{ mde.editor(name="body_content",
-                    default=note.body_content) }}
-                    <input
-                        type="submit"
-                        value="Submit"
-                        class="btn btn-primary mt-2"
-                    />
+                    <div class="update-editor-form">
+                        {{ form.csrf_token }} {{ mde.editor(name="body_content",
+                        default=note.body_content) }}
+                        <input
+                            type="submit"
+                            value="Submit"
+                            class="btn btn-primary mt-2"
+                        />
+                    </div>
                 </form>
-            </div>
-        </div>
-        <div class="col-md-6">
-            <div class="note-container mt-3">
-                <p>Viewer</p>
-                <hr />
-                {{ mde.preview }}
             </div>
         </div>
     </div>

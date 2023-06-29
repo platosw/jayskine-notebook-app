@@ -53,6 +53,7 @@ function AllNotes(props) {
                                             <a
                                                 href={`/notes/${note.note_id}`}
                                                 className="d-flex align-items-center"
+                                                style={{ color: "#1b90fb" }}
                                             >
                                                 <h3 className="mr-2">
                                                     {note.title}
@@ -97,14 +98,17 @@ function AllNotes(props) {
                                                 )}
                                             </p>
                                         </p>
-                                        <button className="btn btn-primary border border-0">
+                                        {/* <button className="btn btn-link border border-0">
                                             <a
                                                 href={`/notes/${note.note_id}`}
-                                                style={{ color: "white" }}
+                                                style={{
+                                                    textDecoration: "none",
+                                                    color: "#1b90fb",
+                                                }}
                                             >
-                                                Go Detail
+                                                <strong>Go Detail</strong>
                                             </a>
-                                        </button>
+                                        </button> */}
                                     </div>
                                 </div>
                             </li>
