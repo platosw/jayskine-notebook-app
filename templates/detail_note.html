@@ -1,7 +1,7 @@
 {% extends 'base.html' %} {% block title %}{{ note.title }}{% endblock %} {%
 block head %} {{ mde.css }} {% endblock %} {% block body %}
 <div class="container-fluid">
-    <div class="note-info container mt-4">
+    <div class="note-info container mt-4 justify-content-center">
         <div class="d-md-flex justify-content-center">
             <h2 class="note-title">{{ note.title }}</h2>
             {% if note.tags != "" %}
@@ -62,8 +62,11 @@ block head %} {{ mde.css }} {% endblock %} {% block body %}
             </button>
         </div>
     </div>
-    <div id="md-viewer" class="mt-2 m-md-5 justify-content-center">
-        <div class="make-pretty">{{ content|safe }}</div>
+    <div
+        id="md-viewer"
+        class="container-xl mt-2 mt-md-5 justify-content-center"
+    >
+        <div class="make-pretty justify-content-center">{{ content|safe }}</div>
     </div>
     <div id="edit_note" class="row m-md-5" hidden>
         <div class="col-md-6">
@@ -135,6 +138,12 @@ block head %} {{ mde.css }} {% endblock %} {% block body %}
     document.querySelector("#edit-btn").addEventListener("click", () => {
         document.querySelector("#md-viewer").toggleAttribute("hidden");
         document.querySelector("#edit_note").toggleAttribute("hidden");
+
+        if (document.querySelector("#edit-btn").innerHTML === "Edit") {
+            document.querySelector("#edit-btn").innerHTML = "View";
+        } else {
+            document.querySelector("#edit-btn").innerHTML = "Edit";
+        }
     });
 </script>
 <script src="/static/js/TagPage.jsx" type="text/jsx"></script>
