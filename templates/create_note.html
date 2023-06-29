@@ -48,11 +48,14 @@ head %} {{ mde.css }} {% endblock %} {% block body %}
                             placeholder="Tags"
                         />
                     </div>
-                    {{ form.csrf_token }} {{ form.editor(class="form-control")
-                    }} {{ form.submit(class="btn btn-primary mt-3") }}
+                    {{ form.csrf_token }} {{ form.editor(class="form-control
+                    messageInput", onkeydown="checkShortcut(event)") }} {{
+                    form.submit(class="btn btn-primary mt-3") }}
                 </div>
             </div>
         </div>
     </div>
 </form>
-{{ mde.js }} {% endblock %}
+{{ mde.js }} {% endblock %} {% block after_body %}
+<script src="/static/js/chatGpt.js" type="text/javascript"></script>
+{% endblock %}

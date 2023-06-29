@@ -6,6 +6,7 @@ from flask_mde import Mde, MdeField
 from flask_wtf import FlaskForm
 from wtforms import SubmitField
 import markdown
+import openai
 from transform_object_to_dictionary import get_all_notes, get_all_categories, get_category
 
 from jinja2 import StrictUndefined
@@ -15,6 +16,8 @@ app.secret_key = os.environ["SECRET_KEYS"]
 mde = Mde(app)
 app.jinja_env.undefined = StrictUndefined
 app.static_folder = 'static'
+
+openai.api_key = os.environ["OPENAI_APIKEY"]
 
 
 class MdeForm(FlaskForm):
@@ -233,6 +236,34 @@ def delete_note(note_id):
     msg = crud.delete_note(note_id)
     flash(msg, "warning")
     return redirect("/")
+
+
+@app.route('/chat', methods=['POST'])
+def chat():
+    data = request.get_json()
+    message = data['message']
+    chat_history = data.get('chat_history', [])
+
+    selected_text = data.get('selected_text')  # 드래그한 텍스트 가져오기
+
+    if selected_text:  # 드래그한 텍스트가 있을 경우
+        chat_history.append(selected_text)  # 대화 기록에 추가
+
+    # ChatGPT와 대화
+    response = openai.Completion.create(
+        engine='text-davinci-003',
+        prompt=chat_history + [message],
+        temperature=0.7,
+        max_tokens=50,
+        n=1,
+        stop=None,
+    )
+
+    # 대화 기록 업데이트
+    chat_history.append(message)
+    chat_history.append(response.choices[0].text.strip())
+
+    return jsonify({'message': response.choices[0].text.strip(), 'chat_history': chat_history})
 
 
 if __name__ == "__main__":

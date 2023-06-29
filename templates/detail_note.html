@@ -71,13 +71,6 @@ block head %} {{ mde.css }} {% endblock %} {% block body %}
     <div id="edit_note" class="row m-md-5" hidden>
         <div class="col-md-6">
             <div class="note-container mt-3">
-                <p>Viewer</p>
-                <hr />
-                {{ mde.preview }}
-            </div>
-        </div>
-        <div class="col-md-6">
-            <div class="note-container mt-3">
                 <form action="/edit_note" method="POST">
                     <input
                         type="hidden"
@@ -132,6 +125,13 @@ block head %} {{ mde.css }} {% endblock %} {% block body %}
                 </form>
             </div>
         </div>
+        <div class="col-md-6">
+            <div class="note-container mt-3">
+                <p>Viewer</p>
+                <hr />
+                {{ mde.preview }}
+            </div>
+        </div>
     </div>
 </div>
 <script>
@@ -146,6 +146,8 @@ block head %} {{ mde.css }} {% endblock %} {% block body %}
         }
     });
 </script>
+{{ mde.js }} {% endblock %} {% block after_body %}
+<script src="/static/js/chatGpt.js" type="text/javascript"></script>
 <script src="/static/js/TagPage.jsx" type="text/jsx"></script>
 <script src="/static/js/Tags.jsx" type="text/jsx"></script>
-{{ mde.js }} {% endblock %}
+{% endblock %}
