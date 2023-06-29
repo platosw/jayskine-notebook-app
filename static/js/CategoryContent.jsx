@@ -88,6 +88,7 @@ function CategoryContent(props) {
                                                 <a
                                                     href={`/notes/${note.note_id}`}
                                                     className="d-flex align-items-center"
+                                                    style={{ color: "#1b90fb" }}
                                                 >
                                                     <h3 className="mr-2">
                                                         {note.title}
@@ -107,8 +108,8 @@ function CategoryContent(props) {
                                                     </p>
                                                 </a>
                                             </div>
-                                            <p className="card-text">
-                                                <span>
+                                            <div className="card-text">
+                                                <p>
                                                     <svg
                                                         xmlns="http://www.w3.org/2000/svg"
                                                         width="15"
@@ -125,21 +126,24 @@ function CategoryContent(props) {
                                                             .map((tag) => {
                                                                 return `#${tag} `;
                                                             })}
-                                                </span>
-                                                <span>
+                                                </p>
+                                                <p>
                                                     {truncateString(
                                                         note.body_content
                                                     )}
-                                                </span>
-                                            </p>
-                                            <button className="btn btn-primary border border-0">
-                                                <a
-                                                    href={`/notes/${note.note_id}`}
-                                                    style={{ color: "white" }}
-                                                >
-                                                    Go Detail
-                                                </a>
-                                            </button>
+                                                </p>
+                                            </div>
+                                            {/* <button className="btn btn-link border border-0">
+                                            <a
+                                                href={`/notes/${note.note_id}`}
+                                                style={{
+                                                    textDecoration: "none",
+                                                    color: "#1b90fb",
+                                                }}
+                                            >
+                                                <strong>Go Detail</strong>
+                                            </a>
+                                        </button> */}
                                         </div>
                                     </div>
                                 </li>

@@ -103,16 +103,16 @@ function AllNotes(props) {
                                             </p>
                                         </div>
                                         {/* <button className="btn btn-link border border-0">
-                                            <a
-                                                href={`/notes/${note.note_id}`}
-                                                style={{
-                                                    textDecoration: "none",
-                                                    color: "#1b90fb",
-                                                }}
-                                            >
-                                                <strong>Go Detail</strong>
-                                            </a>
-                                        </button> */}
+                                    <a
+                                        href={`/notes/${note.note_id}`}
+                                        style={{
+                                            textDecoration: "none",
+                                            color: "#1b90fb",
+                                        }}
+                                    >
+                                        <strong>Go Detail</strong>
+                                    </a>
+                                </button> */}
                                     </div>
                                 </div>
                             </li>
