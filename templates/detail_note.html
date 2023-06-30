@@ -1,5 +1,10 @@
 {% extends 'base.html' %} {% block title %}{{ note.title }}{% endblock %} {%
-block head %} {{ mde.css }} {% endblock %} {% block body %}
+block head %}
+<link
+    rel="stylesheet"
+    href="https://uicdn.toast.com/editor/3.0.2/toastui-editor.min.css"
+/>
+{{ mde.css }} {% endblock %} {% block body %}
 <div class="container-fluid">
     <div class="note-info container mt-4 justify-content-center">
         <div class="d-md-flex justify-content-center">
@@ -62,11 +67,8 @@ block head %} {{ mde.css }} {% endblock %} {% block body %}
             </button>
         </div>
     </div>
-    <div
-        id="md-viewer"
-        class="container-xl mt-2 mt-md-5 justify-content-center"
-    >
-        <div class="make-pretty justify-content-center">{{ content|safe }}</div>
+    <div class="container-xl mt-2 mt-md-5 justify-content-center">
+        <div id="toast-custom-viewer"></div>
     </div>
     <div id="edit_note" class="row m-md-5" hidden>
         <div class="col-md-6">
@@ -132,9 +134,18 @@ block head %} {{ mde.css }} {% endblock %} {% block body %}
         </div>
     </div>
 </div>
+<script src="https://uicdn.toast.com/editor/3.0.2/toastui-editor-all.min.js"></script>
 <script>
+    const viewer = toastui.Editor.factory({
+        el: document.querySelector("#toast-custom-viewer"),
+        viewer: true,
+        initialValue: `{{note.body_content}}`,
+    });
+
+    const viewerSelector = document.querySelector(".toastui-editor-contents");
+
     document.querySelector("#edit-btn").addEventListener("click", () => {
-        document.querySelector("#md-viewer").toggleAttribute("hidden");
+        viewerSelector.toggleAttribute("hidden");
         document.querySelector("#edit_note").toggleAttribute("hidden");
 
         if (document.querySelector("#edit-btn").innerHTML === "Edit") {
