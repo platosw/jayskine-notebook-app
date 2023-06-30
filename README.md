@@ -15,7 +15,6 @@ This **[PROJECT]** is a versatile note-taking application that provides users wi
 -   Markdown Editor, and Viewer
 -   Responsive Design
 -   ChatGPT (An updated feature)
--   Restyling with Bootstrap
 
 ### Technologies Used
 
