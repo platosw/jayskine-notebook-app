@@ -1,6 +1,7 @@
 # 📑 **Jayskine** - _Hackbright Capstone Project_ 📑
 
-<img src="./static/images/gif_keynote.gif?raw=true" alt="The most important Part." width="100%"><br />
+<img src="./static/images/index_page.png?raw=true" alt="Index Page." width="100%"><br />
+<img src="./static/images/edit_page.png?raw=true" alt="Index Page." width="100%"><br />
 This **[PROJECT]** is a versatile note-taking application that provides users with a convenient and powerful solution for creating, managing, and organizing notes in Markdown format, anytime and anywhere.
 
 ## **Description**
@@ -13,22 +14,25 @@ This **[PROJECT]** is a versatile note-taking application that provides users wi
 -   Hashtags
 -   Markdown Editor, and Viewer
 -   Responsive Design
+-   ChatGPT (An updated feature)
+-   Restyling with Bootstrap
 
 ### Technologies Used
 
 -   I won't go into detail about the technologies required by Hackbright since they were mandatory. However, React without Create React App (CRA) was an optional choice. I opted for React over vanilla JavaScript because it offers efficient ongoing updates and maintenance in certain aspects.
 -   The main advantages of Markdown are its concise and intuitive syntax, which makes document creation and reading easy and fast. It is platform-independent and can be displayed consistently across various platforms. It can be used for a variety of purposes and is well-suited for version control systems, allowing for efficient collaboration and document revision management. Additionally, it can be easily converted to HTML, enabling the incorporation of more complex styling and layout elements when needed.
 -   I designed the application with a responsive layout to emphasize the accessibility of our notes anytime and anywhere. By implementing design principles that optimize readability and usability, we ensure that users can conveniently utilize the notes on various devices and screen sizes.
+-   This application utilizes the OpenAI API to provide users with the ability to conveniently write notes through a chatbot within the Markdown editor, without relying on search services, even for information or content they may not be familiar with, such as Markdown syntax.
 
 ### Challenges
 
 -   I used plain JSX files with React for categories and hashtags, bypassing Create React App (CRA). It was a complex but rewarding process, enhancing my understanding of React. Overcoming challenges resulted in a more efficient user experience. I employed UI components for streamlined state management and an intuitive interface.
+-   During this project at Hackbright Academy, certain technical requirements were mandated. Building the Markdown editor without utilizing Jinja was not feasible, which posed challenges in integrating the OpenAI API with the Markdown editor. However, overcoming these obstacles provided an opportunity to revisit and reinforce foundational knowledge that had been overlooked.
 
 ### Nice to haves
 
 -   Plans to add a file uploader feature for attaching image files.
 -   The ability to convert stored note data to Markdown files for downloading.
--   An AI chatbot function to assist users in writing or serve as a virtual assistant.
 
 ## **How to Run**
 
@@ -63,7 +67,13 @@ Write a secret keys in the secrets.sh file.
 export SECRET_KEYS="whatever you want"
 ```
 
-Connect SECRET_KEYS to the server.
+Write a [Open AI API] key in the secrets.sh file.
+
+```sh
+export OPENAI_APIKEY="your api key"
+```
+
+Connect SECRET_KEYS and OPENAI_APIKEY to the server.
 
 ```sh
 source secrets.sh
@@ -87,6 +97,7 @@ python3 server.py
 | --------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **Client Side** | <img src="https://img.shields.io/badge/html5-E34F26?style=for-the-badge&logo=html5&logoColor=white"><img src="https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white"><img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black"><img src="https://img.shields.io/badge/react-61DAFB?style=for-the-badge&logo=react&logoColor=black"><img src="https://img.shields.io/badge/bootstrap-7952B3?style=for-the-badge&logo=bootstrap&logoColor=white">                                                                                                   |
 | **Server Side** | <img src="https://img.shields.io/badge/python-3776AB?style=for-the-badge&logo=python&logoColor=white"><img src="https://img.shields.io/badge/flask-000000?style=for-the-badge&logo=flask&logoColor=white"><img src="https://img.shields.io/badge/sql alchemy-0099E5?style=for-the-badge&logo=flask&logoColor=white"><img src="https://img.shields.io/badge/Postgresql-4169E1?style=for-the-badge&logo=postgresql&logoColor=white"><img src="https://img.shields.io/badge/bcrypt-003A70?style=for-the-badge&logo=letsencrypt&logoColor=white">                                                                                          |
+| **API**         | <img src="https://img.shields.io/badge/open ai-412991?style=for-the-badge&logo=openai&logoColor=white">                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
 | **Others**      | <img src="https://img.shields.io/badge/MDE flask-3776AB?style=for-the-badge&logo=flask&logoColor=white"><img src="https://img.shields.io/badge/git-F05032?style=for-the-badge&logo=git&logoColor=white"><img src="https://img.shields.io/badge/jinja-B41717?style=for-the-badge&logo=jinja&logoColor=white"><img src="https://img.shields.io/badge/amazon aws-232F3E?style=for-the-badge&logo=amazonaws&logoColor=white"><img src="https://img.shields.io/badge/nginx-009639?style=for-the-badge&logo=nginx&logoColor=white"><img src="https://img.shields.io/badge/pdoc-8CA1AF?style=for-the-badge&logo=readthedocs&logoColor=white"> |
 
 ## **Server Side Document**
@@ -117,6 +128,7 @@ Jason Park | <a href="mailto: jason.park.dev@gmail.com"><img src="https://img.sh
 [Linkedin]: https://www.linkedin.com/in/platosw
 [here]: https://youtu.be/AEjYUKi-yXE
 [pdoc]: https://pdoc.dev/
+[Open AI API]: https://platform.openai.com/overview
 
 ## **Acknowledgments**
 
