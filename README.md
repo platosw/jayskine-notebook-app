@@ -51,7 +51,7 @@ source env/bin/activate
 Once in the virtual environment, install all required depenencies.
 
 ```sh
-pip3 install -r requirements.txt
+pip3 install -r requirement.txt
 ```
 
 Create a secrets.sh file.
