@@ -254,7 +254,7 @@ def chat():
         engine='text-davinci-003',
         prompt=chat_history + [message],
         temperature=0.7,
-        max_tokens=50,
+        max_tokens=750,
         n=1,
         stop=None,
     )
