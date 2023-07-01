@@ -239,32 +239,31 @@ def delete_note(note_id):
     return redirect("/")
 
 
+chat_history = []
+
+
 @app.route('/chat', methods=['POST'])
 def chat():
     data = request.get_json()
     message = data['message']
-    chat_history = data.get('chat_history', [])
 
-    selected_text = data.get('selected_text')  # 드래그한 텍스트 가져오기
-
-    if selected_text:  # 드래그한 텍스트가 있을 경우
-        chat_history.append(selected_text)  # 대화 기록에 추가
-
-    # ChatGPT와 대화
-    response = openai.Completion.create(
-        engine='text-davinci-003',
-        prompt=chat_history + [message],
+    # OpenAI Chat API 호출
+    response = openai.ChatCompletion.create(
+        model="gpt-3.5-turbo-0613",
+        messages=chat_history + [{"role": "system", "content": message}],
         temperature=0.7,
         max_tokens=750,
         n=1,
         stop=None,
     )
 
-    # 대화 기록 업데이트
-    chat_history.append(message)
-    chat_history.append(response.choices[0].text.strip())
+    if 'choices' in response and len(response.choices) > 0:
+        reply = response.choices[0].message['content']
+        chat_history.append({"role": "user", "content": message})
+        chat_history.append({"role": "assistant", "content": reply})
+        return jsonify({'message': reply})
 
-    return jsonify({'message': response.choices[0].text.strip(), 'chat_history': chat_history})
+    return jsonify({'message': 'Sorry, I could not generate a response.'})
 
 
 if __name__ == "__main__":
