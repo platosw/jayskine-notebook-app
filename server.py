@@ -15,7 +15,11 @@ from jinja2 import StrictUndefined
 app = Flask(__name__)
 app.secret_key = os.environ["SECRET_KEYS"]
 mde = Mde(app)
-Markdown(app, extensions=["nl2br", "fenced_code"])
+Markdown(app, extensions=["nl2br", "fenced_code"],
+         extension_configs={
+    "footnotes": ("PLACE_MARKER", "~~~~~~~~")
+},
+    safe_mode=True, output_format='html4',)
 app.jinja_env.undefined = StrictUndefined
 app.static_folder = 'static'
 
@@ -102,7 +106,7 @@ def show_detail_note(note_id):
         form = MdeForm()
         note = crud.get_note(note_id)
         current_user = crud.get_user_by_email(session["user"]["email"])
-        content = markdown.markdown(note.body_content)
+        content = note.body_content
         categories = crud.get_all_categories(current_user.user_id)
         return render_template("detail_note.html", note=note, categories=categories, content=content, form=form)
     else:
