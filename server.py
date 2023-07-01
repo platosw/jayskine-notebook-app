@@ -5,6 +5,7 @@ from flask import Flask, render_template, request, flash, session, redirect, jso
 from flask_mde import Mde, MdeField
 from flask_wtf import FlaskForm
 from wtforms import SubmitField
+import markdown
 from flaskext.markdown import Markdown
 import openai
 from transform_object_to_dictionary import get_all_notes, get_all_categories, get_category
@@ -101,7 +102,7 @@ def show_detail_note(note_id):
         form = MdeForm()
         note = crud.get_note(note_id)
         current_user = crud.get_user_by_email(session["user"]["email"])
-        content = note.body_content
+        content = markdown.markdown(note.body_content)
         categories = crud.get_all_categories(current_user.user_id)
         return render_template("detail_note.html", note=note, categories=categories, content=content, form=form)
     else:
