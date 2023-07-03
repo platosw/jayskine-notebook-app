@@ -5,7 +5,6 @@ from flask import Flask, render_template, request, flash, session, redirect, jso
 from flask_mde import Mde, MdeField
 from flask_wtf import FlaskForm
 from wtforms import SubmitField
-import markdown
 from flaskext.markdown import Markdown
 import openai
 from transform_object_to_dictionary import get_all_notes, get_all_categories, get_category

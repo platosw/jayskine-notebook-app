@@ -17,6 +17,8 @@ function checkShortcut(event) {
 }
 
 function sendMessage(selectedText) {
+    document.querySelector("#chat-loading-msg").style.display = "block";
+
     var chatHistory = [];
 
     var data = {
@@ -26,15 +28,17 @@ function sendMessage(selectedText) {
 
     $.ajax({
         type: "POST",
-        url: "/chat", // 해당하는 엔드포인트의 실제 URL로 변경해야 합니다.
+        url: "/chat",
         data: JSON.stringify(data),
         contentType: "application/json",
         success: function (response) {
-            var textarea = document.querySelector(".messageInput");
-            var startPos = textarea.selectionStart;
-            var endPos = textarea.selectionEnd;
-            var responseText = response.message;
-            var updatedText =
+            document.querySelector("#chat-loading-msg").style.display = "none";
+
+            let textarea = document.querySelector(".messageInput");
+            let startPos = textarea.selectionStart;
+            let endPos = textarea.selectionEnd;
+            let responseText = response.message;
+            let updatedText =
                 textarea.value.substring(0, startPos) +
                 responseText +
                 textarea.value.substring(endPos);
@@ -44,6 +48,7 @@ function sendMessage(selectedText) {
         },
         error: function (xhr, status, error) {
             console.error(error);
+            document.querySelector("#chat-loading-msg").style.display = "none";
         },
     });
 }

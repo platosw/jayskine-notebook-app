@@ -119,6 +119,13 @@ block head %} {{ mde.css }} {% endblock %} {% block body %}
                             />
                         </div>
                     </div>
+                    <div
+                        id="chat-loading-msg"
+                        class="p-2 bg-success text-white"
+                        style="display: none"
+                    >
+                        ChatGPT is generating response...
+                    </div>
                     <div class="update-editor-form">
                         {{ form.csrf_token }} {{ form.editor(class="form-control
                         messageInput", onkeydown="checkShortcut(event)") }} {{
@@ -141,7 +148,7 @@ block head %} {{ mde.css }} {% endblock %} {% block body %}
         }
     });
 
-    document.querySelector("#wmd-input").name = `body_content`;
+    document.querySelector("#wmd-input").name = "body_content";
     document.querySelector("#wmd-input").innerHTML = `{{note.body_content}}`;
 </script>
 {{ mde.js }} {% endblock %} {% block after_body %}

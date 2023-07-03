@@ -48,6 +48,13 @@ head %} {{ mde.css }} {% endblock %} {% block body %}
                             placeholder="Tags"
                         />
                     </div>
+                    <div
+                        id="chat-loading-msg"
+                        class="p-2 bg-success text-white"
+                        style="display: none"
+                    >
+                        ChatGPT is generating response...
+                    </div>
                     {{ form.csrf_token }} {{ form.editor(class="form-control
                     messageInput", onkeydown="checkShortcut(event)") }} {{
                     form.submit(class="btn btn-primary mt-3") }}
