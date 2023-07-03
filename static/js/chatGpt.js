@@ -1,5 +1,5 @@
 function getSelectedText() {
-    var textarea = document.querySelector(".messageInput");
+    const textarea = document.querySelector(".messageInput");
     return textarea.value.substring(
         textarea.selectionStart,
         textarea.selectionEnd
@@ -9,7 +9,7 @@ function getSelectedText() {
 function checkShortcut(event) {
     if (event.ctrlKey && event.shiftKey && event.key === "S") {
         event.preventDefault();
-        var selectedText = getSelectedText();
+        const selectedText = getSelectedText();
         if (selectedText !== "") {
             sendMessage(selectedText);
         }
@@ -18,7 +18,7 @@ function checkShortcut(event) {
 
 function clickChatBtn(event) {
     event.preventDefault();
-    var selectedText = getSelectedText();
+    const selectedText = getSelectedText();
     if (selectedText !== "") {
         sendMessage(selectedText);
     }
@@ -27,9 +27,9 @@ function clickChatBtn(event) {
 function sendMessage(selectedText) {
     document.querySelector("#chat-loading-msg").style.display = "block";
 
-    var chatHistory = [];
+    const chatHistory = [];
 
-    var data = {
+    const data = {
         message: selectedText,
         chat_history: chatHistory,
     };
@@ -42,11 +42,11 @@ function sendMessage(selectedText) {
         success: function (response) {
             document.querySelector("#chat-loading-msg").style.display = "none";
 
-            let textarea = document.querySelector(".messageInput");
-            let startPos = textarea.selectionStart;
-            let endPos = textarea.selectionEnd;
-            let responseText = response.message;
-            let updatedText =
+            const textarea = document.querySelector(".messageInput");
+            const startPos = textarea.selectionStart;
+            const endPos = textarea.selectionEnd;
+            const responseText = response.message;
+            const updatedText =
                 textarea.value.substring(0, startPos) +
                 responseText +
                 textarea.value.substring(endPos);
