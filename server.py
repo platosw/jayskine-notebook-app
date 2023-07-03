@@ -248,10 +248,10 @@ chat_history = []
 
 @app.route('/chat', methods=['POST'])
 def chat():
+    """Request and Response with Open AI ChatGPT"""
     data = request.get_json()
     message = data['message']
 
-    # OpenAI Chat API 호출
     response = openai.ChatCompletion.create(
         model="gpt-3.5-turbo-0613",
         messages=chat_history + [{"role": "system", "content": message}],
