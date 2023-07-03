@@ -1,7 +1,7 @@
 # 📑 **Jayskine** - _Hackbright Capstone Project_ 📑
 
 <img src="./static/images/chatgpt.gif?raw=true" alt="Index Page." width="100%"><br />
-This **[PROJECT]** is a versatile note-taking application that provides users with a convenient and powerful solution for creating, managing, and organizing notes in Markdown format, anytime and anywhere.
+This **[PROJECT]** is a versatile note-taking application that offers users a convenient and powerful solution for creating, managing, and organizing notes in Markdown format. It provides the added benefit of assistance from ChatGPT. Users can access this solution anytime and anywhere.
 
 ## **Description**
 
