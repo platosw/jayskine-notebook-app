@@ -156,14 +156,6 @@ ul {
     text-decoration: none;
 }
 
-/* .toastui-editor-contents h1 {
-    font-size: 3em;
-} */
-
-/* .toastui-editor-contents p {
-    font-size: 15px;
-} */
-
 .select-comment {
     margin-top: 75px;
 }
@@ -180,6 +172,27 @@ footer > p > a {
 
 .footer-author {
     color: #1b90fb;
+}
+
+.typing-animation {
+    display: inline-block;
+    overflow: hidden;
+    animation: typing 5s steps(31, end) infinite;
+    white-space: nowrap;
+    border-right: 2px solid;
+    width: 0;
+}
+
+@keyframes typing {
+    0% {
+        width: 0%;
+    }
+    50% {
+        width: 215px;
+    }
+    100% {
+        width: 0%;
+    }
 }
 
 @media (max-width: 991.98px) {
