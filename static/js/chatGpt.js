@@ -16,6 +16,14 @@ function checkShortcut(event) {
     }
 }
 
+function clickChatBtn(event) {
+    event.preventDefault();
+    var selectedText = getSelectedText();
+    if (selectedText !== "") {
+        sendMessage(selectedText);
+    }
+}
+
 function sendMessage(selectedText) {
     document.querySelector("#chat-loading-msg").style.display = "block";
 
