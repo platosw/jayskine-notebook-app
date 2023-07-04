@@ -74,7 +74,8 @@ head %} {{ mde.css }} {% endblock %} {% block body %}
                     </div>
                     {{ form.csrf_token }} {{ form.editor(class="form-control
                     messageInput", onkeydown="checkShortcut(event)") }} {{
-                    form.submit(class="btn btn-primary mt-3") }}
+                    form.submit(class="btn btn-primary mt-3",
+                    onclick="resetAndSubmit()") }}
                     <button
                         class="btn btn-success mt-3 border border-0"
                         onclick="clickChatBtn(event)"

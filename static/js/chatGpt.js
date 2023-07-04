@@ -1,3 +1,17 @@
+function resetAndSubmit() {
+    fetch("/reset", {
+        method: "POST",
+    }).then(function (response) {
+        console.log(response);
+
+        if (response.ok) {
+            console.log("Reset request sent");
+        } else {
+            console.log("Reset request failed");
+        }
+    });
+}
+
 function getSelectedText() {
     const textarea = document.querySelector(".messageInput");
     return textarea.value.substring(

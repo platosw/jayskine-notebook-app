@@ -246,11 +246,23 @@ def delete_note(note_id):
 chat_history = []
 
 
+@app.route('/reset', methods=['POST'])
+def reset():
+    global chat_history
+    chat_history = []
+    print("reset success.")
+    return jsonify({'message': 'Chat session has been reset.'})
+
+
 @app.route('/chat', methods=['POST'])
 def chat():
     """Request and Response with Open AI ChatGPT"""
     data = request.get_json()
     message = data['message']
+
+    if message == '/reset':
+        reset()
+        return jsonify({'message': 'Chat session has been reset.'})
 
     response = openai.ChatCompletion.create(
         model="gpt-3.5-turbo-0613",
