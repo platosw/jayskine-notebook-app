@@ -102,12 +102,15 @@ def show_create_note():
 def show_detail_note(note_id):
     """Render the detail view of a specific note."""
     if "user" in session:
-        form = MdeForm()
-        note = crud.get_note(note_id)
-        current_user = crud.get_user_by_email(session["user"]["email"])
-        content = note.body_content
-        categories = crud.get_all_categories(current_user.user_id)
-        return render_template("detail_note.html", note=note, categories=categories, content=content, form=form)
+        if session["user"]["email"] == crud.get_note(note_id).user.email:
+            form = MdeForm()
+            note = crud.get_note(note_id)
+            current_user = crud.get_user_by_email(session["user"]["email"])
+            content = note.body_content
+            categories = crud.get_all_categories(current_user.user_id)
+            return render_template("detail_note.html", note=note, categories=categories, content=content, form=form)
+        else:
+            return redirect("/")
     else:
         return redirect("/")
 
