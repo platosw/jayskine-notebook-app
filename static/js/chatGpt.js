@@ -55,7 +55,7 @@ function sendMessage(selectedText) {
             textarea.selectionEnd = startPos + responseText.length;
         },
         error: function (xhr, status, error) {
-            console.error(error);
+            console.log(error);
             document.querySelector("#chat-loading-msg").style.display = "none";
         },
     });
