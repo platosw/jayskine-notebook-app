@@ -9,8 +9,12 @@ head %} {{ mde.css }} {% endblock %} {% block body %}
             <div class="row">
                 <div class="col-md-6">
                     <p>Viewer</p>
+                    <p style="font-size: small">
+                        This is the part where you can preview the contents of
+                        the editor.
+                    </p>
                     <hr />
-                    <div>{{ mde.preview }}</div>
+                    <div id="viewer-part">{{ mde.preview }}</div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
