@@ -268,7 +268,7 @@ def chat():
         return jsonify({'message': 'Chat session has been reset.'})
 
     response = openai.ChatCompletion.create(
-        model="gpt-3.5-turbo-0613",
+        model="gpt-3.5-turbo-16k",
         messages=chat_history + [{"role": "system", "content": message}],
         temperature=0.7,
         max_tokens=750,
@@ -288,3 +288,5 @@ def chat():
 if __name__ == "__main__":
     connect_to_db(app)
     app.run(host="0.0.0.0")
+
+# This is just Testing for github
